@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+  RunRailsCops: true
+  DisplayCopNames: true
+
+Metrics/LineLength:
+  Max: 99
+
+Style/Documentation:
+  Enabled: false
