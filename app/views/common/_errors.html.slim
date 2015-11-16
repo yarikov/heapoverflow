@@ -1,0 +1,7 @@
+- if resource.errors.any?
+  .alert.alert-danger
+    = button_tag '×', type: "button", class: "close", "data-dismiss" => "alert"
+    h4 #{t('common.errors')}:
+    ul
+      - resource.errors.full_messages.each do |message|
+        li = message

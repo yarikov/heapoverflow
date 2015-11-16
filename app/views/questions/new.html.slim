@@ -1,5 +1,7 @@
 h3 Новый вопрос
 = form_for @question do |f|
+  == render 'common/errors', resource: @question
+
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'
