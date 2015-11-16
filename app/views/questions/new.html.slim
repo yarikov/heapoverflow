@@ -1,0 +1,10 @@
+h3 Новый вопрос
+= form_for @question do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control'
+  p
+    = f.submit 'Опубликовать', class: 'btn btn-success'

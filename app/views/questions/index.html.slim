@@ -1,3 +1,5 @@
 h3 Все вопросы
 - @questions.each do |question|
     p = link_to question.title, question
+
+= link_to 'Задать вопрос', new_question_path, class: 'btn btn-success'
