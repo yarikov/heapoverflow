@@ -1,2 +1,4 @@
 h3 = @question.title
 p = @question.body
+
+= link_to 'Ответить', new_question_answer_path(@question), class: 'btn btn-success'

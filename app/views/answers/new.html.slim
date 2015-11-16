@@ -1,0 +1,9 @@
+h3 Hовый ответ
+= form_for [@question, @answer] do |f|
+  == render 'common/errors', resource: @answer
+
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control'
+  p
+    = f.submit 'Ответить', class: 'btn btn-success'
