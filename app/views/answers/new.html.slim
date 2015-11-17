@@ -3,7 +3,7 @@ h3 Hовый ответ
   == render 'common/errors', resource: @answer
 
   .form-group
-    = f.label :body
+    = f.label :body, 'Ваш ответ на вопрос'
     = f.text_area :body, class: 'form-control'
   p
     = f.submit 'Ответить', class: 'btn btn-success'
