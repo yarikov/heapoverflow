@@ -5,7 +5,8 @@ feature 'View the question', '
   As an user
   I want to view the question and answers
 ' do
-  given!(:question) { create(:question) }
+  given(:user) { create(:user) }
+  given!(:question) { create(:question, user: user) }
   given!(:answers) { create_list(:answer, 3, question: question) }
 
   scenario 'User view the question and answers' do

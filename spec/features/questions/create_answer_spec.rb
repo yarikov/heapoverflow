@@ -6,7 +6,7 @@ feature 'Сreate an answer', '
   I want to answer the question
 ' do
   given(:user) { create(:user) }
-  given!(:question) { create(:question) }
+  given!(:question) { create(:question, user: user) }
 
   scenario 'Authenticated user creates an answer' do
     sign_in(user)

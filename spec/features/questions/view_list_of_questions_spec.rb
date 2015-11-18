@@ -5,7 +5,8 @@ feature 'List of questions', '
   As an user
   I want to view list of questions
 ' do
-  given!(:questions) { create_list(:question, 3) }
+  given(:user) { create(:user) }
+  given!(:questions) { create_list(:question, 3, user: user) }
 
   scenario 'User view list of questions' do
     visit questions_path
