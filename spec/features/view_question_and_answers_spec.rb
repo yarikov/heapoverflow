@@ -14,8 +14,6 @@ feature 'View the question', '
     expect(page).to have_content question.title
     expect(page).to have_content question.body
 
-    answers.each do |answer|
-      expect(page).to have_content answer.body
-    end
+    answers.each { |answer| expect(page).to have_content answer.body }
   end
 end

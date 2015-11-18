@@ -10,8 +10,6 @@ feature 'List of questions', '
   scenario 'User view list of questions' do
     visit questions_path
 
-    questions.each do |question|
-      expect(page).to have_content question.title
-    end
+    questions.each { |question| expect(page).to have_content question.title }
   end
 end
