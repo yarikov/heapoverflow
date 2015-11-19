@@ -26,6 +26,11 @@ RSpec.describe AnswersController, type: :controller do
           .to change(question.answers, :count).by(1)
       end
 
+      it 'creates new answer for user' do
+        expect { post :create, question_id: question, answer: attributes_for(:answer) }
+          .to change(@user.answers, :count).by(1)
+      end
+
       it 'redirects to question show view' do
         post :create, question_id: question, answer: attributes_for(:answer)
         expect(response).to redirect_to question

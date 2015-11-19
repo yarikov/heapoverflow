@@ -19,8 +19,13 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer = Answer.find(params[:id])
-    @answer.destroy if @answer.user_id == current_user.id
-    redirect_to @answer.question, notice: 'Ответ на вопрос успешно удален'
+    if @answer.user_id == current_user.id
+      @answer.destroy
+      flash[:notice] = 'Ответ на вопрос успешно удален'
+    else
+      flash[:alert] = 'У вас нет прав на эти действия'
+    end
+    redirect_to @answer.question
   end
 
   private

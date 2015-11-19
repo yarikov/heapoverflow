@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
       @question.destroy
       redirect_to questions_path, notice: 'Вопрос успешно удален'
     else
-      render :show
+      redirect_to @question, notice: 'У вас нет прав на эти действия'
     end
   end
 
