@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_question
+  before_action :set_question, only: [:new, :create]
 
   def new
     @answer = Answer.new
@@ -8,12 +8,19 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answer_params)
+    @answer.user = current_user
 
-    if @question.save
+    if @answer.save
       redirect_to @question
     else
       render :new
     end
+  end
+
+  def destroy
+    @answer = Answer.find(params[:id])
+    @answer.destroy if @answer.user_id == current_user.id
+    redirect_to @answer.question, notice: 'Ответ на вопрос успешно удален'
   end
 
   private
