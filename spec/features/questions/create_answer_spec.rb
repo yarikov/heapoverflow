@@ -12,11 +12,11 @@ feature 'Сreate an answer', '
     sign_in(user)
 
     visit question_path(question)
-    click_on 'Ответить'
     fill_in 'Ваш ответ на вопрос', with: 'Answer body'
     click_on 'Ответить'
 
-    expect(page).to have_content 'Answer body'
+    expect(current_path).to eq question_path(question)
+    within('.answers') { expect(page).to have_content 'Answer body' }
   end
 
   scenario 'Unauthenticated user creates an answer' do
