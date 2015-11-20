@@ -8,7 +8,7 @@ feature 'Сreate an answer', '
   given(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
 
-  scenario 'Authenticated user creates an answer' do
+  scenario 'Authenticated user creates an answer', js: true do
     sign_in(user)
 
     visit question_path(question)
@@ -21,8 +21,6 @@ feature 'Сreate an answer', '
 
   scenario 'Unauthenticated user creates an answer' do
     visit question_path(question)
-    click_on 'Ответить'
-
-    expect(page).to have_content 'You need to sign in or sign up before continuing.'
+    expect(page).to_not have_button('Ответить')
   end
 end
