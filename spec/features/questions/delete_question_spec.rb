@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../feature_helper'
 
 feature 'Delete the question' do
   given(:user) { create(:user) }
