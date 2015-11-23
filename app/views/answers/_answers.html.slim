@@ -1,4 +1,2 @@
 - @question.answers.each do |answer|
-  p = answer.body
-  - if current_user && current_user.id == answer.user_id
-    = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete,  class: 'btn btn-danger'
+  == render 'answers/answer', answer: answer
