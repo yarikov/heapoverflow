@@ -1,9 +1,4 @@
-h3 = @question.title
-p = @question.body
-
-- if current_user && current_user.id == @question.user_id
-  = link_to 'Удалить вопрос', @question, data: {:confirm => 'Вы уверены'}, :method => :delete,  class: 'btn btn-danger'
-
+== render 'question'
 
 .answers
   == render 'answers/answers'
