@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, only: [:update, :destroy]
+  before_action :set_answer, only: [:update, :destroy, :best]
   before_action :set_question, only: [:new, :create]
 
   def create
@@ -12,6 +12,15 @@ class AnswersController < ApplicationController
   def update
     @answer.update(answer_params)
     @question = @answer.question
+  end
+
+  def best
+    if @answer.user_id == current_user.id
+      @answer.best!
+      flash.now[:notice] = 'Вы выбрали лучший ответ'
+    else
+      flash.now[:alert] = 'У вас нет прав на эти действия'
+    end
   end
 
   def destroy

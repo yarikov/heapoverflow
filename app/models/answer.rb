@@ -1,6 +1,14 @@
 class Answer < ActiveRecord::Base
+  default_scope { order('best DESC') }
+
   belongs_to :question
   belongs_to :user
 
   validates :body, :question_id, :user_id, presence: true
+
+  def best!
+    best_answer = question.answers.find_by(best: true)
+    best_answer.update(best: false) if best_answer
+    update(best: true)
+  end
 end

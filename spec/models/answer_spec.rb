@@ -6,4 +6,17 @@ RSpec.describe Answer, type: :model do
   it { should validate_presence_of :user_id }
   it { should belong_to :question }
   it { should belong_to :user }
+
+  let(:user) { create(:user) }
+  let(:question) { create(:question, user: user) }
+  let!(:answer1) { create(:answer, question: question, user: user, best: false) }
+  let!(:answer2) { create(:answer, question: question, user: user, best: true) }
+
+  it 'should choose the best answer' do
+    answer1.best!
+    answer2.reload
+
+    expect(answer1.best).to eq true
+    expect(answer2.best).to eq false
+  end
 end

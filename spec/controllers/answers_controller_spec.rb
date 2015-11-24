@@ -98,4 +98,17 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH #best' do
+    sign_in_user
+    it 'assings the requested answer to @answer' do
+      patch :best, id: answer, format: :js
+      expect(assigns(:answer)).to eq answer
+    end
+
+    it 'render best template' do
+      patch :best, id: answer, format: :js
+      expect(response).to render_template :best
+    end
+  end
 end
