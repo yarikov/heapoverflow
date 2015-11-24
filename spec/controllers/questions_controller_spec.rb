@@ -75,6 +75,8 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'PATCH #update' do
     sign_in_user
+    let(:question) { create(:question, user: @user) }
+
     it 'assings the requested question to @question' do
       patch :update, id: question, question: attributes_for(:question), format: :js
       expect(assigns(:question)).to eq question

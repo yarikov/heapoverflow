@@ -5,3 +5,4 @@
 <% else %>
     $('<%= ".answer-#{@answer.id}" %>').replaceWith('<%= j render @answer %>');
 <% end %>
+$('.flash').replaceWith('<%= j render 'layouts/flash' %>');

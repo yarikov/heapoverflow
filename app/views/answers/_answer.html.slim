@@ -1,14 +1,16 @@
 div class="answer-#{answer.id}"
   p = answer.body
-  - if user_signed_in? && current_user.id == answer.user_id
-    = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
-    = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+  - if user_signed_in?
+    - if answer.persisted? && current_user.id == @question.user_id
+      = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
+    - if current_user.id == answer.user_id
+      = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
 
-    = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
-      .form-group
-        = f.label :body, 'Ваш ответ на вопрос'
-        .answer-errors
-        = f.text_area :body, class: 'form-control'
-        = f.submit 'Сохранить', class: 'btn btn-success'
+      = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
+        .form-group
+          = f.label :body, 'Ваш ответ на вопрос'
+          .answer-errors
+          = f.text_area :body, class: 'form-control'
+          = f.submit 'Сохранить', class: 'btn btn-success'
 
-    = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
+      = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'

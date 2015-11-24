@@ -10,12 +10,17 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer.update(answer_params)
-    @question = @answer.question
+    if @answer.user_id == current_user.id
+      @answer.update(answer_params)
+      @question = @answer.question
+      flash.now[:notice] = 'Ответ на вопрос успешно отредактирован'
+    else
+      flash.now[:alert] = 'У вас нет прав на эти действия'
+    end
   end
 
   def best
-    if @answer.user_id == current_user.id
+    if @answer.question.user_id == current_user.id
       @answer.best!
       flash.now[:notice] = 'Вы выбрали лучший ответ'
     else

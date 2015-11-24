@@ -5,3 +5,4 @@
 <% else %>
     $('.question').replaceWith('<%= j render @question %>');
 <% end %>
+$('.flash').replaceWith('<%= j render 'layouts/flash' %>');

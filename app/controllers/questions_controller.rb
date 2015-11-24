@@ -25,7 +25,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params)
+    if @question.user_id == current_user.id
+      @question.update(question_params)
+      flash.now[:notice] = 'Вопрос успешно отредактирован'
+    else
+      flash.now[:alert] = 'У вас нет прав на эти действия'
+    end
   end
 
   def destroy
@@ -33,7 +38,7 @@ class QuestionsController < ApplicationController
       @question.destroy
       redirect_to questions_path, notice: 'Вопрос успешно удален'
     else
-      redirect_to @question, notice: 'У вас нет прав на эти действия'
+      redirect_to @question, alert: 'У вас нет прав на эти действия'
     end
   end
 

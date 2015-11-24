@@ -30,6 +30,7 @@ feature 'Answer editing', '
         expect(page).to have_content 'edited answer'
         expect(page).to_not have_selector 'textarea'
       end
+      expect(page).to have_content 'Ответ на вопрос успешно отредактирован'
     end
   end
 
