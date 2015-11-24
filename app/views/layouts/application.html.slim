@@ -10,8 +10,7 @@ html
     == render 'layouts/header'
 
     .container
-      p.notice = notice
-      p.alert = alert
+      == render 'layouts/flash'
 
       == yield
 

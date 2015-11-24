@@ -10,4 +10,4 @@ div class="answer-#{answer.id}"
         = f.text_area :body, class: 'form-control'
         = f.submit 'Сохранить', class: 'btn btn-success'
 
-    = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete,  class: 'btn btn-danger'
+    = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'

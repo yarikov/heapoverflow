@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_answer, only: [:update, :destroy]
   before_action :set_question, only: [:new, :create]
 
   def create
@@ -9,23 +10,24 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = Answer.find(params[:id])
     @answer.update(answer_params)
     @question = @answer.question
   end
 
   def destroy
-    @answer = Answer.find(params[:id])
     if @answer.user_id == current_user.id
       @answer.destroy
-      flash[:notice] = 'Ответ на вопрос успешно удален'
+      flash.now[:notice] = 'Ответ на вопрос успешно удален'
     else
-      flash[:alert] = 'У вас нет прав на эти действия'
+      flash.now[:alert] = 'У вас нет прав на эти действия'
     end
-    redirect_to @answer.question
   end
 
   private
+
+  def set_answer
+    @answer = Answer.find(params[:id])
+  end
 
   def set_question
     @question = Question.find(params[:question_id])

@@ -83,20 +83,18 @@ RSpec.describe AnswersController, type: :controller do
     sign_in_user
 
     context 'User delete own answer' do
-      let(:answer) { create(:answer, question: question, user: @user) }
+      let!(:answer) { create(:answer, question: question, user: @user) }
 
       it 'delete the answer' do
-        answer
-        expect { delete :destroy, id: answer }.to change(@user.answers, :count).by(-1)
+        expect { delete :destroy, id: answer, format: :js }.to change(@user.answers, :count).by(-1)
       end
     end
 
     context "User delete someone else's answer" do
-      let(:answer) { create(:answer, question: question, user: user) }
+      let!(:answer) { create(:answer, question: question, user: user) }
 
       it 'does not delete the answer' do
-        answer
-        expect { delete :destroy, id: answer }.to_not change(Answer, :count)
+        expect { delete :destroy, id: answer, format: :js }.to_not change(Answer, :count)
       end
     end
   end
