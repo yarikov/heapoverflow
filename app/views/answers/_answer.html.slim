@@ -1,9 +1,9 @@
 div class="answer-#{answer.id}"
   p = answer.body
   - if user_signed_in?
-    - if answer.persisted? && current_user.id == @question.user_id
+    - if answer.persisted? && current_user.author_of?(@question)
       = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
-    - if current_user.id == answer.user_id
+    - if current_user.author_of?(answer)
       = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
 
       = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|

@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.user_id == current_user.id
+    if current_user.author_of?(@answer)
       @answer.update(answer_params)
       @question = @answer.question
       flash.now[:notice] = 'Ответ на вопрос успешно отредактирован'
@@ -20,7 +20,7 @@ class AnswersController < ApplicationController
   end
 
   def best
-    if @answer.question.user_id == current_user.id
+    if current_user.author_of?(@answer.question)
       @answer.best!
       flash.now[:notice] = 'Вы выбрали лучший ответ'
     else
@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    if @answer.user_id == current_user.id
+    if current_user.author_of?(@answer)
       @answer.destroy
       flash.now[:notice] = 'Ответ на вопрос успешно удален'
     else

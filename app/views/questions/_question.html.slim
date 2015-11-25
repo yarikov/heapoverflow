@@ -2,7 +2,7 @@
   h3 = @question.title
   p = @question.body
 
-  - if current_user && current_user.id == @question.user_id
+  - if user_signed_in? && current_user.author_of?(@question)
     = link_to 'Редактировать', '', class: 'edit-question-link',  data: { question_id: @question.id }
 
     = form_for @question, remote: true do |f|

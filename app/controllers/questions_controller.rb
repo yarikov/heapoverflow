@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.user_id == current_user.id
+    if current_user.author_of?(@question)
       @question.update(question_params)
       flash.now[:notice] = 'Вопрос успешно отредактирован'
     else
@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if @question.user_id == current_user.id
+    if current_user.author_of?(@question)
       @question.destroy
       redirect_to questions_path, notice: 'Вопрос успешно удален'
     else
