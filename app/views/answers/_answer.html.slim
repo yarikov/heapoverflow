@@ -1,16 +1,22 @@
-div class="answer-#{answer.id}"
-  p = answer.body
-  - if user_signed_in?
-    - if answer.persisted? && current_user.author_of?(@question)
-      = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
-    - if current_user.author_of?(answer)
-      = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+- if answer.persisted?
+  div class="answer-#{answer.id}"
+    p = answer.body
+    ul
+      - answer.attachments.each do |a|
+        li = link_to a.file.identifier, a.file.url
 
-      = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
-        .form-group
-          = f.label :body, 'Ваш ответ на вопрос'
-          .answer-errors
-          = f.text_area :body, class: 'form-control'
-          = f.submit 'Сохранить', class: 'btn btn-success'
+    - if user_signed_in?
+      - if current_user.author_of?(@question)
+        = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
 
-      = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
+      - if current_user.author_of?(answer)
+        = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+
+        = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
+          .form-group
+            = f.label :body, 'Ваш ответ на вопрос'
+            .answer-errors
+            = f.text_area :body, class: 'form-control'
+            = f.submit 'Сохранить', class: 'btn btn-success'
+
+        = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'

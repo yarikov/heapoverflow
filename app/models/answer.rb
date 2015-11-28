@@ -4,7 +4,11 @@ class Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :user
 
+  has_many :attachments, as: :attachable
+
   validates :body, :question_id, :user_id, presence: true
+
+  accepts_nested_attributes_for :attachments
 
   def best!
     best_answer = question.answers.find_by(best: true)

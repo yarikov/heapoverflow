@@ -11,5 +11,9 @@
         = f.label :body, 'Ваш ответ на вопрос'
         .answer-errors
         = f.text_area :body, class: 'form-control'
+      .form-group
+        = f.fields_for :attachments do |a|
+          = a.label :file, 'Файл'
+          = a.file_field :file
       p
         = f.submit 'Ответить', class: 'btn btn-success'
