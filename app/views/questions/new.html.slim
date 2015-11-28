@@ -8,5 +8,9 @@ h3 Новый вопрос
   .form-group
     = f.label :body, 'Детали вопроса'
     = f.text_area :body, class: 'form-control'
+  .form-group
+    = f.fields_for :attachments do |a|
+      = a.label :file, 'Файл'
+      = a.file_field :file
   p
     = f.submit 'Опубликовать', class: 'btn btn-success'
