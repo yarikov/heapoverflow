@@ -15,6 +15,11 @@
       .form-group
         = f.label :body, 'Детали вопроса'
         = f.text_area :body, class: 'form-control'
+      .form-group
+        = f.fields_for :attachments do |a|
+          == render 'attachment_fields', f: a
+        .add-file
+          = link_to_add_association 'Добавить файл', f, :attachments
         = f.submit 'Сохранить', class: 'btn btn-success'
 
     = link_to 'Удалить вопрос', @question, data: {:confirm => 'Вы уверены'}, :method => :delete,  class: 'btn btn-danger'

@@ -3,6 +3,10 @@
     $('.question-errors').html('<%= j message %>');
   <% end %>
 <% else %>
-    $('.question').replaceWith('<%= j render @question %>');
+  <% if remotipart_submitted? %>
+    $('.question').replaceWith("<%= j "#{render @question }" %>");
+  <% else %>
+    $('.question').replaceWith("<%= j render @question %>");
+  <% end %>
 <% end %>
 $('.flash').replaceWith('<%= j render 'layouts/flash' %>');
