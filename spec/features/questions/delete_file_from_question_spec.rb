@@ -5,16 +5,24 @@ feature 'Delete file from question' do
   given!(:question) { create(:question, user: author) }
   given!(:file) { create(:attachment, attachable: question) }
 
-  scenario 'Author try to delete the file', js: true do
-    sign_in(author)
-    visit question_path(question)
+  context 'Author' do
+    before do
+      sign_in(author)
+      visit question_path(question)
+    end
 
-    within '.question' do
-      click_on 'Редактировать'
-      click_on 'Удалить файл'
-      click_on 'Сохранить'
+    scenario 'sees link to file' do
+      expect(page).to have_link file.file.identifier
+    end
 
-      expect(page).to_not have_link file.file.identifier
+    scenario 'try to delete the file', js: true do
+      within '.question' do
+        click_on 'Редактировать'
+        click_on 'Удалить файл'
+        click_on 'Сохранить'
+
+        expect(page).to_not have_link file.file.identifier
+      end
     end
   end
 end
