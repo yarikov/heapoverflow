@@ -17,6 +17,10 @@
             = f.label :body, 'Ваш ответ на вопрос'
             .answer-errors
             = f.text_area :body, class: 'form-control'
+            = f.fields_for :attachments do |a|
+              == render 'common/attachment_fields', f: a
+            .add-file
+              = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
             = f.submit 'Сохранить', class: 'btn btn-success'
 
         = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'

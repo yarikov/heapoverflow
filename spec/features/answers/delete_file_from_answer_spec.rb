@@ -1,15 +1,16 @@
 require_relative '../feature_helper'
 
-feature 'Delete file from question' do
+feature 'Delete file from answer' do
   given(:author) { create(:user) }
   given!(:question) { create(:question, user: author) }
-  given!(:file) { create(:attachment, attachable: question) }
+  given!(:answer) { create(:answer, question: question, user: author) }
+  given!(:file) { create(:attachment, attachable: answer) }
 
   scenario 'Author try to delete the file', js: true do
     sign_in(author)
     visit question_path(question)
 
-    within '.question' do
+    within '.answers' do
       click_on 'Редактировать'
       click_on 'Удалить файл'
       click_on 'Сохранить'

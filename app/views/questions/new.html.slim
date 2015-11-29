@@ -10,6 +10,6 @@ h3 Новый вопрос
     = f.text_area :body, class: 'form-control'
   .form-group
     = f.fields_for :attachments do |a|
-    = link_to_add_association 'Добавить файл', f, :attachments
+    = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
   p
     = f.submit 'Опубликовать', class: 'btn btn-success'

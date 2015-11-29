@@ -3,6 +3,10 @@
     $('.answer-errors').html('<%= j message %>');
   <% end %>
 <% else %>
+  <% if remotipart_submitted? %>
+    $('<%= ".answer-#{@answer.id}" %>').replaceWith("<%= j "#{render @answer}" %>");
+  <% else %>
     $('<%= ".answer-#{@answer.id}" %>').replaceWith('<%= j render @answer %>');
+  <% end %>
 <% end %>
 $('.flash').replaceWith('<%= j render 'layouts/flash' %>');
