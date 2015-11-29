@@ -13,14 +13,21 @@ feature 'Сreate an answer', '
     visit question_path(question)
 
     fill_in 'Ваш ответ на вопрос', with: 'Answer body'
-    attach_file 'Файл', "#{Rails.root}/spec/spec_helper.rb"
+    click_on 'Добавить файл'
+    all('input[type="file"]')[0].set("#{Rails.root}/spec/spec_helper.rb")
+    click_on 'Добавить файл'
+    all('input[type="file"]')[1].set("#{Rails.root}/spec/rails_helper.rb")
     click_on 'Ответить'
 
     expect(current_path).to eq question_path(question)
     within '.answers' do
       expect(page).to have_content 'Answer body'
-      expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
+      expect(page).to have_link 'spec_helper.rb',
+                                href: '/uploads/attachment/file/1/spec_helper.rb'
+      expect(page).to have_link 'rails_helper.rb',
+                                href: '/uploads/attachment/file/2/rails_helper.rb'
     end
+    expect(page).to_not have_css '.nested-fields'
   end
 
   scenario 'Authenticated user creates invalid answer', js: true do

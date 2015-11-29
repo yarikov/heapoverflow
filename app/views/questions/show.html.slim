@@ -13,7 +13,6 @@
         = f.text_area :body, class: 'form-control'
       .form-group
         = f.fields_for :attachments do |a|
-          = a.label :file, 'Файл'
-          = a.file_field :file
+          = link_to_add_association 'Добавить файл', f, :attachments
       p
         = f.submit 'Ответить', class: 'btn btn-success'
