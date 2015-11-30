@@ -1,5 +1,8 @@
-h3 Все вопросы
-- @questions.each do |question|
-    p = link_to question.title, question
+h4.pull-left Все вопросы
 
-= link_to 'Задать вопрос', new_question_path, class: 'btn btn-success'
+= link_to 'Задать вопрос', new_question_path, class: 'btn btn-success pull-right'
+
+.content
+  - @questions.each do |question|
+    .question-summary
+      = link_to question.title, question
