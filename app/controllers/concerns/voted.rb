@@ -7,12 +7,12 @@ module Voted
 
   def vote_up
     current_user.vote_up(@votable)
-    render json: @votable.vote_count
+    render json: { vote_count: @votable.vote_count, id: @votable.id }
   end
 
   def vote_down
     current_user.vote_down(@votable)
-    render json: @votable.vote_count
+    render json: { vote_count: @votable.vote_count, id: @votable.id }
   end
 
   private

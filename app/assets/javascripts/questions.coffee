@@ -5,11 +5,9 @@ ready = ->
     question_id = $(this).data('questionId')
     $('form#edit_question_' + question_id).show()
 
-  $('.vote_up').bind 'ajax:success', (e, data, status, xhr) ->
-    $('.vote_count').html(xhr.responseText)
-
-  $('.vote_down').bind 'ajax:success', (e, data, status, xhr) ->
-    $('.vote_count').html(xhr.responseText)
+  $('.question .vote_up, .question .vote_down').bind 'ajax:success', (e, data, status, xhr) ->
+    question = $.parseJSON(xhr.responseText)
+    $('.question .vote_count').html(question.vote_count)
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

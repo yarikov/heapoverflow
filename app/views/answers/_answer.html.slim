@@ -5,6 +5,11 @@
       - answer.attachments.each do |a|
         li = link_to a.file.identifier, a.file.url
 
+    .vote_count
+      = answer.vote_count
+    = link_to '', vote_up_answer_path(answer), method: :patch, remote: true, class: 'glyphicon glyphicon-triangle-top vote_up'
+    = link_to '', vote_down_answer_path(answer), method: :patch, remote: true, class: 'glyphicon glyphicon-triangle-bottom vote_down'
+
     - if user_signed_in?
       - if current_user.author_of?(@question)
         = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
