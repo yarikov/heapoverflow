@@ -19,19 +19,17 @@ feature 'Voting for question' do
       visit question_path(question)
     end
 
-    scenario 'vote up for question' do
+    scenario 'vote up for question', js: true do
       within('.question') do
         find('.vote_up').click
         expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_content 'Автор не может проголосовать за свой вопрос'
       end
     end
 
-    scenario 'vote down for question' do
+    scenario 'vote down for question', js: true do
       within('.question') do
         find('.vote_down').click
         expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_content 'Автор не может проголосовать за свой вопрос'
       end
     end
   end
@@ -42,25 +40,23 @@ feature 'Voting for question' do
       visit question_path(question)
     end
 
-    scenario 'vote up for question' do
+    scenario 'vote up for question', js: true do
       within('.question') do
         find('.vote_up').click
         expect(page).to have_selector '.vote_count', text: '1'
 
         find('.vote_up').click
-        expect(page).to have_selector '.vote_count', text: '1'
-        expect(page).to have_content 'Вы уже проголосовали...'
+        expect(page).to have_selector '.vote_count', text: '0'
       end
     end
 
-    scenario 'vote down for question' do
+    scenario 'vote down for question', js: true do
       within('.question') do
         find('.vote_down').click
         expect(page).to have_selector '.vote_count', text: '-1'
 
         find('.vote_down').click
-        expect(page).to have_selector '.vote_count', text: '-1'
-        expect(page).to have_content 'Вы уже проголосовали...'
+        expect(page).to have_selector '.vote_count', text: '0'
       end
     end
   end
@@ -70,19 +66,17 @@ feature 'Voting for question' do
       visit question_path(question)
     end
 
-    scenario 'vote up for question' do
+    scenario 'vote up for question', js: true do
       within('.question') do
         find('.vote_up').click
         expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_content 'You need to sign in or sign up before continuing'
       end
     end
 
-    scenario 'vote down for question' do
+    scenario 'vote down for question', js: true do
       within('.question') do
         find('.vote_down').click
         expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_content 'You need to sign in or sign up before continuing'
       end
     end
   end

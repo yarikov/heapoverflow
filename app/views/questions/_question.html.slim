@@ -4,6 +4,10 @@
   ul
     - @question.attachments.each do |a|
       li = link_to a.file.identifier, a.file.url
+  .vote_count
+    = @question.vote_count
+  = link_to '', vote_up_question_path, method: :patch, remote: true, class: 'glyphicon glyphicon-triangle-top vote_up'
+  = link_to '', vote_down_question_path, method: :patch, remote: true, class: 'glyphicon glyphicon-triangle-bottom vote_down'
 
   - if user_signed_in? && current_user.author_of?(@question)
     = link_to 'Редактировать', '', class: 'edit-question-link',  data: { question_id: @question.id }
