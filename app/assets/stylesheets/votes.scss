@@ -1,0 +1,49 @@
+.vote {
+  display: inline-block;
+  text-align: center;
+}
+
+.vote-up-off {
+  display: block;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: transparent transparent #627180;
+}
+
+.vote-down-off {
+  display: block;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 15px 0;
+  border-color: #627180 transparent transparent;
+}
+
+.vote-up-on {
+  display: block;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: transparent transparent #d96c18;
+}
+
+.vote-down-on {
+  display: block;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 15px 0;
+  border-color: #d96c18 transparent transparent;
+}
+
+span.vote_count {
+  font-size: 20px;
+  color: #627180;
+}

@@ -113,4 +113,66 @@ RSpec.describe AnswersController, type: :controller do
       expect(response).to render_template :best
     end
   end
+
+  describe 'PATCH #vote_up' do
+    context 'when author' do
+      sign_in_user
+      let(:question) { create(:question, user: user) }
+      let!(:answer) { create(:answer, question: question, user: @user) }
+
+      it 'render json' do
+        patch :vote_up, id: answer, format: :json
+        json = JSON.parse(response.body)
+
+        expect(json['error']).to eql 'Автор не может голосовать'
+      end
+    end
+
+    context 'when authenticated user' do
+      sign_in_user
+      let(:question) { create(:question, user: user) }
+      let!(:answer) { create(:answer, question: question, user: user) }
+
+      it 'render json' do
+        patch :vote_up, id: answer, format: :json
+        json = JSON.parse(response.body)
+
+        expect(json['id']).to eql(answer.id)
+        expect(json['vote_count']).to eql(answer.vote_count)
+        expect(json['vote_up']).to eql true
+        expect(json['vote_down']).to eql false
+      end
+    end
+  end
+
+  describe 'PATCH #vote_down' do
+    context 'when author' do
+      sign_in_user
+      let(:question) { create(:question, user: user) }
+      let!(:answer) { create(:answer, question: question, user: @user) }
+
+      it 'render json' do
+        patch :vote_down, id: answer, format: :json
+        json = JSON.parse(response.body)
+
+        expect(json['error']).to eql 'Автор не может голосовать'
+      end
+    end
+
+    context 'when authenticated user' do
+      sign_in_user
+      let(:question) { create(:question, user: user) }
+      let!(:answer) { create(:answer, question: question, user: user) }
+
+      it 'render json' do
+        patch :vote_down, id: answer, format: :json
+        json = JSON.parse(response.body)
+
+        expect(json['id']).to eql(answer.id)
+        expect(json['vote_count']).to eql(answer.vote_count)
+        expect(json['vote_up']).to eql false
+        expect(json['vote_down']).to eql true
+      end
+    end
+  end
 end

@@ -6,13 +6,27 @@ module Voted
   end
 
   def vote_up
-    current_user.vote_up(@votable)
-    render json: { vote_count: @votable.vote_count, id: @votable.id }
+    if current_user.author_of?(@votable)
+      render json: { error: 'Автор не может голосовать' }, status: :unprocessable_entity
+    else
+      current_user.vote_up(@votable)
+      render json: { id: @votable.id,
+                     vote_count: @votable.vote_count,
+                     vote_up: current_user.vote_up?(@votable),
+                     vote_down: current_user.vote_down?(@votable) }
+    end
   end
 
   def vote_down
-    current_user.vote_down(@votable)
-    render json: { vote_count: @votable.vote_count, id: @votable.id }
+    if current_user.author_of?(@votable)
+      render json: { error: 'Автор не может голосовать' }, status: :unprocessable_entity
+    else
+      current_user.vote_down(@votable)
+      render json: { id: @votable.id,
+                     vote_count: @votable.vote_count,
+                     vote_up: current_user.vote_up?(@votable),
+                     vote_down: current_user.vote_down?(@votable) }
+    end
   end
 
   private

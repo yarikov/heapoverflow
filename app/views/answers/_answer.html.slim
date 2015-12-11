@@ -1,14 +1,14 @@
 - if answer.persisted?
-  div class="answer-#{answer.id}"
-    p = answer.body
+  div class="answer-#{answer.id} answer"
+    .vote
+      = vote_up_link_to vote_up_answer_path(answer), answer
+      span.vote_count = answer.vote_count
+      = vote_down_link_to vote_down_answer_path(answer), answer
+    .answer-body
+      = answer.body
     ul
       - answer.attachments.each do |a|
         li = link_to a.file.identifier, a.file.url
-
-    .vote_count
-      = answer.vote_count
-    = link_to '', vote_up_answer_path(answer), method: :patch, remote: true, class: 'glyphicon glyphicon-triangle-top vote_up'
-    = link_to '', vote_down_answer_path(answer), method: :patch, remote: true, class: 'glyphicon glyphicon-triangle-bottom vote_down'
 
     - if user_signed_in?
       - if current_user.author_of?(@question)

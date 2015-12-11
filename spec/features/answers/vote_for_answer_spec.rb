@@ -9,7 +9,7 @@ feature 'Voting for answer' do
   scenario 'Any users sees vote count' do
     visit question_path(question)
 
-    within('.answer-1') do
+    within('.answers') do
       expect(page).to have_selector '.vote_count', text: '0'
     end
   end
@@ -22,15 +22,17 @@ feature 'Voting for answer' do
 
     scenario 'vote up for answer', js: true do
       within('.answers') do
-        find('.vote_up').click
+        find('.vote-up-off').click
         expect(page).to have_selector '.vote_count', text: '0'
+        expect(page).to have_selector '.vote-up-off'
       end
     end
 
     scenario 'vote down for answer', js: true do
       within('.answers') do
-        find('.vote_down').click
+        find('.vote-down-off').click
         expect(page).to have_selector '.vote_count', text: '0'
+        expect(page).to have_selector '.vote-down-off'
       end
     end
   end
@@ -43,21 +45,25 @@ feature 'Voting for answer' do
 
     scenario 'vote up for answer', js: true do
       within('.answers') do
-        find('.vote_up').click
+        find('.vote-up-off').click
         expect(page).to have_selector '.vote_count', text: '1'
+        expect(page).to have_selector '.vote-up-on'
 
-        find('.vote_up').click
+        find('.vote-up-on').click
         expect(page).to have_selector '.vote_count', text: '0'
+        expect(page).to have_selector '.vote-up-off'
       end
     end
 
     scenario 'vote down for answer', js: true do
       within('.answers') do
-        find('.vote_down').click
+        find('.vote-down-off').click
         expect(page).to have_selector '.vote_count', text: '-1'
+        expect(page).to have_selector '.vote-down-on'
 
-        find('.vote_down').click
+        find('.vote-down-on').click
         expect(page).to have_selector '.vote_count', text: '0'
+        expect(page).to have_selector '.vote-down-off'
       end
     end
   end
@@ -69,15 +75,17 @@ feature 'Voting for answer' do
 
     scenario 'vote up for answer', js: true do
       within('.answers') do
-        find('.vote_up').click
+        find('.vote-up-off').click
         expect(page).to have_selector '.vote_count', text: '0'
+        expect(page).to have_selector '.vote-up-off'
       end
     end
 
     scenario 'vote down for answer', js: true do
       within('.answers') do
-        find('.vote_down').click
+        find('.vote-down-off').click
         expect(page).to have_selector '.vote_count', text: '0'
+        expect(page).to have_selector '.vote-down-off'
       end
     end
   end

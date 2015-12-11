@@ -26,11 +26,6 @@ RSpec.describe User, type: :model do
       user.vote_up(question)
       expect(question.vote_count).to eq 1
     end
-
-    it 'does not create upvote if author try to vote' do
-      author.vote_up(question)
-      expect(question.vote_count).to eq 0
-    end
   end
 
   describe '#vote_down' do
@@ -49,11 +44,6 @@ RSpec.describe User, type: :model do
     it 'create downvote if user did not vote' do
       user.vote_down(question)
       expect(question.vote_count).to eq(-1)
-    end
-
-    it 'does not create downvote if author try to vote' do
-      author.vote_down(question)
-      expect(question.vote_count).to eq 0
     end
   end
 end

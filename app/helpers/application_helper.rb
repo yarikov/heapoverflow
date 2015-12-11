@@ -18,4 +18,14 @@ module ApplicationHelper
     end
     nil
   end
+
+  def vote_up_link_to(path, obj)
+    vote_class = user_signed_in? && current_user.vote_up?(obj) ? 'vote-up-on' : 'vote-up-off'
+    link_to '', path, method: :patch, remote: true, class: "#{vote_class}"
+  end
+
+  def vote_down_link_to(path, obj)
+    vote_class = user_signed_in? && current_user.vote_down?(obj) ? 'vote-down-on' : 'vote-down-off'
+    link_to '', path, method: :patch, remote: true, class: "#{vote_class}"
+  end
 end
