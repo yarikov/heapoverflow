@@ -133,6 +133,8 @@ RSpec.describe AnswersController, type: :controller do
       let(:question) { create(:question, user: user) }
       let!(:answer) { create(:answer, question: question, user: user) }
 
+      render_views
+
       it 'render json' do
         patch :vote_up, id: answer, format: :json
         json = JSON.parse(response.body)
@@ -163,6 +165,8 @@ RSpec.describe AnswersController, type: :controller do
       sign_in_user
       let(:question) { create(:question, user: user) }
       let!(:answer) { create(:answer, question: question, user: user) }
+
+      render_views
 
       it 'render json' do
         patch :vote_down, id: answer, format: :json
