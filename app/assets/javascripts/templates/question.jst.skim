@@ -1,0 +1,2 @@
+.question-summary
+  a href="/questions/#{@question.id}" #{@question.body}
