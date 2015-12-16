@@ -8,7 +8,9 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-    @answer.save
+    PrivatePub.publish_to "/questions/#{@question.id}/answers",
+                          answer: @answer.to_json,
+                          vote_count: @answer.vote_count.to_json if @answer.save
   end
 
   def update

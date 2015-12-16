@@ -1,0 +1,7 @@
+div class="answer-#{@answer.id} answer"
+  .vote
+    a.vote-up-off data-remote="true" rel="nofollow" data-method="patch" href="/answers/#{@answer.id}/vote_up"
+    span.vote_count = @vote_count
+    a.vote-down-off data-remote="true" rel="nofollow" data-method="patch" href="/answers/#{@answer.id}/vote_down"
+  .answer-body
+    = @answer.body

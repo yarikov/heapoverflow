@@ -16,3 +16,5 @@
           = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
       p
         = f.submit 'Ответить', class: 'btn btn-success'
+
+= subscribe_to "/questions/#{@question.id}/answers"
