@@ -1,3 +1,9 @@
-$('.comments').append('<%= j render @comment %>');
-$('.new-comment #comment_body').val('');
-$('.new-comment').hide();
+<% if @comment.commentable_type == "Question" %>
+  $('.question .comments').append('<%= j render @comment %>');
+  $('.question #comment_body').val('');
+  $('.question #new_comment').hide();
+<% else %>
+  $('<%= ".answer-#{@commentable.id}" %> .comments').append('<%= j render @comment %>');
+  $('<%= ".answer-#{@commentable.id}" %> #comment_body').val('');
+  $('<%= ".answer-#{@commentable.id}" %> .new_comment').hide();
+<% end %>

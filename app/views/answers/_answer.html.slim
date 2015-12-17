@@ -10,6 +10,9 @@
       - answer.attachments.each do |a|
         li = link_to a.file.identifier, a.file.url
 
+    .comments
+      == render answer.comments
+
     - if user_signed_in?
       - if current_user.author_of?(@question)
         = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
@@ -29,3 +32,11 @@
             = f.submit 'Сохранить', class: 'btn btn-success'
 
         = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
+
+      = link_to 'Добавить комментарий', '', class: 'new-comment-link'
+
+      = form_for [answer, Comment.new], remote: true do |f|
+        .form-group
+          = f.label :body, 'Комментарий'
+          = f.text_area :body, class: 'form-control'
+          = f.submit 'Сохранить', class: 'btn btn-success'

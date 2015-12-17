@@ -12,6 +12,9 @@
       - @question.attachments.each do |a|
         li = link_to a.file.identifier, a.file.url
 
+  .comments
+    == render @question.comments
+
   - if user_signed_in? && current_user.author_of?(@question)
     = link_to 'Редактировать', '', class: 'edit-question-link',  data: { question_id: @question.id }
 
@@ -30,3 +33,12 @@
         = f.submit 'Сохранить', class: 'btn btn-success'
 
     = link_to 'Удалить вопрос', @question, data: {:confirm => 'Вы уверены'}, :method => :delete,  class: 'btn btn-danger'
+
+  - if user_signed_in?
+    = link_to 'Добавить комментарий', '', class: 'new-comment-link'
+
+    = form_for [@question, Comment.new], remote: true do |f|
+      .form-group
+        = f.label :body, 'Комментарий'
+        = f.text_area :body, class: 'form-control'
+        = f.submit 'Сохранить', class: 'btn btn-success'

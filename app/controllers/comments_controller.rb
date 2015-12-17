@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_question
 
   def create
-    @comment = @question.comments.new(comment_params)
+    @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
     @comment.save
   end
@@ -11,7 +11,8 @@ class CommentsController < ApplicationController
   private
 
   def set_question
-    @question = Question.find(params[:question_id])
+    return @commentable = Question.find(params[:question_id]) if params[:question_id]
+    @commentable = Answer.find(params[:answer_id]) if params[:answer_id]
   end
 
   def comment_params

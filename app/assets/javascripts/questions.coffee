@@ -15,7 +15,7 @@ voteQuestion = (e, data, status, xhr) ->
 
 newComment = (e) ->
   e.preventDefault()
-  $('.new-comment').show()
+  $(this).parent().find('.new_comment').show()
 
 $(document)
   .ready(ready)
