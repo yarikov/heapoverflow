@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :questions, concerns: :voted do
+    resources :comments
     resources :answers, concerns: :voted, shallow: true do
       patch :best, on: :member
     end

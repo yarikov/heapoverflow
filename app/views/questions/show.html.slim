@@ -1,4 +1,17 @@
 == render @question
+.comments
+  == render @question.comments
+
+- if user_signed_in?
+  = link_to 'Добавить комментарий', '', class: 'new-comment-link'
+
+  .new-comment
+    h4 Новый комментарий
+    = form_for [@question, @comment], remote: true do |f|
+      .form-group
+        = f.label :body, 'Комментарий'
+        = f.text_area :body, class: 'form-control'
+        = f.submit 'Сохранить', class: 'btn btn-success'
 
 .answers
   == render @question.answers
