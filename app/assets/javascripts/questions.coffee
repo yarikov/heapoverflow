@@ -1,7 +1,18 @@
 ready = ->
+  questionId = $('.question').data('questionId')
+  userId = $('.question').data('userId')
+
   PrivatePub.subscribe "/questions", (data, channel) ->
     question = $.parseJSON(data['question'])
     $('.content').append(JST['templates/question'](question: question))
+
+  PrivatePub.subscribe "/questions/#{questionId}/comments", (data, channel) ->
+    comment = $.parseJSON(data['comment'])
+    return if userId == comment.user_id
+    if comment.commentable_type == 'Question'
+      $('.question .comments').append("<div class='comment'>#{comment.body}</div>")
+    else
+      $(".answer-#{comment.commentable_id} .comments").append("<div class='comment'>#{comment.body}</div>")
 
 editQuestion = (e) ->
   e.preventDefault()

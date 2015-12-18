@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
-    @comment.save
+    PrivatePub.publish_to comment_path, comment: @comment.to_json if @comment.save
   end
 
   private
@@ -17,5 +17,13 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def comment_path
+    if @comment.commentable_type == 'Question'
+      "/questions/#{@commentable.id}/comments"
+    else
+      "/questions/#{@commentable.question_id}/comments"
+    end
   end
 end
