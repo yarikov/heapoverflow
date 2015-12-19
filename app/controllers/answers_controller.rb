@@ -1,44 +1,30 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: [:update, :destroy, :best]
-  before_action :set_question, only: [:new, :create]
+  before_action :set_question, only: [:create, :update]
+  before_action :check_answer_author!, only: [:update, :destroy]
+  before_action :check_question_author!, only: :best
+  after_action :publish_answer, only: :create
 
   include Voted
 
+  respond_to :js
+
   def create
-    @answer = @question.answers.new(answer_params)
-    @answer.user = current_user
-    PrivatePub.publish_to "/questions/#{@question.id}/answers",
-                          answer: @answer.to_json,
-                          vote_count: @answer.vote_count.to_json if @answer.save
+    respond_with @answer = @question.answers.create(answer_params.merge(user: current_user))
   end
 
   def update
-    if current_user.author_of?(@answer)
-      @answer.update(answer_params)
-      @question = @answer.question
-      flash.now[:notice] = 'Ответ на вопрос успешно отредактирован'
-    else
-      flash.now[:alert] = 'У вас нет прав на эти действия'
-    end
+    @answer.update(answer_params)
+    respond_with @answer
   end
 
   def best
-    if current_user.author_of?(@answer.question)
-      @answer.best!
-      flash.now[:notice] = 'Вы выбрали лучший ответ'
-    else
-      flash.now[:alert] = 'У вас нет прав на эти действия'
-    end
+    respond_with @answer.best!
   end
 
   def destroy
-    if current_user.author_of?(@answer)
-      @answer.destroy
-      flash.now[:notice] = 'Ответ на вопрос успешно удален'
-    else
-      flash.now[:alert] = 'У вас нет прав на эти действия'
-    end
+    respond_with @answer.destroy
   end
 
   private
@@ -48,7 +34,24 @@ class AnswersController < ApplicationController
   end
 
   def set_question
-    @question = Question.find(params[:question_id])
+    @question = @answer.question if @answer
+    @question ||= Question.find(params[:question_id])
+  end
+
+  def check_answer_author!
+    return if current_user.author_of?(@answer)
+    render json: { error: 'У вас нет прав на эти действия' }, status: :unprocessable_entity
+  end
+
+  def check_question_author!
+    return if current_user.author_of?(@answer.question)
+    render json: { error: 'У вас нет прав на эти действия' }, status: :unprocessable_entity
+  end
+
+  def publish_answer
+    PrivatePub.publish_to "/questions/#{@question.id}/answers",
+                          answer: @answer.to_json,
+                          vote_count: @answer.vote_count.to_json if @answer.valid?
   end
 
   def answer_params
