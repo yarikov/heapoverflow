@@ -1,18 +1,23 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_question
+  before_action :set_commentable
+  after_action :publish_comment
+
+  respond_to :js
 
   def create
-    @comment = @commentable.comments.new(comment_params)
-    @comment.user = current_user
-    PrivatePub.publish_to comment_path, comment: @comment.to_json if @comment.save
+    respond_with @comment = @commentable.comments.create(comment_params.merge(user: current_user))
   end
 
   private
 
-  def set_question
+  def set_commentable
     return @commentable = Question.find(params[:question_id]) if params[:question_id]
     @commentable = Answer.find(params[:answer_id]) if params[:answer_id]
+  end
+
+  def publish_comment
+    PrivatePub.publish_to comment_path, comment: @comment.to_json if @comment.valid?
   end
 
   def comment_params

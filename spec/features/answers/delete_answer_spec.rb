@@ -12,7 +12,7 @@ feature 'Delete the answer' do
     visit question_path(question)
     click_on 'Удалить ответ'
 
-    expect(page).to have_content 'Ответ на вопрос успешно удален'
+    expect(page).to have_content 'Answer was successfully destroyed'
     expect(page).to_not have_content answer.body
     expect(current_path).to eq question_path(question)
   end

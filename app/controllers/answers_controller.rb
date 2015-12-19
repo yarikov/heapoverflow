@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: [:update, :destroy, :best]
-  before_action :set_question, only: [:create, :update]
+  before_action :set_question, only: [:create, :update, :best]
   before_action :check_answer_author!, only: [:update, :destroy]
   before_action :check_question_author!, only: :best
   after_action :publish_answer, only: :create
@@ -44,7 +44,7 @@ class AnswersController < ApplicationController
   end
 
   def check_question_author!
-    return if current_user.author_of?(@answer.question)
+    return if current_user.author_of?(@question)
     render json: { error: 'У вас нет прав на эти действия' }, status: :unprocessable_entity
   end
 

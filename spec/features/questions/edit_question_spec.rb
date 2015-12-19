@@ -32,7 +32,7 @@ feature 'Question editing', '
         expect(page).to_not have_selector 'text_field'
         expect(page).to_not have_selector 'textarea'
       end
-      expect(page).to have_content 'Вопрос успешно отредактирован'
+      expect(page).to have_content 'Question was successfully updated'
     end
   end
 

@@ -23,7 +23,7 @@ feature 'The best answer', '
     scenario 'try to choose the best answer', js: true do
       click_on 'Лучший ответ'
 
-      expect(page).to have_content 'Вы выбрали лучший ответ'
+      expect(page).to have_content 'You chose the best answer'
     end
   end
 

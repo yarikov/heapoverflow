@@ -9,7 +9,7 @@ feature 'Delete the question' do
     visit question_path(question)
     click_on 'Удалить вопрос'
 
-    expect(page).to have_content 'Вопрос успешно удален'
+    expect(page).to have_content 'Question was successfully destroyed'
     expect(current_path).to eq questions_path
   end
 
