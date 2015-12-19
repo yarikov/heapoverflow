@@ -17,6 +17,7 @@ gem 'cocoon'
 gem 'private_pub'
 gem 'thin'
 gem 'skim'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug'

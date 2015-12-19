@@ -5,7 +5,7 @@ ready = ->
   PrivatePub.subscribe "/questions/#{questionId}/answers", (data, channel) ->
     answer = $.parseJSON(data['answer'])
     vote_count = $.parseJSON(data['vote_count'])
-    return if userId == comment.user_id
+    return if userId == answer.user_id
     $('.answers').append(JST['templates/answer'](answer: answer, vote_count: vote_count))
 
 editAnswer = (e) ->
