@@ -31,10 +31,16 @@ end
 
 group :development do
   gem 'rubocop', require: false
+  gem 'guard-rails', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-bundler', require: false
+  gem 'guard-spring', require: false
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'fuubar'
 end
