@@ -20,16 +20,7 @@
       - if current_user.author_of?(answer)
         = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
 
-        = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
-          .form-group
-            = f.label :body, 'Ваш ответ на вопрос'
-            .answer-errors
-            = f.text_area :body, class: 'form-control'
-            = f.fields_for :attachments do |a|
-              == render 'common/attachment_fields', f: a
-            .add-file
-              = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
-            = f.submit 'Сохранить', class: 'btn btn-success'
+        == render 'answers/form', answer: answer
 
         = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
 

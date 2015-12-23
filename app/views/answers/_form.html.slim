@@ -1,0 +1,10 @@
+= form_for shallow_path(@question, answer), remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
+  .form-group
+    = f.label :body, 'Ваш ответ на вопрос'
+    .answer-errors
+    = f.text_area :body, class: 'form-control'
+    = f.fields_for :attachments do |a|
+      == render 'common/attachment_fields', f: a
+    .add-file
+      = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
+    = f.submit answer.persisted? ? 'Сохранить' : 'Ответить', class: 'btn btn-success'

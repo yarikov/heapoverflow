@@ -28,4 +28,8 @@ module ApplicationHelper
     vote_class = user_signed_in? && current_user.vote_down?(obj) ? 'vote-down-on' : 'vote-down-off'
     link_to '', path, method: :patch, remote: true, class: "#{vote_class}"
   end
+
+  def shallow_path(*args)
+    args.last.persisted? ? args.last : args
+  end
 end
