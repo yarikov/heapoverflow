@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+  devise_scope(:user) { post :twitter, to: 'omniauth_callbacks#twitter' }
+
   root 'questions#index'
 
   concern :voted do

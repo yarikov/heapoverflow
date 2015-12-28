@@ -21,4 +21,4 @@ voteAnswer = (e, data, status, xhr) ->
 $(document)
   .ready(ready)
   .on('click', '.edit-answer-link', editAnswer)
-  .on('ajax:success', '.vote-up-off, .vote-up-on, .vote-down-off, .vote-down-on', voteAnswer)
+  .on('ajax:success', '.answers .vote-up-off, .answers .vote-up-on, .answers .vote-down-off, .answers .vote-down-on', voteAnswer)
