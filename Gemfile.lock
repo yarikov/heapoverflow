@@ -58,6 +58,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-email (2.4.0)
+      capybara (~> 2.4)
+      mail
     capybara-webkit (1.7.1)
       capybara (>= 2.3.0, < 2.6.0)
       json
@@ -162,6 +165,8 @@ GEM
     jwt (1.5.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     listen (3.0.5)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -355,6 +360,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.5)
   capybara
+  capybara-email
   capybara-webkit
   carrierwave
   cocoon
@@ -370,6 +376,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  letter_opener
   omniauth
   omniauth-facebook
   omniauth-twitter

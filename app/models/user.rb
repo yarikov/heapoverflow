@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
     return new unless auth.info.email
     user = find_or_create_by!(email: auth.info.email) do |u|
       u.password = u.password_confirmation = Devise.friendly_token[0, 20]
+      u.skip_confirmation! unless auth.provider == 'twitter'
     end
     user.authorizations.create(provider: auth.provider, uid: auth.uid)
     user
