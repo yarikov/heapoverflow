@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
     return authorization.user if authorization
     return new unless auth.info.email
     user = find_or_create_by!(email: auth.info.email) do |u|
-      u.password = u.password_confirmation = Devise.friendly_token[0, 20]
-      u.skip_confirmation! unless auth.provider == 'twitter'
+      u.password = Devise.friendly_token[0, 20]
+      u.skip_confirmation! if auth.credentials
     end
     user.authorizations.create(provider: auth.provider, uid: auth.uid)
     user

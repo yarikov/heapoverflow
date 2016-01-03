@@ -1,6 +1,4 @@
 = form_tag twitter_path, method: :post do
   = label_tag :email
-  = email_field 'auth[info]', :email
-  = hidden_field_tag 'auth[provider]', auth.provider
-  = hidden_field_tag 'auth[uid]', auth.uid
+  = email_field_tag :email
   = submit_tag 'Подтвердить'

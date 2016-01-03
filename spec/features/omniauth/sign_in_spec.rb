@@ -40,7 +40,7 @@ feature 'User sign in' '
 
       mock_auth_hash
       click_on 'Sign in with Twitter'
-      fill_in 'auth[info][email]', with: 'test@email.com'
+      fill_in 'Email', with: 'test@email.com'
       click_on 'Подтвердить'
       expect(page).to have_content 'You have to confirm your email address before continuing'
 

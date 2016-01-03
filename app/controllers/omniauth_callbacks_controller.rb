@@ -5,7 +5,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: auth.provider.capitalize) if is_navigational_format?
     else
-      render 'omniauth/get_email', locals: { auth: request.env['omniauth.auth'] }
+      session['devise.auth_provider'] = auth.provider
+      session['devise.auth_uid'] = auth.uid
+      render 'omniauth/get_email'
     end
   end
   alias_method :twitter, :facebook
@@ -13,6 +15,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def auth
-    request.env['omniauth.auth'] || OmniAuth::AuthHash.new(params[:auth])
+    request.env['omniauth.auth'] || OmniAuth::AuthHash.new(
+      provider: session['devise.auth_provider'],
+      uid: session['devise.auth_uid'],
+      info: { email: params[:email] }
+    )
   end
 end
