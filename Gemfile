@@ -21,6 +21,7 @@ gem 'private_pub'
 gem 'thin'
 gem 'skim'
 gem 'responders'
+gem 'cancancan'
 
 group :development, :test do
   gem 'pry-byebug'

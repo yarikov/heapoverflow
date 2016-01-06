@@ -15,7 +15,7 @@
   .comments
     == render @question.comments
 
-  - if user_signed_in? && current_user.author_of?(@question)
+  - if can?(:update, @question)
     = link_to 'Редактировать', '', class: 'edit-question-link',  data: { question_id: @question.id }
 
     = form_for @question, remote: true do |f|
@@ -34,7 +34,7 @@
 
     = link_to 'Удалить вопрос', @question, data: {:confirm => 'Вы уверены'}, :method => :delete,  class: 'btn btn-danger'
 
-  - if user_signed_in?
+  - if can?(:create, Comment)
     = link_to 'Добавить комментарий', '', class: 'new-comment-link'
 
     = form_for [@question, Comment.new], remote: true do |f|

@@ -4,7 +4,7 @@
   == render @question.answers
 
 .new-answer
-  - if user_signed_in?
+  - if can?(:create, Answer)
     h4 Hовый ответ
     == render 'answers/form', answer: @answer
 

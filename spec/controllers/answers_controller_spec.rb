@@ -128,7 +128,7 @@ RSpec.describe AnswersController, type: :controller do
         patch :vote_up, id: answer, format: :json
         json = JSON.parse(response.body)
 
-        expect(json['error']).to eql 'Автор не может голосовать'
+        expect(json['error']).to eql 'The author of the answer cannot vote up'
       end
     end
 
@@ -161,7 +161,7 @@ RSpec.describe AnswersController, type: :controller do
         patch :vote_down, id: answer, format: :json
         json = JSON.parse(response.body)
 
-        expect(json['error']).to eql 'Автор не может голосовать'
+        expect(json['error']).to eql 'The author of the answer cannot vote down'
       end
     end
 

@@ -28,8 +28,13 @@ newComment = (e) ->
   e.preventDefault()
   $(this).parent().find('.new_comment').show()
 
+showError = (e, data, status, xhr) ->
+  message = $.parseJSON(data.responseText)
+  $('.flash').replaceWith(JST['templates/flash'](error: message.error))
+
 $(document)
   .ready(ready)
   .on('click', '.edit-question-link', editQuestion)
   .on('click', '.new-comment-link', newComment)
   .on('ajax:success', '.question .vote-up-off, .question .vote-up-on, .question .vote-down-off, .question .vote-down-on', voteQuestion)
+  .on('ajax:error', showError)

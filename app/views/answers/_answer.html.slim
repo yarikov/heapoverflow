@@ -13,17 +13,17 @@
     .comments
       == render answer.comments
 
-    - if user_signed_in?
-      - if current_user.author_of?(@question)
-        = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
+    - if can?(:best, answer)
+      = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
 
-      - if current_user.author_of?(answer)
-        = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+    - if can?(:update, answer)
+      = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
 
-        == render 'answers/form', answer: answer
+      == render 'answers/form', answer: answer
 
-        = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
+      = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
 
+    - if can?(:create, Comment)
       = link_to 'Добавить комментарий', '', class: 'new-comment-link'
 
       = form_for [answer, Comment.new], remote: true do |f|
