@@ -29,6 +29,8 @@ class Ability
     can :best, Answer do |answer|
       user.author_of?(answer.question)
     end
+
+    can :me, User, id: user.id
   end
 
   def guest_abilities

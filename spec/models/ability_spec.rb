@@ -59,5 +59,8 @@ RSpec.describe Ability, type: :model do
 
     it { should be_able_to :best, other_answer, user: user }
     it { should_not be_able_to :best, other_answer2, user: user }
+
+    it { should be_able_to :me, user, user: user }
+    it { should_not be_able_to :me, other, user: user }
   end
 end
