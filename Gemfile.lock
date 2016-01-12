@@ -45,6 +45,10 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.5.1)
@@ -91,6 +95,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    doorkeeper (3.1.0)
+      railties (>= 3.2)
     em-http-request (1.1.2)
       addressable (>= 2.3.4)
       cookiejar
@@ -163,6 +169,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    json_spec (1.1.4)
+      multi_json (~> 1.0)
+      rspec (>= 2.0, < 4.0)
     jwt (1.5.2)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -359,6 +368,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
   bootstrap-sass (~> 3.3.5)
   cancancan
   capybara
@@ -369,6 +379,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   devise
+  doorkeeper
   factory_girl_rails
   fuubar
   guard-bundler
@@ -377,6 +388,7 @@ DEPENDENCIES
   guard-spring
   jbuilder (~> 2.0)
   jquery-rails
+  json_spec
   launchy
   letter_opener
   omniauth

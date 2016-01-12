@@ -22,6 +22,7 @@ gem 'thin'
 gem 'skim'
 gem 'responders'
 gem 'cancancan'
+gem 'doorkeeper'
 
 group :development, :test do
   gem 'pry-byebug'
@@ -35,6 +36,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'better_errors'
   gem 'rubocop', require: false
   gem 'guard-rails', require: false
   gem 'guard-rspec', require: false
@@ -49,5 +51,6 @@ end
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara-email'
+  gem 'json_spec'
   gem 'fuubar'
 end

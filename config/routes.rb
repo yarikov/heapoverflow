@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  use_doorkeeper
+
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   devise_scope(:user) { post :twitter, to: 'omniauth_callbacks#twitter' }
 
@@ -16,6 +18,14 @@ Rails.application.routes.draw do
     resources :answers, concerns: :voted, shallow: true do
       resources :comments
       patch :best, on: :member
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :profiles do
+        get :me, on: :collection
+      end
     end
   end
 end
