@@ -4,8 +4,14 @@ RSpec.describe QuestionsController, type: :controller do
   let(:user) { create(:user) }
   let(:question) { create(:question, user: user) }
 
+  let(:own_votable) { create(:question, user: @user) }
+  let(:votable) { create(:question, user: user) }
+
+  it_behaves_like 'Votable'
+
   describe 'GET #index' do
     let(:questions) { create_list(:question, 2, user: user) }
+
     before { get :index }
 
     it 'populates an array of all questions' do
@@ -35,6 +41,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'GET #new' do
     sign_in_user
+
     before { get :new }
 
     it 'assigns a new Question to @question' do
@@ -48,26 +55,29 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'POST #create' do
     sign_in_user
+
     context 'with valid attributes' do
+      let(:request) { post :create, question: attributes_for(:question) }
+
       it 'saves the new question in the database' do
-        expect { post :create, question: attributes_for(:question) }
-          .to change(@user.questions, :count).by(1)
+        expect { request }.to change(@user.questions, :count).by(1)
       end
 
       it 'redirects to show view' do
-        post :create, question: attributes_for(:question)
+        request
         expect(response).to redirect_to question_path(assigns(:question))
       end
     end
 
     context 'with invalid attributes' do
+      let(:request) { post :create, question: attributes_for(:invalid_question) }
+
       it 'does not save the question in the database' do
-        expect { post :create, question: attributes_for(:invalid_question) }
-          .to_not change(Question, :count)
+        expect { request }.to_not change(Question, :count)
       end
 
       it 're-renders new view' do
-        post :create, question: attributes_for(:invalid_question)
+        request
         expect(response).to render_template :new
       end
     end
@@ -75,6 +85,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'PATCH #update' do
     sign_in_user
+
     let(:question) { create(:question, user: @user) }
 
     it 'assings the requested question to @question' do
@@ -113,73 +124,10 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     context "User delete someone else's question" do
-      let(:question) { create(:question, user: user) }
+      let!(:question) { create(:question, user: user) }
 
       it 'does not delete the question' do
-        question
         expect { delete :destroy, id: question }.to_not change(Question, :count)
-      end
-    end
-  end
-
-  describe 'PATCH #vote_up' do
-    context 'when author' do
-      sign_in_user
-      let!(:question) { create(:question, user: @user) }
-
-      it 'render json' do
-        patch :vote_up, id: question, format: :json
-        json = JSON.parse(response.body)
-
-        expect(json['error']).to eql 'The author of the question cannot vote up'
-      end
-    end
-
-    context 'when authenticated user' do
-      sign_in_user
-      let!(:question) { create(:question, user: user) }
-
-      render_views
-
-      it 'render json' do
-        patch :vote_up, id: question, format: :json
-        json = JSON.parse(response.body)
-
-        expect(json['id']).to eql(question.id)
-        expect(json['vote_count']).to eql(question.vote_count)
-        expect(json['vote_up']).to eql true
-        expect(json['vote_down']).to eql false
-      end
-    end
-  end
-
-  describe 'PATCH #vote_down' do
-    context 'when author' do
-      sign_in_user
-      let!(:question) { create(:question, user: @user) }
-
-      it 'render json' do
-        patch :vote_down, id: question, format: :json
-        json = JSON.parse(response.body)
-
-        expect(json['error']).to eql 'The author of the question cannot vote down'
-      end
-    end
-
-    context 'when authenticated user' do
-      sign_in_user
-      let!(:question) { create(:question, user: user) }
-
-      render_views
-
-      it 'render json' do
-        patch :vote_down, id: question, format: :json
-        json = JSON.parse(response.body)
-
-        expect(json['id']).to eql(question.id)
-        expect(json['vote_count']).to eql(question.vote_count)
-        expect(json['vote_up']).to eql false
-        expect(json['vote_down']).to eql true
       end
     end
   end

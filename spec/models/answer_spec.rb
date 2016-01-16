@@ -13,16 +13,20 @@ RSpec.describe Answer, type: :model do
 
   it { should accept_nested_attributes_for :attachments }
 
-  let(:user) { create(:user) }
-  let(:question) { create(:question, user: user) }
-  let!(:answer1) { create(:answer, question: question, user: user, best: false) }
-  let!(:answer2) { create(:answer, question: question, user: user, best: true) }
+  describe '#best!' do
+    let(:user)     { create(:user) }
+    let(:question) { create(:question, user: user) }
+    let!(:answer1) { create(:answer, question: question, user: user, best: false) }
+    let!(:answer2) { create(:answer, question: question, user: user, best: true) }
 
-  it 'should choose the best answer' do
-    answer1.best!
-    answer2.reload
+    before { answer1.best! }
 
-    expect(answer1.best).to eq true
-    expect(answer2.best).to eq false
+    it 'should choose the best answer' do
+      expect(answer1.best).to eq true
+    end
+
+    it 'changes another answer to false' do
+      expect(answer2.reload.best).to eq false
+    end
   end
 end

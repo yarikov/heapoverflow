@@ -5,56 +5,45 @@ RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question, user: user) }
   let(:answer) { create(:answer, question: question, user: user) }
 
+  let(:own_votable) { create(:answer, question: question, user: @user) }
+  let(:votable) { create(:answer, question: question, user: user) }
+
+  it_behaves_like 'Votable'
+
   describe 'POST #create' do
     sign_in_user
     context 'with valid attributes' do
+      let(:request) do
+        post :create, question_id: question, answer: attributes_for(:answer), format: :js
+      end
+
       it 'saves the new answer in the database' do
-        expect do
-          post :create,
-               answer: attributes_for(:answer),
-               question_id: question,
-               user_id: user,
-               format: :js
-        end.to change(question.answers, :count).by(1)
+        expect { request }.to change(question.answers, :count).by(1)
       end
 
       it 'creates new answer for user' do
-        expect do
-          post :create,
-               answer: attributes_for(:answer),
-               question_id: question,
-               user_id: user,
-               format: :js
-        end.to change(@user.answers, :count).by(1)
+        expect { request }.to change(@user.answers, :count).by(1)
       end
 
       it 'render create template' do
-        post :create,
-             answer: attributes_for(:answer),
-             question_id: question,
-             user_id: user,
-             format: :js
+        request
         expect(response).to render_template :create
       end
+
+      it_behaves_like 'Publishable'
     end
 
     context 'with invalid attributes' do
+      let(:request) do
+        post :create, question_id: question, answer: attributes_for(:invalid_answer), format: :js
+      end
+
       it 'does not save the answer in the database' do
-        expect do
-          post :create,
-               answer: attributes_for(:invalid_answer),
-               question_id: question,
-               user_id: user,
-               format: :js
-        end.to_not change(Answer, :count)
+        expect { request }.to_not change(Answer, :count)
       end
 
       it 'render create template' do
-        post :create,
-             answer: attributes_for(:invalid_answer),
-             question_id: question,
-             user_id: user,
-             format: :js
+        request
         expect(response).to render_template :create
       end
     end
@@ -107,80 +96,14 @@ RSpec.describe AnswersController, type: :controller do
     let(:question) { create(:question, user: @user) }
     let(:answer) { create(:answer, question: question, user: user) }
 
+    before { patch :best, id: answer, format: :js }
+
     it 'assings the requested answer to @answer' do
-      patch :best, id: answer, format: :js
       expect(assigns(:answer)).to eq answer
     end
 
     it 'render best template' do
-      patch :best, id: answer, format: :js
       expect(response).to render_template :best
-    end
-  end
-
-  describe 'PATCH #vote_up' do
-    context 'when author' do
-      sign_in_user
-      let(:question) { create(:question, user: user) }
-      let!(:answer) { create(:answer, question: question, user: @user) }
-
-      it 'render json' do
-        patch :vote_up, id: answer, format: :json
-        json = JSON.parse(response.body)
-
-        expect(json['error']).to eql 'The author of the answer cannot vote up'
-      end
-    end
-
-    context 'when authenticated user' do
-      sign_in_user
-      let(:question) { create(:question, user: user) }
-      let!(:answer) { create(:answer, question: question, user: user) }
-
-      render_views
-
-      it 'render json' do
-        patch :vote_up, id: answer, format: :json
-        json = JSON.parse(response.body)
-
-        expect(json['id']).to eql(answer.id)
-        expect(json['vote_count']).to eql(answer.vote_count)
-        expect(json['vote_up']).to eql true
-        expect(json['vote_down']).to eql false
-      end
-    end
-  end
-
-  describe 'PATCH #vote_down' do
-    context 'when author' do
-      sign_in_user
-      let(:question) { create(:question, user: user) }
-      let!(:answer) { create(:answer, question: question, user: @user) }
-
-      it 'render json' do
-        patch :vote_down, id: answer, format: :json
-        json = JSON.parse(response.body)
-
-        expect(json['error']).to eql 'The author of the answer cannot vote down'
-      end
-    end
-
-    context 'when authenticated user' do
-      sign_in_user
-      let(:question) { create(:question, user: user) }
-      let!(:answer) { create(:answer, question: question, user: user) }
-
-      render_views
-
-      it 'render json' do
-        patch :vote_down, id: answer, format: :json
-        json = JSON.parse(response.body)
-
-        expect(json['id']).to eql(answer.id)
-        expect(json['vote_count']).to eql(answer.vote_count)
-        expect(json['vote_up']).to eql false
-        expect(json['vote_down']).to eql true
-      end
     end
   end
 end
