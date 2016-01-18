@@ -57,6 +57,7 @@ RSpec.describe QuestionsController, type: :controller do
     sign_in_user
 
     context 'with valid attributes' do
+      let(:channel) { '/questions' }
       let(:request) { post :create, question: attributes_for(:question) }
 
       it 'saves the new question in the database' do
@@ -67,6 +68,8 @@ RSpec.describe QuestionsController, type: :controller do
         request
         expect(response).to redirect_to question_path(assigns(:question))
       end
+
+      it_behaves_like 'Publishable'
     end
 
     context 'with invalid attributes' do

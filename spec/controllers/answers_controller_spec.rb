@@ -13,6 +13,7 @@ RSpec.describe AnswersController, type: :controller do
   describe 'POST #create' do
     sign_in_user
     context 'with valid attributes' do
+      let(:channel) { "/questions/#{question.id}/answers" }
       let(:request) do
         post :create, question_id: question, answer: attributes_for(:answer), format: :js
       end

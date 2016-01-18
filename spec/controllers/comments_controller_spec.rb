@@ -8,6 +8,7 @@ RSpec.describe CommentsController, type: :controller do
     sign_in_user
 
     context 'with valid attributes' do
+      let(:channel) { "/questions/#{question.id}/comments" }
       let(:request) do
         post :create, question_id: question, comment: attributes_for(:comment), format: :js
       end
