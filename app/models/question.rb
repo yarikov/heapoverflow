@@ -10,4 +10,6 @@ class Question < ActiveRecord::Base
   validates :user_id, :title, :body, presence: true
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
+
+  scope :created_last_24_hours, -> { where(created_at: 1.day.ago..Time.zone.now) }
 end

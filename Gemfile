@@ -26,6 +26,9 @@ gem 'doorkeeper'
 gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
+gem 'whenever'
+gem 'sidekiq'
+gem 'sinatra', require: false
 
 group :development, :test do
   gem 'pry-byebug'
