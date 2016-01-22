@@ -32,7 +32,7 @@
           = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
         = f.submit 'Сохранить', class: 'btn btn-success'
 
-    = link_to 'Удалить вопрос', @question, data: {:confirm => 'Вы уверены'}, :method => :delete,  class: 'btn btn-danger'
+    = link_to 'Удалить вопрос', @question, data: {confirm: 'Вы уверены'}, method: :delete,  class: 'btn btn-danger'
 
   - if can?(:create, Comment)
     = link_to 'Добавить комментарий', '', class: 'new-comment-link'
@@ -42,3 +42,9 @@
         = f.label :body, 'Комментарий'
         = f.text_area :body, class: 'form-control'
         = f.submit 'Сохранить', class: 'btn btn-success'
+
+  .subscription
+    - if can?(:destroy, @subscription)
+      = link_to 'Unsubscribe', subscription_path(@subscription), method: :delete, remote: true
+    - else
+      = link_to 'Subscribe', question_subscriptions_path(@question), method: :post, remote: true

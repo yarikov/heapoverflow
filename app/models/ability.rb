@@ -15,12 +15,13 @@ class Ability
 
   def admin_abilities
     can :manage, :all
+    cannot :destroy, nil
   end
 
   def user_abilities
     can :read, :all
-    can :create,  [Question, Answer, Comment]
-    can [:update, :destroy], [Question, Answer], user_id: user.id
+    can :create,  [Question, Answer, Comment, Subscription]
+    can [:update, :destroy], [Question, Answer, Subscription], user_id: user.id
 
     can [:vote_down, :vote_up], [Question, Answer] do |object|
       !user.author_of?(object)

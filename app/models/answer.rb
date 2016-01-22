@@ -13,9 +13,15 @@ class Answer < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
+  after_create :notify_subscribers
+
   def best!
     best_answer = question.answers.find_by(best: true)
     best_answer.update(best: false) if best_answer
     update(best: true)
+  end
+
+  def notify_subscribers
+    NotifySubscribersJob.perform_later(self)
   end
 end
