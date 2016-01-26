@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
   respond_to :js, only: :update
 
   def index
-    respond_with @questions = Question.all
+    respond_with @questions = Question.page(params[:page]).per(15)
   end
 
   def show

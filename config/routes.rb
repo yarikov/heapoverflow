@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   root 'questions#index'
 
+  get 'search', to: 'search#search'
+
   concern :voted do
     member do
       patch :vote_up

@@ -1,0 +1,24 @@
+h4 Search
+= form_tag search_path, method: :get do |f|
+  .row
+    .col-md-9
+      = search_field_tag :query, params[:query], placeholder: 'Search...', class: 'form-control'
+    .col-md-2
+      = select_tag :resource, options_for_select(Search::RESOURCES, params[:resource]), prompt: 'Anything', class: 'form-control'
+    .col-md-1
+      = submit_tag 'Search', class: 'btn btn-primary'
+
+- if @resources
+  - @resources.each do |resource|
+    - if resource.is_a?(Question)
+      p = link_to resource.title, resource
+      p = resource.body
+    - elsif resource.is_a?(Answer)
+      p = link_to resource.question.title, resource.question
+      p = resource.body
+    - elsif resource.is_a?(Comment)
+      p = resource.body
+    - elsif resource.is_a?(User)
+      p = resource.email
+
+= paginate @resources

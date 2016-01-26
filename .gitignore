@@ -20,3 +20,7 @@ public/uploads/
 
 # Redis
 dump.rdb
+
+# Sphinx
+config/*.sphinx.conf
+db/sphinx

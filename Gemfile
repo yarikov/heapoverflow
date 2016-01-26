@@ -29,6 +29,9 @@ gem 'oj_mimic_json'
 gem 'whenever'
 gem 'sidekiq'
 gem 'sinatra', require: false
+gem 'mysql2'
+gem 'thinking-sphinx'
+gem 'kaminari'
 
 group :development, :test do
   gem 'pry-byebug'

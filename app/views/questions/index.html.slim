@@ -7,4 +7,6 @@ h4.pull-left Все вопросы
     .question-summary
       = link_to question.title, question
 
+= paginate @questions
+
 = subscribe_to "/questions"
