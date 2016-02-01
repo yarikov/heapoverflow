@@ -5,39 +5,31 @@
 
 .vote-up-off {
   display: block;
-  margin: auto;
-  width: 0;
-  height: 0;
+  margin: 0 0 10px;
   border-style: solid;
   border-width: 0 15px 15px;
   border-color: transparent transparent #627180;
 }
 
-.vote-down-off {
-  display: block;
-  margin: auto;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 15px 15px 0;
-  border-color: #627180 transparent transparent;
-}
-
 .vote-up-on {
   display: block;
-  margin: auto;
-  width: 0;
-  height: 0;
+  margin: 0 0 10px;
   border-style: solid;
   border-width: 0 15px 15px;
   border-color: transparent transparent #d96c18;
 }
 
+.vote-down-off {
+  display: block;
+  margin: 10px 0 0;
+  border-style: solid;
+  border-width: 15px 15px 0;
+  border-color: #627180 transparent transparent;
+}
+
 .vote-down-on {
   display: block;
-  margin: auto;
-  width: 0;
-  height: 0;
+  margin: 10px 0 0;
   border-style: solid;
   border-width: 15px 15px 0;
   border-color: #d96c18 transparent transparent;

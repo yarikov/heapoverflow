@@ -10,9 +10,11 @@ ready = ->
 
 editAnswer = (e) ->
   e.preventDefault();
-  $(this).hide();
   answerId = $(this).data('answerId')
-  $("form#edit-answer-#{answerId}").show()
+  $(this).text (i, text) ->
+    if text is 'Редактировать' then 'Закрыть' else 'Редактировать'
+  $(this).toggleClass('btn-warning btn-info')
+  $("form#edit-answer-#{answerId}").toggle()
 
 voteAnswer = (e, data, status, xhr) ->
   answer = $.parseJSON(xhr.responseText)

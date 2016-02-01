@@ -1,33 +1,42 @@
 - if answer.persisted?
-  div class="answer-#{answer.id} answer"
-    .vote
-      = vote_up_link_to vote_up_answer_path(answer), answer
-      span.vote_count = answer.vote_count
-      = vote_down_link_to vote_down_answer_path(answer), answer
-    .answer-body
-      = answer.body
-    ul
-      - answer.attachments.each do |a|
-        li = link_to a.file.identifier, a.file.url
+  div class="answer answer-#{answer.id}"
+    .row
+      .col-xs-1
+        .vote
+          = vote_up_link_to vote_up_answer_path(answer), answer
+          span.vote_count = answer.vote_count
+          = vote_down_link_to vote_down_answer_path(answer), answer
 
-    .comments
-      == render answer.comments
+      .col-xs-11
+        .answer-body
+          = markdown answer.body
+          ul
+            - answer.attachments.each do |a|
+              li = link_to a.file.identifier, a.file.url
 
-    - if can?(:best, answer)
-      = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true
+        .btn-group.pull-right
 
-    - if can?(:update, answer)
-      = link_to 'Редактировать', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+          - if can?(:best, answer)
+            = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true, class: 'btn btn-success'
 
-      == render 'answers/form', answer: answer
+          - if can?(:update, answer)
+            = link_to 'Редактировать', '', class: 'btn btn-warning edit-answer-link', data: { answer_id: answer.id }
 
-      = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
+            = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
 
-    - if can?(:create, Comment)
-      = link_to 'Добавить комментарий', '', class: 'new-comment-link'
+        .clearfix
 
-      = form_for [answer, Comment.new], remote: true do |f|
-        .form-group
-          = f.label :body, 'Комментарий'
-          = f.text_area :body, class: 'form-control'
-          = f.submit 'Сохранить', class: 'btn btn-success'
+        == render 'answers/form', answer: answer if can?(:update, answer)
+
+        .comments
+          == render answer.comments
+
+        .new-comment
+          - if can?(:create, Comment)
+            = link_to 'Добавить комментарий', '', class: 'btn btn-default btn-xs new-comment-link'
+
+            = form_for [answer, Comment.new], remote: true do |f|
+              .form-group
+                = f.label :body, 'Комментарий'
+                = f.text_area :body, class: 'form-control'
+              = f.submit 'Сохранить', class: 'btn btn-success'

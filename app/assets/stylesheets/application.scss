@@ -1,7 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "pygments";
 @import "questions";
-@import "answers";
 @import "votes";
 
 html {
@@ -10,6 +10,7 @@ html {
 }
 
 body {
+  font-size: 15px;
   margin-bottom: 60px;
 }
 
@@ -25,6 +26,18 @@ footer {
   background-color: #f5f5f5;
 }
 
-.edit_answer { display: none }
-.edit_question { display: none }
-.new_comment { display: none }
+pre {
+  padding: 10px;
+  background-color: #eee;
+  word-wrap: normal;
+  overflow: auto;
+  font: 13px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  border: 0;
+  border-radius: 0;
+}
+
+#question_body, #answer_body {
+  height: 300px !important;
+}
+
+.edit_answer, .edit_question, .new_comment { display: none }

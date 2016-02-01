@@ -1,1 +1,1 @@
-$('.subscription a').replaceWith("<%= j link_to 'Subscribe', question_subscriptions_path(@subscription.question), method: :post, remote: true %>");
+$('.subscription a').replaceWith("<%= j link_to 'Subscribe', question_subscriptions_path(@subscription.question), method: :post, remote: true, class: 'btn btn-default' %>");

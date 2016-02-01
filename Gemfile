@@ -32,6 +32,8 @@ gem 'sinatra', require: false
 gem 'mysql2'
 gem 'thinking-sphinx'
 gem 'kaminari'
+gem 'redcarpet'
+gem 'pygments.rb'
 
 group :development, :test do
   gem 'pry-byebug'

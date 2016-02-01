@@ -16,9 +16,10 @@ ready = ->
 
 editQuestion = (e) ->
   e.preventDefault()
-  $(this).hide()
-  questionId = $(this).data('questionId')
-  $("form#edit_question_#{questionId}").show()
+  $(this).text (i, text) ->
+    if text is 'Редактировать' then 'Закрыть' else 'Редактировать'
+  $(this).toggleClass('btn-warning btn-info')
+  $("form.edit_question").toggle()
 
 voteQuestion = (e, data, status, xhr) ->
   question = $.parseJSON(xhr.responseText)
@@ -26,7 +27,10 @@ voteQuestion = (e, data, status, xhr) ->
 
 newComment = (e) ->
   e.preventDefault()
-  $(this).parent().find('.new_comment').show()
+  $(this).text (i, text) ->
+    if text is 'Добавить комментарий' then 'Закрыть' else 'Добавить комментарий'
+  $(this).toggleClass('btn-primary btn-info')
+  $(this).parent().find('.new_comment').toggle()
 
 showError = (e, data, status, xhr) ->
   message = $.parseJSON(data.responseText)

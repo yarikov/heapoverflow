@@ -5,6 +5,7 @@
     = f.text_area :body, class: 'form-control'
     = f.fields_for :attachments do |a|
       == render 'common/attachment_fields', f: a
-    .add-file
-      = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
+  .btn-group.pull-left
+    = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields', class: 'btn btn-default'
     = f.submit answer.persisted? ? 'Сохранить' : 'Ответить', class: 'btn btn-success'
+  .clearfix

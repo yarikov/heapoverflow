@@ -27,7 +27,6 @@ feature 'Сreate an answer', '
       expect(page).to have_link 'rails_helper.rb',
                                 href: '/uploads/attachment/file/2/rails_helper.rb'
     end
-    expect(page).to_not have_css '.nested-fields'
   end
 
   scenario 'Authenticated user creates invalid answer', js: true do

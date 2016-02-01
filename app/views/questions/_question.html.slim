@@ -1,50 +1,60 @@
 .question data={question_id: "#{@question.id}", user_id: "#{current_user.id if user_signed_in?}"}
+
   h3 = @question.title
 
-  .vote
-    = vote_up_link_to vote_up_question_path, @question
-    span.vote_count = @question.vote_count
-    = vote_down_link_to vote_down_question_path, @question
+  .row
+    .col-xs-1
+      .vote
+        = vote_up_link_to vote_up_question_path, @question
+        span.vote_count = @question.vote_count
+        = vote_down_link_to vote_down_question_path, @question
 
-  .question-body
-    = @question.body
-    ul
-      - @question.attachments.each do |a|
-        li = link_to a.file.identifier, a.file.url
+    .col-xs-11
+      .question-body
+        = markdown @question.body
+        ul
+          - @question.attachments.each do |a|
+            li = link_to a.file.identifier, a.file.url
 
-  .comments
-    == render @question.comments
+      .subscription.pull-left
+        - if can?(:destroy, @subscription)
+          = link_to 'Unsubscribe', subscription_path(@subscription), method: :delete, remote: true, class: 'btn btn-primary'
+        - else
+          = link_to 'Subscribe', question_subscriptions_path(@question), method: :post, remote: true, class: 'btn btn-default'
 
-  - if can?(:update, @question)
-    = link_to 'Редактировать', '', class: 'edit-question-link',  data: { question_id: @question.id }
+      - if can?(:update, @question)
+        .btn-group.pull-right
+          = link_to 'Редактировать', '', data: { question_id: @question.id }, class: 'btn btn-warning edit-question-link'
 
-    = form_for @question, remote: true do |f|
-      .form-group
-        = f.label :title, 'Суть вопроса'
-        = f.text_field :title, class: 'form-control'
-      .form-group
-        = f.label :body, 'Детали вопроса'
-        = f.text_area :body, class: 'form-control'
-      .form-group
-        = f.fields_for :attachments do |a|
-          == render 'common/attachment_fields', f: a
-        .add-file
-          = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
-        = f.submit 'Сохранить', class: 'btn btn-success'
+          = link_to 'Удалить вопрос', @question, data: { confirm: 'Вы уверены' }, method: :delete,  class: 'btn btn-danger'
 
-    = link_to 'Удалить вопрос', @question, data: {confirm: 'Вы уверены'}, method: :delete,  class: 'btn btn-danger'
+      .clearfix
 
-  - if can?(:create, Comment)
-    = link_to 'Добавить комментарий', '', class: 'new-comment-link'
+      - if can?(:update, @question)
 
-    = form_for [@question, Comment.new], remote: true do |f|
-      .form-group
-        = f.label :body, 'Комментарий'
-        = f.text_area :body, class: 'form-control'
-        = f.submit 'Сохранить', class: 'btn btn-success'
+        = form_for @question, remote: true do |f|
+          .form-group
+            = f.label :title, 'Суть вопроса'
+            = f.text_field :title, class: 'form-control'
+          .form-group
+            = f.label :body, 'Детали вопроса'
+            = f.text_area :body, class: 'form-control'
+            = f.fields_for :attachments do |a|
+              == render 'common/attachment_fields', f: a
+          .btn-group.pull-left
+            = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields', class: 'btn btn-default'
+            = f.submit 'Сохранить', class: 'btn btn-success'
+          .clearfix
 
-  .subscription
-    - if can?(:destroy, @subscription)
-      = link_to 'Unsubscribe', subscription_path(@subscription), method: :delete, remote: true
-    - else
-      = link_to 'Subscribe', question_subscriptions_path(@question), method: :post, remote: true
+      .comments
+        == render @question.comments
+
+      .new-comment
+        - if can?(:create, Comment)
+          = link_to 'Добавить комментарий', '', class: 'btn btn-default btn-xs new-comment-link'
+
+          = form_for [@question, Comment.new], remote: true do |f|
+            .form-group
+              = f.label :body, 'Комментарий'
+              = f.text_area :body, class: 'form-control'
+            = f.submit 'Сохранить', class: 'btn btn-success'

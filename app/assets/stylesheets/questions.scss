@@ -11,6 +11,68 @@
   margin-top: 50px;
 }
 
-.question-body {
-  display: inline-block;
+// show
+.question {
+  border-bottom: 1px solid #e0e0e0;
+
+  .row {
+    padding: 20px 0
+  }
+
+  h3 {
+    margin: 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .question-body {
+    padding-bottom: 10px;
+  }
+
+  .edit_question {
+    margin-top: 15px;
+  }
+}
+
+.answer {
+  border-bottom: 1px solid #e0e0e0;
+
+  .row {
+    padding: 20px 0
+  }
+
+  .answer-body {
+    padding-bottom: 10px;
+  }
+
+  .edit_answer {
+    margin-top: 15px;
+  }
+}
+
+.comments {
+  margin-top: 20px;
+  border-top: 1px solid #e0e0e0;
+
+  .comment {
+    font-size: 13px;
+    padding: 5px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .new_comment {
+    padding-top: 15px;
+
+    .btn {
+      margin-top: 15px;
+    }
+  }
+
+  .new-comment-link {
+    margin-top: 20px;
+  }
+}
+
+.new-answer, .new-comment {
+  padding-top: 10px;
 }
