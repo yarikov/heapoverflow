@@ -34,6 +34,7 @@ gem 'thinking-sphinx'
 gem 'kaminari'
 gem 'redcarpet'
 gem 'pygments.rb'
+gem 'impressionist'
 
 group :development, :test do
   gem 'pry-byebug'

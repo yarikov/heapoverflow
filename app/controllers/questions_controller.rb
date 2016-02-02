@@ -5,6 +5,8 @@ class QuestionsController < ApplicationController
   before_action :set_subscription, only: [:show, :update]
   after_action :publish_question, only: :create
 
+  impressionist actions: [:show]
+
   include Voted
 
   authorize_resource

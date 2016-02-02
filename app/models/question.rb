@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   include HasVotes
+  is_impressionable
 
   belongs_to :user
 
