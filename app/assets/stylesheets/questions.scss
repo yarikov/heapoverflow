@@ -28,6 +28,7 @@
   }
 
   .col-xs-3 {
+    padding-top: 4px;
     text-align: center;
   }
 
@@ -47,6 +48,7 @@
 
   .summary {
     display: inline-block;
+    margin-bottom: 4px;
 
     a {
       vertical-align: top;
@@ -78,6 +80,10 @@
 
   .question-body {
     padding-bottom: 10px;
+  }
+
+  .tags {
+    margin-top: 10px;
   }
 
   .edit_question {

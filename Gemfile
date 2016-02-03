@@ -35,6 +35,7 @@ gem 'kaminari'
 gem 'redcarpet'
 gem 'pygments.rb'
 gem 'impressionist'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'pry-byebug'

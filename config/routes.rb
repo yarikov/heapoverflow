@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   devise_scope(:user) { post :twitter, to: 'omniauth_callbacks#twitter' }
 
   root 'questions#index'
-
   get 'search', to: 'search#search'
 
   concern :voted do
@@ -20,6 +19,8 @@ Rails.application.routes.draw do
       patch :vote_down
     end
   end
+
+  resources :tags, only: [:index, :show]
 
   resources :questions, concerns: :voted do
     resources :comments

@@ -1,0 +1,81 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-size: 15px;
+  margin-bottom: 60px;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  bottom: 0;
+  p {
+    margin: 10px 0;
+    text-align: center;
+  }
+  background-color: #f5f5f5;
+}
+
+.mainnavs {
+  margin-top: 15px;
+  float: right;
+
+  li {
+    display: inline-block;
+    background-color: #9ea3a9;
+    padding: 4px 10px 5px;
+
+    a {
+      font-size: 14px;
+      line-height: 1.3;
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+  }
+
+  li:hover {
+    background: #f69c55;
+    cursor: pointer;
+  }
+}
+
+pre {
+  padding: 10px;
+  background-color: #eee;
+  word-wrap: normal;
+  overflow: auto;
+  font: 13px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  border: 0;
+  border-radius: 0;
+}
+
+#question_body, #answer_body {
+  height: 300px !important;
+}
+
+.edit_answer, .edit_question, .new_comment { display: none }
+
+.tag {
+  display: inline-block;
+  color: #39739d;
+  padding: 2px 6px;
+  margin: 2px 2px 2px 0;
+  font-size: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  background: #E1ECF4;
+  border: 1px solid #E1ECF4;
+  border-radius: 0;
+}
+
+.tags {
+  float: left;
+
+  .tag {
+    @extend .tag;
+  }
+}

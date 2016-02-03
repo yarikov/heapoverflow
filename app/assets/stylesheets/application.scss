@@ -1,43 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "pygments";
+@import "custom";
 @import "questions";
+@import "tags";
 @import "votes";
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  font-size: 15px;
-  margin-bottom: 60px;
-}
-
-footer {
-  position: absolute;
-  width: 100%;
-  height: 40px;
-  bottom: 0;
-  p {
-    margin: 10px 0;
-    text-align: center;
-  }
-  background-color: #f5f5f5;
-}
-
-pre {
-  padding: 10px;
-  background-color: #eee;
-  word-wrap: normal;
-  overflow: auto;
-  font: 13px Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  border: 0;
-  border-radius: 0;
-}
-
-#question_body, #answer_body {
-  height: 300px !important;
-}
-
-.edit_answer, .edit_question, .new_comment { display: none }

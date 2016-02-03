@@ -1,6 +1,7 @@
 class Question < ActiveRecord::Base
   include HasVotes
   is_impressionable
+  acts_as_taggable
 
   belongs_to :user
 

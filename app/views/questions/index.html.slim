@@ -2,8 +2,6 @@
   .col-lg-12
     h4.pull-left Все вопросы
 
-    = link_to 'Задать вопрос', new_question_path, class: 'btn btn-success pull-right'
-
 .row
   .col-lg-9
     .content
@@ -11,23 +9,24 @@
         .question-summary
           .row
             .col-xs-3
-              .bla
-                .votes
-                  .mini-counts
-                    = question.vote_count
-                  p votes
-                .answers
-                  .mini-counts
-                     = question.answers.count
-                  p answers
-                .views
-                  .mini-counts
-                    = question.impressionist_count(filter: :session_hash)
-                  p views
+              .votes
+                .mini-counts
+                  = question.vote_count
+                p votes
+              .answers
+                .mini-counts
+                   = question.answers.count
+                p answers
+              .views
+                .mini-counts
+                  = question.impressionist_count(filter: :session_hash)
+                p views
             .col-xs-9
               .summary
                 = link_to question.title, question
               .clearfix
+              .tags
+                = raw question.tag_list.map { |tag| link_to tag, tag_path(tag), class: 'tag' }.join(' ')
               p asked #{time_ago_in_words(question.created_at)} ago #{question.user.email}
 
       = paginate @questions

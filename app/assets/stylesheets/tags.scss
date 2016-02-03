@@ -1,0 +1,23 @@
+// Tags#show
+.tags-list {
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+
+  .col-xs-3 {
+    margin-bottom: 15px;
+  }
+
+  .tag {
+    @extend .tag;
+  }
+}
+
+span.item-multiplier-x {
+  margin-right: 4px;
+  color: #888;
+}
+
+span.item-multiplier-count {
+  font-size: 11px;
+  color: #777;
+}
