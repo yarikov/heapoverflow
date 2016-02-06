@@ -1,0 +1,3 @@
+.nav.nav-tabs
+  li.active = link_to 'Profile', @user
+  li = link_to 'Edit Profile', edit_user_path(@user) if can?(:update, @user)

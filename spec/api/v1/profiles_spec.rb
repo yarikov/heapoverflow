@@ -14,15 +14,16 @@ describe 'Profile API' do
         expect(response).to be_success
       end
 
-      %w(id email created_at updated_at admin).each do |attr|
+      %w(id full_name created_at updated_at admin).each do |attr|
         it "contains #{attr}" do
-          expect(response.body).to be_json_eql(me.send(attr.to_sym).to_json).at_path(attr)
+          expect(response.body)
+            .to be_json_eql(me.send(attr.to_sym).to_json).at_path("user/#{attr}")
         end
       end
 
       %w(password encrypted_password).each do |attr|
         it "does not contain #{attr}" do
-          expect(response.body).to_not have_json_path(attr)
+          expect(response.body).to_not have_json_path("user/#{attr}")
         end
       end
     end
@@ -49,7 +50,7 @@ describe 'Profile API' do
         expect(response.body).to_not include_json(users[0].to_json)
       end
 
-      %w(id email created_at updated_at admin).each do |attr|
+      %w(id full_name created_at updated_at admin).each do |attr|
         it "contains #{attr}" do
           expect(response.body)
             .to be_json_eql(users[1].send(attr.to_sym).to_json)

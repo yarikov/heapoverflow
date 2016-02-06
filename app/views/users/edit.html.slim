@@ -1,0 +1,20 @@
+= render 'nav'
+.edit-profile
+  .row
+    .col-lg-9
+      .row
+        .col-xs-3
+          .gravatar-wrapper
+            = image_tag @user.avatar_url
+            a#change-picture href='#' Change picture
+          = simple_form_for @user, remote: true, data: { type: :json }, html: { id: 'update-avatar' } do |f|
+            = f.input :avatar, label: false
+        .col-xs-9
+          = simple_form_for @user do |f|
+            = f.input :full_name
+            = f.input :location
+            = f.input :description
+            = f.input :website
+            = f.input :twitter
+            = f.input :github
+            = f.button :submit, 'Save profile'

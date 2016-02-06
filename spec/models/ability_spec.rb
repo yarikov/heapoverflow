@@ -11,6 +11,7 @@ RSpec.describe Ability, type: :model do
     it { should be_able_to :read, Question }
     it { should be_able_to :read, Answer }
     it { should be_able_to :read, Comment }
+    it { should be_able_to :read, User }
   end
 
   describe 'for admin' do
@@ -45,6 +46,8 @@ RSpec.describe Ability, type: :model do
     it { should be_able_to :update, own_answer, user: user }
     it { should_not be_able_to :update, other_question, user: user }
     it { should_not be_able_to :update, other_answer, user: user }
+    it { should be_able_to :update, user, user: user }
+    it { should_not be_able_to :update, other, user: user }
 
     it { should be_able_to :destroy, own_question, user: user }
     it { should be_able_to :destroy, own_answer, user: user }

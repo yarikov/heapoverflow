@@ -27,7 +27,7 @@
               .clearfix
               .tags
                 = raw question.tag_list.map { |tag| link_to tag, tag_path(tag), class: 'tag' }.join(' ')
-              p asked #{time_ago_in_words(question.created_at)} ago #{question.user.email}
+              p asked #{time_ago_in_words(question.created_at)} ago #{link_to question.user.full_name, question.user}
 
       = paginate @questions
 

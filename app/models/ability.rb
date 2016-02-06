@@ -23,6 +23,8 @@ class Ability
     can :create,  [Question, Answer, Comment, Subscription]
     can [:update, :destroy], [Question, Answer, Subscription], user_id: user.id
 
+    can [:update, :me], User, id: user.id
+
     can [:vote_down, :vote_up], [Question, Answer] do |object|
       !user.author_of?(object)
     end
@@ -30,8 +32,6 @@ class Ability
     can :best, Answer do |answer|
       user.author_of?(answer.question)
     end
-
-    can :me, User, id: user.id
   end
 
   def guest_abilities

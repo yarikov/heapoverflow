@@ -20,7 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tags, only: [:index, :show]
+  resources :users, only: [:index, :show, :edit, :update]
+  resources :tags,  only: [:index, :show]
 
   resources :questions, concerns: :voted do
     resources :comments

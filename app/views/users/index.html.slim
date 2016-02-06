@@ -1,0 +1,12 @@
+h4 Users
+.row
+  .users-list
+    - @users.each do |user|
+      .col-xs-3
+        .user-info
+          .user-gravatar
+            = link_to user do
+              = image_tag user.avatar.small.url
+          .user-details
+            = link_to user.full_name, user
+            span = user.location

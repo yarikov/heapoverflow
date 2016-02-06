@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
+  mount_uploader :avatar, AvatarUploader
+  is_impressionable
+
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
