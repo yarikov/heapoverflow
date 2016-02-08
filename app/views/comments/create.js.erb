@@ -2,11 +2,11 @@
   $('.question .comments').append('<%= j render @comment %>');
   $('.question .new-comment a').text('Добавить комментарий');
   $('.question .new-comment a').toggleClass('btn-info btn-primary')
-  $('.question #comment_body').val('');
+  $('.question > .new-comment > #comment_body').val('');
   $('.question #new_comment').hide();
 <% else %>
   $('<%= ".answer-#{@commentable.id}" %> .comments').append('<%= j render @comment %>');
-  $('<%= ".answer-#{@commentable.id}" %> #comment_body').val('');
+  $('<%= ".answer-#{@commentable.id}" %> > .new-comment > #comment_body').val('');
   $('<%= ".answer-#{@commentable.id}" %> .new_comment').hide();
   $('<%= ".answer-#{@commentable.id}" %> .new-comment a').text('Добавить комментарий');
   $('<%= ".answer-#{@commentable.id}" %> .new-comment a').toggleClass('btn-info btn-primary')

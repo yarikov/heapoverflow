@@ -31,6 +31,9 @@ RSpec.describe Ability, type: :model do
     let(:other_answer) { create :answer, question: own_question, user: other }
     let(:other_answer2) { create :answer, question: other_question, user: other }
 
+    let(:own_comment)   { create :comment, commentable: own_question, user: user }
+    let(:other_comment) { create :comment, commentable: own_question, user: other }
+
     let(:own_subscription) { own_question.subscriptions.first }
     let(:other_subscription) { create :subscription }
 
@@ -44,16 +47,20 @@ RSpec.describe Ability, type: :model do
 
     it { should be_able_to :update, own_question, user: user }
     it { should be_able_to :update, own_answer, user: user }
+    it { should be_able_to :update, own_comment, user: user }
+    it { should be_able_to :update, user, user: user }
     it { should_not be_able_to :update, other_question, user: user }
     it { should_not be_able_to :update, other_answer, user: user }
-    it { should be_able_to :update, user, user: user }
+    it { should_not be_able_to :update, other_comment, user: user }
     it { should_not be_able_to :update, other, user: user }
 
     it { should be_able_to :destroy, own_question, user: user }
     it { should be_able_to :destroy, own_answer, user: user }
     it { should be_able_to :destroy, own_subscription, user: user }
+    it { should be_able_to :destroy, own_comment, user: user }
     it { should_not be_able_to :destroy, other_question, user: user }
     it { should_not be_able_to :destroy, other_answer, user: user }
+    it { should_not be_able_to :destroy, other_comment, user: user }
     it { should_not be_able_to :destroy, other_subscription, user: user }
 
     it { should be_able_to :vote_down, other_question, user: user }

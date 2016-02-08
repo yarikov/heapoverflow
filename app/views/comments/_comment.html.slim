@@ -1,1 +1,12 @@
-div.comment = comment.body
+.comment
+  .comment-body
+    = comment.body
+  .comment-buttons
+    - if can?(:destroy, comment)
+      = link_to '', '', class: 'glyphicon glyphicon-pencil edit-comment'
+      = link_to '', comment, method: :delete, remote: true, data: { type: :json }, class: 'glyphicon glyphicon-remove delete-comment'
+
+  - if can?(:update, comment)
+    = simple_form_for comment, remote: true, data: { type: :json } do |f|
+      = f.input :body, label: 'Comment'
+      = f.button :submit
