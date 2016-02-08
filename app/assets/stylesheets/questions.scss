@@ -8,6 +8,10 @@
   padding: 15px 0;
   border-bottom: 1px solid #e0e0e0;
 
+  a {
+    text-decoration: none;
+  }
+
   .votes, .answers, .views {
     display: inline-block;
     color: #777;

@@ -85,3 +85,21 @@ img {
   width:  164px;
   height: 164px;
 }
+
+// kaminari
+.pagination {
+  margin-top: 40px;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+  background: #f69c55;
+  border: 1px solid #f69c55;
+}
+
+.pagination > li > a:hover {
+  color: #666;
+}
+
+.pagination > li > a, .pagination > li > span {
+  color: #888;
+}
