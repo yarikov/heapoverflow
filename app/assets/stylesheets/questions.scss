@@ -141,7 +141,7 @@
 
   a {
     text-decoration: none;
-    color: #e0e0e0;
+    color: #c0c0c0;
     font-size: 0.8em;
   }
 
@@ -156,4 +156,52 @@
 
 .new-answer, .new-comment {
   padding-top: 10px;
+}
+
+.subscription {
+  position: relative;
+  display: inline-block;
+  left: 5px;
+  margin-top: 18px;
+
+  a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.6em;
+    color: #c0c0c0;
+  }
+
+  a.active {
+    color: #FFD700;
+  }
+
+  span {
+    margin-top: 6px;
+    display: block;
+    text-align: center;
+    color: #777;
+    font-size: 13px;
+  }
+}
+
+.best-answer {
+  position: relative;
+  display: inline-block;
+  margin-top: 18px;
+
+  a {
+    display: block;
+    text-decoration: none;
+    font-size: 1.8em;
+    color: #c0c0c0;
+  }
+
+  .best {
+    color: #32CD32;
+  }
+
+  i {
+    font-size: 1.8em;
+  }
 }

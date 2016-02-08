@@ -13,19 +13,23 @@ feature 'Subscribe to question' do
     scenario 'can subscribe to question', js: true do
       visit question_path(question)
 
-      click_on 'Subscribe'
+      page.execute_script('$(".glyphicon-star").click()')
 
-      expect(page).to_not have_link 'Subscribe'
-      expect(page).to have_link 'Unsubscribe'
+      within '.subscription' do
+        expect(page).to have_css 'a.glyphicon.glyphicon-star.active'
+        expect(page).to have_content '2'
+      end
     end
 
     scenario 'can unsubscribe from question', js: true do
       visit question_path(subscribed_question)
 
-      click_on 'Unsubscribe'
+      page.execute_script('$(".glyphicon-star").click()')
 
-      expect(page).to_not have_link 'Unsubscribe'
-      expect(page).to have_link 'Subscribe'
+      within '.subscription' do
+        expect(page).to_not have_css 'a.glyphicon.glyphicon-star.active'
+        expect(page).to have_content '0'
+      end
     end
   end
 end

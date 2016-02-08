@@ -1,2 +1,4 @@
-$('<%= ".answer-#{@answer.id}" %>').prependTo( $( ".answers" ) );
-$('.flash').replaceWith('<%= j render 'layouts/flash' %>');
+$('a.best').removeClass('best')
+<% if @answer.reload.best %>
+  $('<%= ".answer-#{@answer.id} .best-answer a" %>').addClass('best');
+<% end %>

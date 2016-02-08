@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   resources :questions, concerns: :voted do
     resources :comments
-    resources :subscriptions, only: [:create, :destroy], shallow: true
+    resources :subscriptions, only: [:create, :destroy]
     resources :answers, concerns: :voted, shallow: true do
       resources :comments
       patch :best, on: :member

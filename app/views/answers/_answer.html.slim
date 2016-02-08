@@ -7,6 +7,12 @@
           span.vote_count = answer.vote_count
           = vote_down_link_to vote_down_answer_path(answer), answer
 
+        .best-answer
+          - if can?(:best, answer)
+            = best_link_to best_answer_path(answer), answer
+          - elsif answer.best
+            i.glyphicon.glyphicon-ok.best
+
       .col-xs-11
         .answer-body
           = markdown answer.body
@@ -15,10 +21,6 @@
               li = link_to a.file.identifier, a.file.url
 
         .btn-group.pull-right
-
-          - if can?(:best, answer)
-            = link_to 'Лучший ответ', best_answer_path(answer), :method => :patch, remote: true, class: 'btn btn-success'
-
           - if can?(:update, answer)
             = link_to 'Редактировать', '', class: 'btn btn-warning edit-answer-link', data: { answer_id: answer.id }
 

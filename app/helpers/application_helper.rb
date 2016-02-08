@@ -29,6 +29,11 @@ module ApplicationHelper
     link_to '', path, method: :patch, remote: true, class: "#{vote_class}"
   end
 
+  def best_link_to(path, obj)
+    best_class = obj.best ? 'best' : ''
+    link_to '', path, method: :patch, remote: true, class: "glyphicon glyphicon-ok #{best_class}"
+  end
+
   def shallow_path(*args)
     args.last.persisted? ? args.last : args
   end

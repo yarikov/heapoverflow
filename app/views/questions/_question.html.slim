@@ -9,6 +9,13 @@
         span.vote_count = @question.vote_count
         = vote_down_link_to vote_down_question_path, @question
 
+      .subscription
+        - if can?(:destroy, @subscription)
+          = link_to '', [@question, @subscription], method: :delete, remote: true, class: 'glyphicon glyphicon-star active'
+        - else
+          = link_to '', question_subscriptions_path(@question), method: :post, remote: true, class: 'glyphicon glyphicon-star'
+        span = question.subscriptions.count
+
     .col-xs-11
       .question-body.clearfix
         = markdown @question.body
@@ -17,12 +24,6 @@
             li = link_to a.file.identifier, a.file.url
         .tags
           = raw @question.tag_list.map { |tag| link_to tag, tag_path(tag), class: 'tag' }.join(' ')
-
-      .subscription.pull-left
-        - if can?(:destroy, @subscription)
-          = link_to 'Unsubscribe', subscription_path(@subscription), method: :delete, remote: true, class: 'btn btn-primary'
-        - else
-          = link_to 'Subscribe', question_subscriptions_path(@question), method: :post, remote: true, class: 'btn btn-default'
 
       - if can?(:update, @question)
         .btn-group.pull-right
