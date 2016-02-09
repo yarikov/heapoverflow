@@ -8,6 +8,8 @@ RSpec.describe User, type: :model do
   it { should have_many(:votes).dependent(:destroy) }
   it { should have_many(:subscriptions).dependent(:destroy) }
 
+  it { should validate_presence_of :full_name }
+
   let(:author) { create(:user) }
   let(:user) { create(:user) }
   let(:question) { create(:question, user: author) }
@@ -50,7 +52,7 @@ RSpec.describe User, type: :model do
 
     context 'user does not exists' do
       context 'with email' do
-        let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345', info: { email: 'new@user.com' }) }
+        let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345', info: { email: 'new@user.com', name: 'Petya Ivanov' }) }
 
         it 'creates new user' do
           expect { User.find_for_oauth(auth) }.to change(User, :count).by(1)
@@ -63,6 +65,11 @@ RSpec.describe User, type: :model do
         it 'fills user email' do
           user = User.find_for_oauth(auth)
           expect(user.email).to eq auth.info.email
+        end
+
+        it 'fills user full_name' do
+          user = User.find_for_oauth(auth)
+          expect(user.full_name).to eq auth.info.name
         end
 
         it 'creates authorization for user' do

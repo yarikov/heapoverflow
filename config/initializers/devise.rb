@@ -238,7 +238,7 @@ Devise.setup do |config|
   config.omniauth :facebook,
                   Rails.application.secrets.facebook_app_id,
                   Rails.application.secrets.facebook_app_secret,
-                  info_fields: 'id, email'
+                  info_fields: 'id, email, name'
   config.omniauth :twitter,
                   Rails.application.secrets.twitter_api_key,
                   Rails.application.secrets.twitter_api_secret
