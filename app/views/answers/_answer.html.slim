@@ -20,11 +20,16 @@
             - answer.attachments.each do |a|
               li = link_to a.file.identifier, a.file.url
 
-        .btn-group.pull-right
+        .post-menu
           - if can?(:update, answer)
-            = link_to 'Редактировать', '', class: 'btn btn-warning edit-answer-link', data: { answer_id: answer.id }
+            = link_to 'edit', '', class: 'show-edit-form'
+            = link_to 'delete', answer, data: { confirm: 'Вы уверены' }, method: :delete, remote: true
 
-            = link_to 'Удалить ответ', answer, data: {:confirm => 'Вы уверены'}, :method => :delete, remote: true, class: 'btn btn-danger'
+        .user-info
+          span answered #{answer.created_at.to_s(:my_short)}
+          = link_to answer.user do
+            = image_tag answer.user.avatar.small.url
+          = link_to answer.user.full_name, answer.user
 
         .clearfix
 
@@ -35,10 +40,11 @@
 
         .new-comment
           - if can?(:create, Comment)
-            = link_to 'Добавить комментарий', '', class: 'btn btn-default btn-xs new-comment-link'
+            = link_to 'add a comment', '', class: 'new-comment-link'
 
             = form_for [answer, Comment.new], remote: true do |f|
               .form-group
-                = f.label :body, 'Комментарий'
                 = f.text_area :body, class: 'form-control'
-              = f.submit 'Сохранить', class: 'btn btn-success'
+              .buttons
+                = f.submit 'Add', class: 'btn btn-primary'
+                = link_to 'Close', '', class: 'btn btn-default close-form'

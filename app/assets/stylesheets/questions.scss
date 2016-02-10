@@ -112,14 +112,19 @@
 }
 
 .comments {
-  margin-top: 20px;
-  border-top: 1px solid #e0e0e0;
-
   .comment {
     font-size: 13px;
     padding: 5px;
     overflow: hidden;
     border-bottom: 1px solid #e0e0e0;
+
+    a {
+      text-decoration: none;
+    }
+
+    span.commented {
+      color: #999;
+    }
   }
 
   .new_comment {
@@ -141,21 +146,26 @@
 
   .comment-buttons {
     float: right;
-  }
 
-  a {
-    text-decoration: none;
-    color: #c0c0c0;
-    font-size: 0.8em;
-  }
+    a {
+      text-decoration: none;
+      color: #c0c0c0;
+      font-size: 0.8em;
+    }
 
-  a:hover {
-    color: #9ea3a9;
-  }
+    a:hover {
+      color: #9ea3a9;
+    }
 
-  a.edit-comment {
-    margin-right: 3px;
+    a.show-edit-form {
+      margin-right: 3px;
+    }
   }
+}
+
+.comments > .comment:first-child {
+  border-top: 1px solid #e0e0e0;
+  margin-top: 20px;
 }
 
 .new-answer, .new-comment {
@@ -208,4 +218,66 @@
   i {
     font-size: 1.8em;
   }
+}
+
+.post-menu {
+  float: left;
+
+  a {
+    text-decoration: none;
+    margin-right: 6px;
+    color: #888;
+    font-size: 13px;
+  }
+
+  a:hover {
+    color: #444;
+  }
+}
+
+a.new-comment-link {
+  text-decoration: none;
+  color: #888;
+  opacity: .6;
+  font-size: 13px;
+}
+
+a.new-comment-link:hover {
+  color: #00CED1;
+}
+
+.question .user-info, .answer .user-info {
+  box-sizing: border-box;
+  padding: 5px 6px 9px 7px;
+  width: 200px;
+  color: #52575c;
+  background: #E1ECF4;
+  float: right;
+
+  span {
+    display: block;
+  }
+
+  img {
+    margin: 4px 8px 0 0;
+    width: 32px;
+    height: 32px;
+  }
+
+  a {
+    font-size: 13px;
+    display: inline-block;
+  }
+}
+
+.answer .user-info {
+  background: #fff;
+}
+
+form.edit_comment {
+  margin: 30px 0 10px;
+}
+
+form.new_comment {
+  margin-top: 15px;
 }

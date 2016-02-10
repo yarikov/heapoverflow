@@ -86,6 +86,10 @@ img {
   height: 164px;
 }
 
+.btn {
+  margin-right: 5px;
+}
+
 // kaminari
 .pagination {
   margin-top: 40px;
@@ -102,4 +106,9 @@ img {
 
 .pagination > li > a, .pagination > li > span {
   color: #888;
+}
+
+.result {
+  margin-top: 25px;
+  border-top: 1px solid #e0e0e0;
 }

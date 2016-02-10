@@ -12,12 +12,12 @@ feature 'Сreate an answer', '
     sign_in(user)
     visit question_path(question)
 
-    fill_in 'Ваш ответ на вопрос', with: 'Answer body'
-    click_on 'Добавить файл'
+    fill_in 'answer[body]', with: 'Answer body'
+    click_on 'Add a file'
     all('input[type="file"]')[0].set("#{Rails.root}/spec/spec_helper.rb")
-    click_on 'Добавить файл'
+    click_on 'Add a file'
     all('input[type="file"]')[1].set("#{Rails.root}/spec/rails_helper.rb")
-    click_on 'Ответить'
+    click_on 'Post Your Answer'
 
     expect(current_path).to eq question_path(question)
     within '.answers' do
@@ -33,13 +33,13 @@ feature 'Сreate an answer', '
     sign_in(user)
     visit question_path(question)
 
-    click_on 'Ответить'
+    click_on 'Post Your Answer'
 
     expect(page).to have_content "Body can't be blank"
   end
 
   scenario 'Unauthenticated user creates an answer' do
     visit question_path(question)
-    expect(page).to_not have_button('Ответить')
+    expect(page).to_not have_button 'Post Your Answer'
   end
 end

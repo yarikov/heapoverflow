@@ -1,18 +1,18 @@
-h3 Новый вопрос
+h3 New Question
 = form_for @question do |f|
   == render 'common/errors', resource: @question
 
   .form-group
-    = f.label :title, 'Суть вопроса'
+    = f.label :title, 'Title'
     = f.text_field :title, class: 'form-control'
   .form-group
-    = f.label :body, 'Детали вопроса'
+    = f.label :body, 'Body'
     = f.text_area :body, class: 'form-control'
   .form-group
     = f.fields_for :attachments, @question.attachments.new do |a|
-    = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields'
   .form-group
     = f.label :tag_list, 'Tags'
     = f.text_field :tag_list, class: 'form-control'
   p
-    = f.submit 'Опубликовать', class: 'btn btn-success'
+    = f.submit 'Post Your Question', class: 'btn btn-primary'
+    = link_to_add_association 'Add a file', f, :attachments, partial: 'common/attachment_fields', class: 'btn btn-default'

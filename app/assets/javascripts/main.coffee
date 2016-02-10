@@ -9,3 +9,15 @@ $.fn.voteChange = (obj) ->
   else
     $(this).find('.vote-up-on').toggleClass('vote-up-on vote-up-off')
     $(this).find('.vote-down-on').toggleClass('vote-down-on vote-down-off')
+
+showEditForm = (e) ->
+  e.preventDefault();
+  $(this).parent().siblings('form').show()
+
+closeForm = (e) ->
+  e.preventDefault()
+  $(this).closest('form').hide()
+
+$(document)
+  .on('click', '.show-edit-form', showEditForm)
+  .on('click', '.close-form', closeForm)

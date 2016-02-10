@@ -16,15 +16,15 @@ feature 'Question editing', '
     end
 
     scenario 'sees link to Edit' do
-      within('.question') { expect(page).to have_link 'Редактировать' }
+      within('.question') { expect(page).to have_link 'edit' }
     end
 
     scenario 'try to edit his question', js: true do
       within '.question' do
-        click_on 'Редактировать'
-        fill_in 'Суть вопроса', with: 'edited question title'
-        fill_in 'Детали вопроса', with: 'edited question body'
-        click_on 'Сохранить'
+        click_on 'edit'
+        fill_in 'Title', with: 'edited question title'
+        fill_in 'Body', with: 'edited question body'
+        click_on 'Save'
 
         expect(page).to_not have_content question.body
         expect(page).to have_content 'edited question title'
@@ -40,12 +40,12 @@ feature 'Question editing', '
     sign_in(user)
     visit question_path(question)
 
-    within('.question') { expect(page).to_not have_link 'Редактировать' }
+    within('.question') { expect(page).to_not have_link 'edit' }
   end
 
   scenario 'Unauthenticated user try to edit question' do
     visit question_path(question)
 
-    within('.question') { expect(page).to_not have_link 'Редактировать' }
+    within('.question') { expect(page).to_not have_link 'edit' }
   end
 end

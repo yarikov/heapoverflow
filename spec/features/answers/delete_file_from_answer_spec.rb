@@ -18,9 +18,9 @@ feature 'Delete file from answer' do
 
     scenario 'try to delete the file', js: true do
       within '.answers' do
-        click_on 'Редактировать'
-        click_on 'Удалить файл'
-        click_on 'Сохранить'
+        click_on 'edit'
+        click_on 'Delete the file'
+        click_on 'Save'
 
         expect(page).to_not have_link file.file.identifier
       end

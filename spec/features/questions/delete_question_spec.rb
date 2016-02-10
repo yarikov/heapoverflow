@@ -7,7 +7,7 @@ feature 'Delete the question' do
   scenario 'User can delete own question' do
     sign_in(user)
     visit question_path(question)
-    click_on 'Удалить вопрос'
+    click_on 'delete'
 
     expect(page).to have_content 'Question was successfully destroyed'
     expect(current_path).to eq questions_path
@@ -16,6 +16,6 @@ feature 'Delete the question' do
   scenario "User cannot delete someone else's question" do
     visit question_path(question)
 
-    expect(page).to_not have_content 'Удалить вопрос'
+    expect(page).to_not have_content 'delete'
   end
 end

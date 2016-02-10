@@ -46,12 +46,12 @@ feature 'Search', '
 
   scenario 'user', js: true do
     within '.search' do
-      fill_in 'query', with: user.email
+      fill_in 'query', with: user.full_name
       select 'User', from: 'resource'
       click_on 'Search'
     end
 
-    expect(page).to have_content user.email
+    expect(page).to have_content user.full_name
   end
 
   scenario 'anything', js: true do

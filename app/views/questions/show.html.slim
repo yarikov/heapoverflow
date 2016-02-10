@@ -13,7 +13,7 @@
       .col-xs-11.col-xs-offset-1
         .new-answer
           - if can?(:create, Answer)
-            h4 Hовый ответ
+            h4 Your Answer
             == render 'answers/form', answer: @answer
 
 = subscribe_to "/questions/#{@question.id}/answers"

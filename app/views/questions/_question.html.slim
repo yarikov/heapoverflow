@@ -26,10 +26,15 @@
           = raw @question.tag_list.map { |tag| link_to tag, tag_path(tag), class: 'tag' }.join(' ')
 
       - if can?(:update, @question)
-        .btn-group.pull-right
-          = link_to 'Редактировать', '', data: { question_id: @question.id }, class: 'btn btn-warning edit-question-link'
+        .post-menu
+          = link_to 'edit', '', class: 'show-edit-form'
+          = link_to 'delete', @question, data: { confirm: 'Вы уверены' }, method: :delete
 
-          = link_to 'Удалить вопрос', @question, data: { confirm: 'Вы уверены' }, method: :delete,  class: 'btn btn-danger'
+      .user-info
+        span asked #{@question.created_at.to_s(:my_short)}
+        = link_to @question.user do
+          = image_tag @question.user.avatar.small.url
+        = link_to @question.user.full_name, @question.user
 
       .clearfix
 
@@ -37,19 +42,20 @@
 
         = form_for @question, remote: true do |f|
           .form-group
-            = f.label :title, 'Суть вопроса'
+            = f.label :title, 'Title'
             = f.text_field :title, class: 'form-control'
           .form-group
-            = f.label :body, 'Детали вопроса'
+            = f.label :body, 'Body'
             = f.text_area :body, class: 'form-control'
             = f.fields_for :attachments do |a|
               == render 'common/attachment_fields', f: a
           .form-group
             = f.label :tag_list, 'Tags'
             = f.text_field :tag_list, value: @question.tag_list.to_s,  class: 'form-control'
-          .btn-group.pull-left
-            = link_to_add_association 'Добавить файл', f, :attachments, partial: 'common/attachment_fields', class: 'btn btn-default'
-            = f.submit 'Сохранить', class: 'btn btn-success'
+          .buttons
+            = f.submit 'Save', class: 'btn btn-primary'
+            = link_to_add_association 'Add a file', f, :attachments, partial: 'common/attachment_fields', class: 'btn btn-default'
+            = link_to 'Close', '', class: 'btn btn-default close-form'
           .clearfix
 
       .comments
@@ -57,10 +63,11 @@
 
       .new-comment
         - if can?(:create, Comment)
-          = link_to 'Добавить комментарий', '', class: 'btn btn-default btn-xs new-comment-link'
+          = link_to 'add a comment', '', class: 'new-comment-link'
 
           = form_for [@question, Comment.new], remote: true do |f|
             .form-group
-              = f.label :body, 'Комментарий'
               = f.text_area :body, class: 'form-control'
-            = f.submit 'Сохранить', class: 'btn btn-success'
+            .buttons
+              = f.submit 'Add', class: 'btn btn-primary'
+              = link_to 'Close', '', class: 'btn btn-default close-form'
