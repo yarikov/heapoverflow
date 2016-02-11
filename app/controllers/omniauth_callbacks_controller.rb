@@ -9,6 +9,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session['devise.auth_provider'] = auth.provider
       session['devise.auth_uid'] = auth.uid
       session['devise.auth_name'] = auth.info.name
+      session['devise.auth_image'] = auth.info.image
       render 'omniauth/get_email'
     end
   end
@@ -21,7 +22,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       provider: session['devise.auth_provider'],
       uid: session['devise.auth_uid'],
       info: { email: params[:email],
-              name: session['devise.auth_name']
+              name: session['devise.auth_name'],
+              image: session['devise.auth_image']
       }
     )
   end

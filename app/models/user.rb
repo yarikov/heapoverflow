@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
     return new unless auth.info.email
     user = find_or_create_by!(email: auth.info.email) do |u|
       u.full_name = auth.info.name
+      u.remote_avatar_url = auth.info.image
       u.password = Devise.friendly_token[0, 20]
       u.skip_confirmation! if auth.credentials
     end

@@ -1,7 +1,6 @@
 // index
 .content {
   border-top: 1px solid #e0e0e0;
-  margin-top: 10px;
 }
 
 .question-summary {
@@ -279,5 +278,10 @@ form.edit_comment {
 }
 
 form.new_comment {
+  margin-top: 15px;
+}
+
+// new
+.question-form {
   margin-top: 15px;
 }

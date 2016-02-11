@@ -24,8 +24,4 @@ feature 'Edit profile' do
     expect(page).to have_link 'http://twitter.com/petya'
     expect(page).to have_link 'http://github.com/petya'
   end
-
-  scenario 'The user can change avatar' do
-    # TODO
-  end
 end

@@ -238,10 +238,14 @@ Devise.setup do |config|
   config.omniauth :facebook,
                   Rails.application.secrets.facebook_app_id,
                   Rails.application.secrets.facebook_app_secret,
-                  info_fields: 'id, email, name'
+                  info_fields: 'id, email, name',
+                  secure_image_url: true
   config.omniauth :twitter,
                   Rails.application.secrets.twitter_api_key,
-                  Rails.application.secrets.twitter_api_secret
+                  Rails.application.secrets.twitter_api_secret,
+                  secure_image_url: true,
+                  image_size: 'original'
+
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

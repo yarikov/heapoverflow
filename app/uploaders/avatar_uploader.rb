@@ -4,7 +4,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   storage :file
-  # storage :fog  // TODO
 
   process resize_to_fill: [164, 164]
 
