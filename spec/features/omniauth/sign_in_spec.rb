@@ -10,7 +10,7 @@ feature 'User sign in' '
       visit new_user_session_path
 
       OmniAuth.config.mock_auth[:facebook] = :invalid_credentials
-      click_on 'Sign in with Facebook'
+      click_on 'Facebook'
 
       expect(page).to have_content 'Could not authenticate you from Facebook'
     end
@@ -19,7 +19,7 @@ feature 'User sign in' '
       visit new_user_session_path
 
       mock_auth_hash
-      click_on 'Sign in with Facebook'
+      click_on 'Facebook'
 
       expect(page).to have_content 'Successfully authenticated from Facebook account'
     end
@@ -30,7 +30,7 @@ feature 'User sign in' '
       visit new_user_session_path
 
       OmniAuth.config.mock_auth[:twitter] = :invalid_credentials
-      click_on 'Sign in with Twitter'
+      click_on 'Twitter'
 
       expect(page).to have_content 'Could not authenticate you from Twitter'
     end
@@ -39,7 +39,7 @@ feature 'User sign in' '
       visit new_user_session_path
 
       mock_auth_hash
-      click_on 'Sign in with Twitter'
+      click_on 'Twitter'
       fill_in 'Email', with: 'test@email.com'
       click_on 'Подтвердить'
       expect(page).to have_content 'You have to confirm your email address before continuing'
@@ -48,7 +48,7 @@ feature 'User sign in' '
       current_email.click_link 'Confirm my account'
       expect(page).to have_content 'Your email address has been successfully confirmed'
 
-      click_on 'Sign in with Twitter'
+      click_on 'Twitter'
       expect(page).to have_content 'Successfully authenticated from Twitter account'
     end
   end

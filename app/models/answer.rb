@@ -10,6 +10,7 @@ class Answer < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :body, :question_id, :user_id, presence: true
+  validates :body, length: { in: 10..3000 }
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 

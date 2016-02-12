@@ -10,7 +10,9 @@ class Question < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
-  validates :user_id, :title, :body, presence: true
+  validates :user_id, :title, :body, :tag_list, presence: true
+  validates :title, length: { in: 10..200 }
+  validates :body,  length: { in: 10..3000 }
 
   after_create :author_subscribe
 

@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :question do
     title
     body 'Question body'
+    tag_list 'question'
     user
   end
 

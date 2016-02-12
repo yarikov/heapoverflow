@@ -10,9 +10,9 @@ nav.navbar.navbar-default.navbar-static-top
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
-          li = link_to 'Выйти', destroy_user_session_path, method: :delete
+          li = link_to 'Sign out', destroy_user_session_path, method: :delete
         - else
-          li = link_to 'Войти', new_user_session_path
-          li = link_to 'Регистрация', new_user_registration_path
+          li = link_to 'Sign in', new_user_session_path
+          li = link_to 'Sign up', new_user_registration_path
       = form_tag search_path, method: :get, class: 'navbar-form navbar-right' do |f|
         = search_field_tag :query, params[:query], placeholder: 'Search...', class: 'form-control'
