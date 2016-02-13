@@ -1,4 +1,4 @@
-$('a.best').removeClass('best')
+$('a.best').toggleClass('best not_best');
 <% if @answer.reload.best %>
-  $('<%= ".answer-#{@answer.id} .best-answer a" %>').addClass('best');
+  $('<%= ".answer-#{@answer.id} .best-answer a" %>').toggleClass('best not_best');
 <% end %>

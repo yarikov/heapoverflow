@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def best_link_to(path, obj)
-    best_class = obj.best ? 'best' : ''
+    best_class = obj.best ? 'best' : 'not_best'
     link_to '', path, method: :patch, remote: true, class: "glyphicon glyphicon-ok #{best_class}"
   end
 
