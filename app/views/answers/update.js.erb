@@ -1,7 +1,6 @@
-<% if @answer.errors.present? %>
-  <% @answer.errors.full_messages.each do |message| %>
-    $('.answer-errors').html('<%= j message %>');
-  <% end %>
+<% if @answer.persisted? && @answer.errors.present? %>
+  $('<%= ".answer-#{@answer.id}" %> form.edit_answer').replaceWith("<%= j render 'answers/form', answer: @answer %>");
+  $('<%= ".answer-#{@answer.id}" %> form.edit_answer').show();
 <% else %>
   <% if remotipart_submitted? %>
     $('<%= ".answer-#{@answer.id}" %>').replaceWith("<%= j "#{render @answer}" %>");

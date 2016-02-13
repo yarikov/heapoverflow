@@ -20,8 +20,8 @@
             - answer.attachments.each do |a|
               li = link_to a.file.identifier, a.file.url
 
-        .post-menu
-          - if can?(:update, answer)
+        - if can?(:update, answer)
+          .post-menu
             = link_to 'edit', '', class: 'show-edit-form'
             = link_to 'delete', answer, data: { confirm: 'Вы уверены' }, method: :delete, remote: true
 

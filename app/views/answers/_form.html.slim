@@ -1,11 +1,5 @@
-= form_for shallow_path(@question, answer), remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
-  .form-group
-    .answer-errors
-    = f.text_area :body, class: 'form-control'
-    = f.fields_for :attachments do |a|
-      == render 'common/attachment_fields', f: a
-  .buttons
-    = f.submit answer.persisted? ? 'Save' : 'Post Your Answer', class: 'btn btn-primary'
-    = link_to_add_association 'Add a file', f, :attachments, partial: 'common/attachment_fields', class: 'btn btn-default'
-    = link_to 'Close', '', class: 'btn btn-default close-form' if answer.persisted?
-  .clearfix
+= simple_form_for shallow_path(@question, answer), remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
+  = f.input :body
+  = f.simple_fields_for :attachments do |a|
+    == render 'common/attachment_fields', f: a
+  == render 'common/buttons', resource: answer, f: f

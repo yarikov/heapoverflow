@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
 
   after_create :author_subscribe
 
-  accepts_nested_attributes_for :attachments, allow_destroy: true
+  accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
 
   scope :created_last_24_hours, -> { where(created_at: 1.day.ago..Time.zone.now) }
 

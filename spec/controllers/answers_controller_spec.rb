@@ -60,9 +60,9 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     it 'changes answer attributes' do
-      patch :update, id: answer, answer: { body: 'new body' }, format: :js
+      patch :update, id: answer, answer: { body: 'new answer body' }, format: :js
       answer.reload
-      expect(answer.body).to eq 'new body'
+      expect(answer.body).to eq 'new answer body'
     end
 
     it 'render update template' do

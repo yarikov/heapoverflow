@@ -1,9 +1,11 @@
-$('.answer-errors').empty();
 <% if @answer.errors.present? %>
-  <% @answer.errors.full_messages.each do |message| %>
-    $('.answer-errors').html('<%= j message %>');
-  <% end %>
+  $('.new-answer form').replaceWith("<%= j render 'answers/form', answer: @answer %>");
 <% else %>
-  $('.answers').append('<%= j render @answer %>');
+  <% if remotipart_submitted? %>
+    $('.answers').append("<%= j "#{render @answer}" %>");
+  <% else %>
+    $('.answers').append('<%= j render @answer %>');
+  <% end %>
   $('.new-answer #answer_body').val('');
+  $('.nested-fields').remove();
 <% end %>

@@ -1,0 +1,4 @@
+.buttons
+  = f.submit resource.persisted? ? 'Save' : "Post Your #{resource.class.to_s.capitalize}", class: 'btn btn-primary'
+  = link_to_add_association 'Add a file', f, :attachments, partial: 'common/attachment_fields', class: 'btn btn-default'
+  = link_to 'Close', '', class: 'btn btn-default close-form' if resource.persisted?
