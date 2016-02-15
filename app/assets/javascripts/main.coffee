@@ -18,6 +18,13 @@ closeForm = (e) ->
   e.preventDefault()
   $(this).closest('form').hide()
 
+dropdownClick = ->
+  if $(window).width() < 768
+    setTimeout ->
+      $('.dropdown-toggle').click()
+    , 100
+
 $(document)
   .on('click', '.show-edit-form', showEditForm)
   .on('click', '.close-form', closeForm)
+  .on('click', '.navbar-toggle', dropdownClick)
