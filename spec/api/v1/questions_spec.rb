@@ -23,7 +23,7 @@ describe 'Questions API' do
         it "question object contains #{attr}" do
           expect(response.body)
             .to be_json_eql(questions[0].send(attr.to_sym).to_json)
-            .at_path("questions/0/#{attr}")
+            .at_path("questions/1/#{attr}")
         end
       end
     end
