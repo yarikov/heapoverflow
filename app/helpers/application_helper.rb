@@ -19,6 +19,13 @@ module ApplicationHelper
     nil
   end
 
+  def active(options = {})
+    options.each do |option|
+      return 'active' if controller_name == option.first.to_s && action_name.in?(option.last)
+    end
+    ''
+  end
+
   def vote_up_link_to(path, obj)
     vote_class = user_signed_in? && current_user.vote_up?(obj) ? 'vote-up-on' : 'vote-up-off'
     link_to '', path, method: :patch, remote: true, class: "#{vote_class}"

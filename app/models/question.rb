@@ -3,6 +3,8 @@ class Question < ActiveRecord::Base
   is_impressionable
   acts_as_taggable
 
+  default_scope { order('created_at DESC') }
+
   belongs_to :user
 
   has_many :answers, dependent: :destroy
