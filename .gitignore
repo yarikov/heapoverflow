@@ -13,6 +13,8 @@
 /tmp
 
 config/database.yml
+config/private_pub.yml
+config/thinking_sphinx.yml
 public/uploads/
 
 # Rubymine

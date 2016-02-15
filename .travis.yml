@@ -25,6 +25,8 @@ before_script:
   # Копируем конфиги
   - cp config/database.travis.yml config/database.yml
   - cp config/secrets.travis.yml config/secrets.yml
+  - cp config/private_pub.yml.sample config/private_pub.yml
+  - cp config/thinking_sphinx.yml.sample config/thinking_sphinx.yml
   # Формируем структуру базы
   - bundle exec rake db:setup
   # Запускаем PrivatePub
