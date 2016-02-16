@@ -38,6 +38,8 @@ gem 'pygments.rb'
 gem 'impressionist'
 gem 'acts-as-taggable-on'
 gem 'simple_form'
+gem 'dotenv'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
 
 group :development, :test do
   gem 'pry-byebug'
@@ -61,6 +63,10 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'letter_opener'
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
 end
 
 group :test do
