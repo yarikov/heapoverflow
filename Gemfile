@@ -38,8 +38,7 @@ gem 'pygments.rb'
 gem 'impressionist'
 gem 'acts-as-taggable-on'
 gem 'simple_form'
-gem 'dotenv'
-gem 'dotenv-deployment', require: 'dotenv/deployment'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'therubyracer'
 
 group :development, :test do
