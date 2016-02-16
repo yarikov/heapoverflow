@@ -1,7 +1,7 @@
 = simple_form_for @question, remote: @question.persisted? do |f|
   = f.input :title
   = f.input :body
-  = f.input :tag_list, label: 'Tags'
+  = f.input :tag_list, label: 'Tags', input_html: { value: @question.tag_list.to_s }
   = f.simple_fields_for :attachments do |a|
     == render 'common/attachment_fields', f: a if @question.persisted?
   == render 'common/buttons', resource: @question, f: f
