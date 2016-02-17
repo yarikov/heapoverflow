@@ -40,6 +40,7 @@ gem 'acts-as-taggable-on'
 gem 'simple_form'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'therubyracer'
+gem 'unicorn'
 
 group :development, :test do
   gem 'pry-byebug'
@@ -68,6 +69,7 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :test do
