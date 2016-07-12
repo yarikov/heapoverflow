@@ -1,4 +1,6 @@
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
+  default_scope { order(created_at: :asc) }
+
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 

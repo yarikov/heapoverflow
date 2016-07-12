@@ -1,9 +1,7 @@
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
   include HasVotes
   is_impressionable
   acts_as_taggable
-
-  default_scope { order('created_at DESC') }
 
   belongs_to :user
 

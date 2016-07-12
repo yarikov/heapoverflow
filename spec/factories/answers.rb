@@ -1,8 +1,11 @@
 FactoryGirl.define do
-  sequence(:body) { |n| "Answer body #{n}" }
-
   factory :answer do
-    body
+    user
+    sequence(:body) { |n| "Answer body #{n}" }
+
+    factory :old_answer do
+      created_at 3.days.ago
+    end
   end
 
   factory :invalid_answer, class: 'Answer' do

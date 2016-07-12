@@ -9,7 +9,12 @@ describe 'Questions API' do
       let(:access_token) { create(:access_token) }
       let!(:questions)   { create_list(:question, 2, user: user) }
 
-      before { get '/api/v1/questions', format: :json, access_token: access_token.token }
+      before do
+        get '/api/v1/questions', params: {
+          access_token: access_token.token,
+          format: :json
+        }
+      end
 
       it 'returns 200 status code' do
         expect(response).to be_success
@@ -29,25 +34,25 @@ describe 'Questions API' do
     end
 
     def do_request(options = {})
-      get '/api/v1/questions', { format: :json }.merge(options)
+      get '/api/v1/questions', params: { format: :json }.merge(options)
     end
   end
 
   describe 'GET /show' do
-    let(:user)      { create(:user) }
-    let!(:question) { create(:question, user: user) }
-    let!(:answers)  { create_list(:answer, 2, question: question, user: user) }
+    let(:user)             { create(:user) }
+    let!(:question)        { create(:question) }
 
-    let!(:comments_for_question)    { create_list(:comment, 2, commentable: question, user: user) }
-    let!(:comments_for_answer)      { create_list(:comment, 2, commentable: answer, user: user) }
-    let!(:attachments_for_question) { create_list(:attachment, 2, attachable: question) }
-    let!(:attachments_for_answer)   { create_list(:attachment, 2, attachable: answer) }
+    let!(:old_answer)      { create(:old_answer, question: question) }
+    let!(:qst_old_comment) { create(:old_comment, commentable: question) }
+    let!(:ans_old_comment) { create(:old_comment, commentable: answer) }
+    let!(:qst_old_atchmnt) { create(:old_attachment, attachable: question) }
+    let!(:ans_old_atchmnt) { create(:old_attachment, attachable: answer) }
 
-    let(:answer)                    { answers.first }
-    let(:comment_for_question)      { comments_for_question.first }
-    let(:comment_for_answer)        { comments_for_answer.first }
-    let(:attachment_for_question)   { attachments_for_question.first }
-    let(:attachment_for_answer)     { attachments_for_answer.first }
+    let!(:answer)          { create(:answer, question: question) }
+    let!(:qst_comment)     { create(:comment, commentable: question) }
+    let!(:ans_comment)     { create(:comment, commentable: answer) }
+    let!(:qst_atchmnt)     { create(:attachment, attachable: question) }
+    let!(:ans_atchmnt)     { create(:attachment, attachable: answer) }
 
     it_behaves_like 'API Authenticable'
 
@@ -55,7 +60,10 @@ describe 'Questions API' do
       let(:access_token) { create(:access_token, resource_owner_id: user.id) }
 
       before do
-        get "/api/v1/questions/#{question.id}", format: :json, access_token: access_token.token
+        get "/api/v1/questions/#{question.id}", params: {
+          access_token: access_token.token,
+          format: :json
+        }
       end
 
       it 'returns 200 status code' do
@@ -76,13 +84,14 @@ describe 'Questions API' do
 
       context 'comments' do
         it 'included in question object' do
-          expect(response.body).to have_json_size(2).at_path('question/comments')
+          expect(response.body)
+            .to have_json_size(2).at_path('question/comments')
         end
 
         %w(id body user_id created_at updated_at).each do |attr|
           it "contains #{attr}" do
             expect(response.body)
-              .to be_json_eql(comment_for_question.send(attr.to_sym).to_json)
+              .to be_json_eql(qst_comment.send(attr.to_sym).to_json)
               .at_path("question/comments/1/#{attr}")
           end
         end
@@ -90,59 +99,64 @@ describe 'Questions API' do
 
       context 'attachments' do
         it 'included in question object' do
-          expect(response.body).to have_json_size(2).at_path('question/attachments')
+          expect(response.body)
+            .to have_json_size(2).at_path('question/attachments')
         end
 
         it 'contains url' do
           expect(response.body)
-            .to be_json_eql(attachment_for_question.file.url.to_json)
-            .at_path('question/attachments/1/url')
+            .to be_json_eql(qst_atchmnt.file.url.to_json)
+            .at_path('question/attachments/0/url')
         end
       end
 
       context 'answers' do
         it 'included in question object' do
-          expect(response.body).to have_json_size(2).at_path('question/answers')
+          expect(response.body)
+            .to have_json_size(2).at_path('question/answers')
         end
 
         %w(id body user_id created_at updated_at).each do |attr|
           it "contains #{attr}" do
             expect(response.body)
               .to be_json_eql(answer.send(attr.to_sym).to_json)
-              .at_path("question/answers/0/#{attr}")
+              .at_path("question/answers/1/#{attr}")
           end
         end
 
         context 'comments' do
           it 'included in answer object' do
-            expect(response.body).to have_json_size(2).at_path('question/answers/0/comments')
+            expect(response.body)
+              .to have_json_size(2).at_path('question/answers/1/comments')
           end
 
           %w(id body user_id created_at updated_at).each do |attr|
             it "contains #{attr}" do
               expect(response.body)
-                .to be_json_eql(comment_for_answer.send(attr.to_sym).to_json)
-                .at_path("question/answers/0/comments/1/#{attr}")
+                .to be_json_eql(ans_comment.send(attr.to_sym).to_json)
+                .at_path("question/answers/1/comments/1/#{attr}")
             end
           end
         end
 
         context 'attachments' do
           it 'included in answer object' do
-            expect(response.body).to have_json_size(2).at_path('question/answers/0/attachments')
+            expect(response.body)
+              .to have_json_size(2).at_path('question/answers/1/attachments')
           end
 
           it 'contains url' do
             expect(response.body)
-              .to be_json_eql(attachment_for_answer.file.url.to_json)
-              .at_path('question/answers/0/attachments/1/url')
+              .to be_json_eql(ans_atchmnt.file.url.to_json)
+              .at_path('question/answers/1/attachments/0/url')
           end
         end
       end
     end
 
     def do_request(options = {})
-      get "/api/v1/questions/#{question.id}", { format: :json }.merge(options)
+      get "/api/v1/questions/#{question.id}",
+          params: { format: :json }.merge(options)
     end
   end
 
@@ -150,14 +164,16 @@ describe 'Questions API' do
     it_behaves_like 'API Authenticable'
 
     context 'authorized' do
-      let(:user) { create(:user) }
+      let(:user)         { create(:user) }
       let(:access_token) { create(:access_token, resource_owner_id: user.id) }
 
       context 'with valid attributes' do
         let(:request) do
-          post '/api/v1/questions',
-               question: attributes_for(:question),
-               format: :json, access_token: access_token.token
+          post '/api/v1/questions', params: {
+            question: attributes_for(:question),
+            access_token: access_token.token,
+            format: :json
+          }
         end
 
         it 'returns 201 status code' do
@@ -172,9 +188,11 @@ describe 'Questions API' do
 
       context 'with invalid attributes' do
         let(:request) do
-          post '/api/v1/questions',
-               question: attributes_for(:invalid_question),
-               format: :json, access_token: access_token.token
+          post '/api/v1/questions', params: {
+            question: attributes_for(:invalid_question),
+            access_token: access_token.token,
+            format: :json
+          }
         end
 
         it 'returns 422 status code' do
@@ -189,7 +207,7 @@ describe 'Questions API' do
     end
 
     def do_request(options = {})
-      post '/api/v1/questions', { format: :json }.merge(options)
+      post '/api/v1/questions', params: { format: :json }.merge(options)
     end
   end
 end

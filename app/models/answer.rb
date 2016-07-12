@@ -1,7 +1,5 @@
-class Answer < ActiveRecord::Base
+class Answer < ApplicationRecord
   include HasVotes
-
-  default_scope { order('best DESC') }
 
   belongs_to :question
   belongs_to :user

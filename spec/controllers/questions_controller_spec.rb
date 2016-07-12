@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:user) { create(:user) }
-  let(:question) { create(:question, user: user) }
+  let(:user)        { create(:user) }
+  let(:question)    { create(:question, user: user) }
 
   let(:own_votable) { create(:question, user: @user) }
-  let(:votable) { create(:question, user: user) }
+  let(:votable)     { create(:question, user: user) }
 
   it_behaves_like 'Votable'
 
@@ -24,7 +24,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #show' do
-    before { get :show, id: question }
+    before { get :show, params: { id: question } }
 
     it 'assigns the requested question to @question' do
       expect(assigns(:question)).to eq question
@@ -58,7 +58,9 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'with valid attributes' do
       let(:channel) { '/questions' }
-      let(:request) { post :create, question: attributes_for(:question) }
+      let(:request) do
+        post :create, params: { question: attributes_for(:question) }
+      end
 
       it 'saves the new question in the database' do
         expect { request }.to change(@user.questions, :count).by(1)
@@ -73,7 +75,9 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     context 'with invalid attributes' do
-      let(:request) { post :create, question: attributes_for(:invalid_question) }
+      let(:request) do
+        post :create, params: { question: attributes_for(:invalid_question) }
+      end
 
       it 'does not save the question in the database' do
         expect { request }.to_not change(Question, :count)
@@ -89,22 +93,28 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'PATCH #update' do
     sign_in_user
 
-    let(:question) { create(:question, user: @user) }
+    let(:question)       { create(:question, user: @user) }
+    let(:qst_attributes) { attributes_for(:question) }
+
+    before do
+      patch :update, params: {
+        id: question,
+        question: qst_attributes,
+        format: :js
+      }
+    end
 
     it 'assings the requested question to @question' do
-      patch :update, id: question, question: attributes_for(:question), format: :js
       expect(assigns(:question)).to eq question
     end
 
     it 'changes question attributes' do
-      patch :update, id: question, question: { title: 'new question title', body: 'new question body' }, format: :js
       question.reload
-      expect(question.title).to eq 'new question title'
-      expect(question.body).to eq 'new question body'
+      expect(question.title).to eq qst_attributes[:title]
+      expect(question.body).to eq qst_attributes[:body]
     end
 
     it 'render update template' do
-      patch :update, id: question, question: attributes_for(:question), format: :js
       expect(response).to render_template :update
     end
   end
@@ -114,14 +124,15 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'User delete own question' do
       let(:question) { create(:question, user: @user) }
+      let(:request)  { delete :destroy, params: { id: question } }
 
       it 'delete the question' do
         question
-        expect { delete :destroy, id: question }.to change(@user.questions, :count).by(-1)
+        expect { request }.to change(@user.questions, :count).by(-1)
       end
 
       it 'redirects to index' do
-        delete :destroy, id: question
+        request
         expect(response).to redirect_to questions_path
       end
     end
@@ -130,7 +141,7 @@ RSpec.describe QuestionsController, type: :controller do
       let!(:question) { create(:question, user: user) }
 
       it 'does not delete the question' do
-        expect { delete :destroy, id: question }.to_not change(Question, :count)
+        expect { request }.to_not change(Question, :count)
       end
     end
   end

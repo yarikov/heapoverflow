@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   authorize_resource
-  impressionist actions: [:show]
+  # impressionist actions: [:show]
 
   def index
     @users = User.all
@@ -29,6 +29,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user)
-      .permit(:full_name, :avatar, :location, :description, :website, :github, :twitter)
+          .permit(:full_name, :avatar, :location, :description, :website, :github, :twitter)
   end
 end

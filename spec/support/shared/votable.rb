@@ -4,7 +4,7 @@ shared_examples_for 'Votable' do
 
     context 'when author' do
       it 'render json' do
-        patch :vote_up, id: own_votable, format: :json
+        patch :vote_up, params: { id: own_votable, format: :json }
         json = JSON.parse(response.body)
 
         expect(json['error'])
@@ -16,7 +16,7 @@ shared_examples_for 'Votable' do
       render_views
 
       it 'render json' do
-        patch :vote_up, id: votable, format: :json
+        patch :vote_up, params: { id: votable, format: :json }
         json = JSON.parse(response.body)
 
         expect(json['id']).to eql(votable.id)
@@ -32,7 +32,7 @@ shared_examples_for 'Votable' do
 
     context 'when author' do
       it 'render json' do
-        patch :vote_down, id: own_votable, format: :json
+        patch :vote_down, params: { id: own_votable, format: :json }
         json = JSON.parse(response.body)
 
         expect(json['error'])
@@ -44,7 +44,7 @@ shared_examples_for 'Votable' do
       render_views
 
       it 'render json' do
-        patch :vote_down, id: votable, format: :json
+        patch :vote_down, params: { id: votable, format: :json }
         json = JSON.parse(response.body)
 
         expect(json['id']).to eql(votable.id)

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
-  let(:user) { create(:user) }
+  let(:user)     { create(:user) }
   let(:question) { create(:question, user: user) }
 
   describe 'POST #create' do
@@ -10,7 +10,11 @@ RSpec.describe CommentsController, type: :controller do
     context 'with valid attributes' do
       let(:channel) { "/questions/#{question.id}/comments" }
       let(:request) do
-        post :create, question_id: question, comment: attributes_for(:comment), format: :js
+        post :create, params: {
+          question_id: question,
+          comment: attributes_for(:comment),
+          format: :js
+        }
       end
 
       it 'saves the new comment in the database' do
@@ -31,7 +35,11 @@ RSpec.describe CommentsController, type: :controller do
 
     context 'with invalid attributes' do
       let(:request) do
-        post :create, question_id: question, comment: attributes_for(:invalid_comment), format: :js
+        post :create, params: {
+          question_id: question,
+          comment: attributes_for(:invalid_comment),
+          format: :js
+        }
       end
 
       it 'does not save the comment in the database' do

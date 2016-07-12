@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   before_action :set_subscription, only: [:show, :update]
   after_action :publish_question, only: :create
 
-  impressionist actions: [:show]
+  # impressionist actions: [:show]
 
   include Voted
 
@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   respond_to :js, only: :update
 
   def index
-    respond_with @questions = Question.page(params[:page]).per(15)
+    respond_with @questions = Question.newest.page(params[:page]).per(15)
   end
 
   def show
@@ -58,6 +58,6 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question)
-      .permit(:title, :body, :tag_list, attachments_attributes: [:id, :file, :_destroy])
+          .permit(:title, :body, :tag_list, attachments_attributes: [:id, :file, :_destroy])
   end
 end

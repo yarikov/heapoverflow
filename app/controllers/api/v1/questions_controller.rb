@@ -2,11 +2,11 @@ class Api::V1::QuestionsController < Api::V1::BaseController
   authorize_resource
 
   def index
-    respond_with Question.all, each_serializer: QuestionsSerializer
+    respond_with Question.newest, each_serializer: QuestionsSerializer
   end
 
   def show
-    respond_with Question.find(params[:id])
+    respond_with Question.find(params[:id]), include: '**'
   end
 
   def create
