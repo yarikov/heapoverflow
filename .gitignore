@@ -15,6 +15,7 @@
 config/database.yml
 config/private_pub.yml
 config/thinking_sphinx.yml
+config/storage.yml
 public/uploads/
 
 # Rubymine

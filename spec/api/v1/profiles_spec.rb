@@ -16,7 +16,7 @@ describe 'Profile API' do
       end
 
       it 'returns 200 status' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       %w(id full_name created_at updated_at admin).each do |attr|
@@ -56,7 +56,7 @@ describe 'Profile API' do
       end
 
       it 'returns 200 status' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it 'does not contain current_resource_owner' do

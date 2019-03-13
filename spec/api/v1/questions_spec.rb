@@ -17,7 +17,7 @@ describe 'Questions API' do
       end
 
       it 'returns 200 status code' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it 'returns list of questions' do
@@ -67,7 +67,7 @@ describe 'Questions API' do
       end
 
       it 'returns 200 status code' do
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it 'returns list of questions' do
@@ -178,7 +178,7 @@ describe 'Questions API' do
 
         it 'returns 201 status code' do
           request
-          expect(response).to be_success
+          expect(response).to be_successful
         end
 
         it 'saves the new question in the database' do

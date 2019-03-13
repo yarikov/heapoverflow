@@ -1,11 +1,11 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_question, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_question, only: %i[show update destroy]
   before_action :new_answer, only: :show
-  before_action :set_subscription, only: [:show, :update]
+  before_action :set_subscription, only: %i[show update]
   after_action :publish_question, only: :create
 
-  # impressionist actions: [:show]
+  impressionist actions: [:show]
 
   include Voted
 
@@ -58,6 +58,6 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question)
-          .permit(:title, :body, :tag_list, attachments_attributes: [:id, :file, :_destroy])
+          .permit(:title, :body, :tag_list, attachments_attributes: %i[id file _destroy])
   end
 end

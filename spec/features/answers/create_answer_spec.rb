@@ -35,7 +35,7 @@ feature 'Сreate an answer', '
 
     click_on 'Post Your Answer'
 
-    expect(page).to have_content "Body can't be blank"
+    expect(page).to have_content "can't be blank"
   end
 
   scenario 'Unauthenticated user creates an answer' do

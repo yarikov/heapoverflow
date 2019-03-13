@@ -10,7 +10,7 @@ feature 'Delete the answer' do
     sign_in(author)
 
     visit question_path(question)
-    within('.answers') { click_on 'delete' }
+    accept_alert { within('.answers') { click_on 'delete' } }
 
     expect(page).to have_content 'Answer was successfully destroyed'
     expect(page).to_not have_content answer.body

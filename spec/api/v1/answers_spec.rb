@@ -21,7 +21,7 @@ describe 'Answers API' do
 
         it 'returns 201 status code' do
           request
-          expect(response).to be_success
+          expect(response).to be_successful
         end
 
         it 'creates new answer for user' do
