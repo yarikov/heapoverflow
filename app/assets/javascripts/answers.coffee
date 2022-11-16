@@ -1,6 +1,6 @@
 ready = ->
-  questionId = $('.question').data('questionId')
-  userId = $('.question').data('userId')
+  questionId = $('.question').data('question_id')
+  userId = $('.question').data('user_id')
 
   PrivatePub.subscribe "/questions/#{questionId}/answers", (data, channel) ->
     answer = $.parseJSON(data['answer'])

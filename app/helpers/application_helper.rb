@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def subscribe_to(channel)
+    subscription = PrivatePub.subscription(channel: channel, server: ENV['FAYE_PUBLIC_URL'])
+    content_tag 'script', type: 'text/javascript' do
+      raw("PrivatePub.sign(#{subscription.to_json});")
+    end
+  end
+
   def bootstrap_class_for(flash_type)
     { success: 'alert-success',
       error: 'alert-danger',
