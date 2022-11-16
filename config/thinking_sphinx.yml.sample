@@ -1,5 +1,9 @@
 development:
   mysql41: 7777
+  address: <%= ENV.fetch('SPHINX_HOST') %>
+  pid_file: "<%= Rails.root %>/tmp/pids/searchd.development.pid"
 
 test:
   mysql41: 8888
+  address: <%= ENV.fetch('SPHINX_HOST') %>
+  pid_file: "<%= Rails.root %>/tmp/pids/searchd.test.pid"

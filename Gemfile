@@ -34,7 +34,7 @@ gem 'sass-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sidekiq'
 gem 'simple_form'
-gem 'sinatra', github: 'sinatra', require: false
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea', require: false
 gem 'skim'
 gem 'slim-rails'
 gem 'therubyracer'
@@ -43,6 +43,7 @@ gem 'thinking-sphinx'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'whenever'
+gem 'mimemagic', '~> 0.3.9'
 
 group :development, :test do
   gem 'database_cleaner'

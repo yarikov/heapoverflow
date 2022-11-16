@@ -1,8 +1,18 @@
 require 'rails_helper'
 
-RSpec.configure do |config|
-  Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.register_driver :selenium_chrome_remote do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome, url: 'http://chrome:4444')
+end
 
+Capybara.server_port = 31337
+Capybara.server_host = '0.0.0.0'
+Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
+Capybara.javascript_driver = :selenium_chrome_remote
+
+DatabaseCleaner.allow_production = true
+DatabaseCleaner.allow_remote_database_url = true
+
+RSpec.configure do |config|
   config.include FeatureMacros, type: :feature
 
   config.use_transactional_fixtures = false
