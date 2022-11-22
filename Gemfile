@@ -35,7 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sidekiq'
 gem 'simple_form'
 gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea', require: false
-gem 'skim'
+gem 'skim', '~> 0.11.0'
 gem 'slim-rails'
 gem 'therubyracer'
 gem 'thin'
