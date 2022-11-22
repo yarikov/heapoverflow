@@ -1,10 +1,10 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email)     { |n| "user#{n}@test.com" }
     sequence(:full_name) { |n| "Vasya#{n} Pupkin" }
-    password '12345678'
-    password_confirmation '12345678'
-    confirmed_at Time.zone.now
+    password { '12345678' }
+    password_confirmation { '12345678' }
+    confirmed_at { Time.zone.now }
 
     factory :user_with_profile do
       avatar { File.open("#{Rails.root}/app/assets/images/avatar.png") }
