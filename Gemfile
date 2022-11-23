@@ -4,7 +4,7 @@ gem 'active_model_serializers'
 gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on'
 gem 'bootsnap', require: false
 gem 'bootstrap-sass', '~> 3.3.5'
-gem 'cancancan', '~> 2.3.0'
+gem 'cancancan', '~> 3.4.0'
 gem 'carrierwave'
 gem 'cocoon'
 gem 'coffee-rails'
@@ -26,15 +26,14 @@ gem 'pg', '~> 1.1.4'
 gem 'private_pub'
 gem 'puma', '~> 3.0'
 gem 'pygments.rb'
-gem 'rails', '~> 6.1.7'
+gem 'rails', '~> 7.0.4'
 gem 'redcarpet'
 gem 'remotipart'
 gem 'responders'
 gem 'sass-rails', '~> 5.1.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sidekiq'
 gem 'simple_form'
-gem 'sinatra', git: 'https://github.com/sinatra/sinatra.git', ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea', require: false
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra', ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea', require: false
 gem 'skim', '~> 0.11.0'
 gem 'slim-rails'
 gem 'thin'
@@ -70,7 +69,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 4.2.0'
 end
 
 group :test do

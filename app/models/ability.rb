@@ -15,7 +15,6 @@ class Ability
 
   def admin_abilities
     can :manage, :all
-    cannot :destroy, nil
   end
 
   def user_abilities

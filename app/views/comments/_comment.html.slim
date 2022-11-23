@@ -1,7 +1,7 @@
 .comment
   .comment-body
      span #{comment.body} – #{link_to comment.user.full_name, comment.user}
-     span.commented  #{comment.created_at.to_s(:my_short)}
+     span.commented  #{comment.created_at.to_fs(:my_short)}
   .comment-buttons
     - if can?(:destroy, comment)
       = link_to '', '', class: 'glyphicon glyphicon-pencil show-edit-form'

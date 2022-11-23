@@ -8,7 +8,7 @@ shared_examples_for 'Votable' do
         json = JSON.parse(response.body)
 
         expect(json['error'])
-          .to eql "The author of the #{own_votable.class.to_s.underscore} cannot vote up"
+          .to eql "The author of the #{own_votable.class} cannot vote"
       end
     end
 
@@ -36,7 +36,7 @@ shared_examples_for 'Votable' do
         json = JSON.parse(response.body)
 
         expect(json['error'])
-          .to eql "The author of the #{own_votable.class.to_s.underscore} cannot vote down"
+          .to eql "The author of the #{own_votable.class} cannot vote"
       end
     end
 

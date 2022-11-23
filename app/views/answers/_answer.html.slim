@@ -26,7 +26,7 @@
             = link_to 'delete', answer, data: { confirm: 'Вы уверены' }, method: :delete, remote: true
 
         .user-info
-          span answered #{answer.created_at.to_s(:my_short)}
+          span answered #{answer.created_at.to_fs(:my_short)}
           = link_to answer.user do
             = image_tag answer.user.avatar.small.url
           = link_to answer.user.full_name, answer.user
