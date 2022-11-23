@@ -1,11 +1,7 @@
 <% if @answer.errors.present? %>
   $('.new-answer form').replaceWith("<%= j render 'answers/form', answer: @answer %>");
 <% else %>
-  <% if remotipart_submitted? %>
-    $('.answers').append("<%= j "#{render @answer}" %>");
-  <% else %>
-    $('.answers').append('<%= j render @answer %>');
-  <% end %>
+  $('.answers').append('<%= j render @answer %>');
   $('.new-answer #answer_body').val('');
   $('.nested-fields').remove();
 <% end %>

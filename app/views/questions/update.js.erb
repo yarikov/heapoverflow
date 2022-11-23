@@ -2,10 +2,6 @@
   $('form.edit_question').replaceWith("<%= j render 'form', question: @question %>");
   $('form.edit_question').show();
 <% else %>
-  <% if remotipart_submitted? %>
-    $('.question').replaceWith("<%= j "#{render @question }" %>");
-  <% else %>
-    $('.question').replaceWith("<%= j render @question %>");
-  <% end %>
+  $('.question').replaceWith("<%= j render @question %>");
 <% end %>
 $('.flash').replaceWith('<%= j render 'layouts/flash' %>');

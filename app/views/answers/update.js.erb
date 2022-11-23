@@ -2,10 +2,6 @@
   $('<%= ".answer-#{@answer.id}" %> form.edit_answer').replaceWith("<%= j render 'answers/form', answer: @answer %>");
   $('<%= ".answer-#{@answer.id}" %> form.edit_answer').show();
 <% else %>
-  <% if remotipart_submitted? %>
-    $('<%= ".answer-#{@answer.id}" %>').replaceWith("<%= j "#{render @answer}" %>");
-  <% else %>
-    $('<%= ".answer-#{@answer.id}" %>').replaceWith('<%= j render @answer %>');
-  <% end %>
+  $('<%= ".answer-#{@answer.id}" %>').replaceWith('<%= j render @answer %>');
 <% end %>
 $('.flash').replaceWith('<%= j render 'layouts/flash' %>');
