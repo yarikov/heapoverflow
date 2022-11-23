@@ -6,8 +6,8 @@ default: &default
 
 development:
   <<: *default
-  database: qna_development
+  database: heapoverflow_development
 
 test:
   <<: *default
-  database: qna_test
+  database: heapoverflow_test

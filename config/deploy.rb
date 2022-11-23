@@ -1,11 +1,11 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'qna'
-set :repo_url, 'git@github.com:yarikov/qna.git'
+set :application, 'heapoverflow'
+set :repo_url, 'git@github.com:yarikov/heapoverflow.git'
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/deployer/qna'
+set :deploy_to, '/home/deployer/heapoverflow'
 set :deploy_user, 'deployer'
 
 # Default value for :linked_files is []

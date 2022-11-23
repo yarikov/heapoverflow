@@ -1,10 +1,10 @@
 # paths
-app_path = '/home/deployer/qna'
+app_path = '/home/deployer/heapoverflow'
 working_directory "#{app_path}/current"
 pid               "#{app_path}/current/tmp/pids/unicorn.pid"
 
 # listen
-listen '/tmp/unicorn.qna.sock', backlog: 64
+listen '/tmp/unicorn.heapoverflow.sock', backlog: 64
 
 # logging
 stderr_path 'log/unicorn.stderr.log'

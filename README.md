@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/yarikov/qna.svg?branch=master)](https://travis-ci.org/yarikov/qna)
-# QnA
+# Heap Overflow
 
-This is my stackoverflow clone app.
+This is my [Stack Overflow](https://stackoverflow.com/) clone app.
