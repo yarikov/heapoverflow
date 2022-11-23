@@ -31,7 +31,7 @@
           = link_to 'delete', @question, data: { confirm: 'Вы уверены' }, method: :delete
 
       .user-info
-        span asked #{@question.created_at.to_s(:my_short)}
+        span asked #{@question.created_at.to_fs(:my_short)}
         = link_to @question.user do
           = image_tag @question.user.avatar.small.url
         = link_to @question.user.full_name, @question.user

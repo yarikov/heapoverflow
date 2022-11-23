@@ -4,6 +4,6 @@ en:
     manage:
       all: "Not authorized to %{action} %{subject}"
     vote_up:
-      all: "The author of the %{subject} cannot vote up"
+      all: "The author of the %{subject} cannot vote"
     vote_down:
-      all: "The author of the %{subject} cannot vote down"
+      all: "The author of the %{subject} cannot vote"

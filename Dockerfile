@@ -1,4 +1,4 @@
-FROM ruby:2.6.10
+FROM ruby:3.1.2
 
 ENV NODE_VERSION 4.1.2
 ENV SPHINX_VERSION 2.2.11
@@ -20,6 +20,6 @@ RUN curl -SLO --progress-bar "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE
 COPY Gemfile* /usr/src/app/
 WORKDIR /usr/src/app
 
-RUN gem install bundler:1.17.3
+RUN gem install bundler:2.3.26
 
 COPY . /usr/src/app
