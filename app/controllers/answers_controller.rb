@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: [:update, :destroy, :best]
   before_action :set_question, only: [:create, :update, :best]
-  after_action :publish_answer, only: :create
+  after_action :broadcast_answer, only: :create
 
   include Voted
 
@@ -38,10 +38,15 @@ class AnswersController < ApplicationController
     @question ||= Question.find(params[:question_id])
   end
 
-  def publish_answer
-    PrivatePub.publish_to "/questions/#{@question.id}/answers",
-                          answer: @answer.to_json,
-                          vote_count: @answer.vote_count.to_json if @answer.valid?
+  def broadcast_answer
+    return unless @answer.valid?
+
+    ActionCable.server.broadcast("/questions/#{@question.id}/answers",
+      {
+        answer: @answer.to_json,
+        vote_count: @answer.vote_count.to_json
+      }
+    )
   end
 
   def answer_params

@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_comment, only: [:update, :destroy]
   before_action :set_commentable, only: :create
-  after_action :publish_comment, only: :create
+  after_action :broadcast_comment, only: :create
 
   respond_to :js, only: :create
   respond_to :json, only: [:update, :destroy]
@@ -35,8 +35,8 @@ class CommentsController < ApplicationController
     @commentable = Answer.find(params[:answer_id]) if params[:answer_id]
   end
 
-  def publish_comment
-    PrivatePub.publish_to comment_path, comment: @comment.to_json if @comment.valid?
+  def broadcast_comment
+    ActionCable.server.broadcast(comment_path, { comment: @comment.to_json }) if @comment.valid?
   end
 
   def comment_params

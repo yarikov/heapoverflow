@@ -10,7 +10,6 @@ services:
       - '3000:3000'
     environment:
       DATABASE_URL: postgres://postgres:some-long-secure-password@postgres:5432
-      FAYE_PUBLIC_URL: http://localhost:9292/faye
       REDIS_URL: redis://redis:6379
       ELASTICSEARCH_URL: http://elasticsearch:9200
     volumes:
@@ -41,16 +40,6 @@ services:
       - redis
       - elasticsearch
     command: bundle exec sidekiq
-
-  private_pub:
-    build: .
-    image: heapoverflow:2.0.1
-    ports:
-      - '9292:9292'
-    volumes:
-      - .:/usr/src/app
-      - bundle:/usr/local/bundle
-    command: rackup private_pub.ru -s thin -E production -o 0.0.0.0
 
   postgres:
     image: postgres:9.6

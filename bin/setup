@@ -22,7 +22,6 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Copying sample files =="
   FileUtils.cp 'config/database.yml.sample', 'config/database.yml' unless File.exist?('config/database.yml')
-  FileUtils.cp 'config/private_pub.yml.sample', 'config/private_pub.yml' unless File.exist?('config/private_pub.yml')
   FileUtils.cp 'config/storage.yml.sample', 'config/storage.yml' unless File.exist?('config/storage.yml')
 
   puts "\n== Preparing database =="

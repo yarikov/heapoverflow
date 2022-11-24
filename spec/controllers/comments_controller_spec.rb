@@ -30,7 +30,7 @@ RSpec.describe CommentsController, type: :controller do
         expect(response).to render_template :create
       end
 
-      it_behaves_like 'Publishable'
+      it_behaves_like 'Broadcastable'
     end
 
     context 'with invalid attributes' do

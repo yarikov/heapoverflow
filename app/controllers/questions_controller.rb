@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i[show update destroy]
   before_action :new_answer, only: :show
   before_action :set_subscription, only: %i[show update]
-  after_action :publish_question, only: :create
+  after_action :broadcast_question, only: :create
 
   impressionist actions: [:show]
 
@@ -52,8 +52,8 @@ class QuestionsController < ApplicationController
     @answer = @question.answers.new
   end
 
-  def publish_question
-    PrivatePub.publish_to '/questions', question: @question.to_json if @question.valid?
+  def broadcast_question
+    ActionCable.server.broadcast('/questions', { question: @question.to_json }) if @question.valid?
   end
 
   def question_params

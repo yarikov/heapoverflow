@@ -2,17 +2,19 @@ ready = ->
   questionId = $('.question').data('question_id')
   userId = $('.question').data('user_id')
 
-  PrivatePub.subscribe "/questions", (data, channel) ->
-    question = $.parseJSON(data['question'])
-    $('.content').append(JST['templates/question'](question: question))
+  App.cable.subscriptions.create { channel: 'QuestionsChannel' },
+    received: (data) ->
+      question = $.parseJSON(data['question'])
+      $('.content').append(JST['templates/question'](question: question))
 
-  PrivatePub.subscribe "/questions/#{questionId}/comments", (data, channel) ->
-    comment = $.parseJSON(data['comment'])
-    return if userId == comment.user_id
-    if comment.commentable_type == 'Question'
-      $('.question .comments').append("<div class='comment'>#{comment.body}</div>")
-    else
-      $(".answer-#{comment.commentable_id} .comments").append("<div class='comment'>#{comment.body}</div>")
+  App.cable.subscriptions.create { channel: 'CommentsChannel', question_id: questionId },
+    received: (data) ->
+      comment = $.parseJSON(data['comment'])
+      return if userId == comment.user_id
+      if comment.commentable_type == 'Question'
+        $('.question .comments').append("<div class='comment'>#{comment.body}</div>")
+      else
+        $(".answer-#{comment.commentable_id} .comments").append("<div class='comment'>#{comment.body}</div>")
 
 voteQuestion = (e, data, status, xhr) ->
   question = $.parseJSON(xhr.responseText)

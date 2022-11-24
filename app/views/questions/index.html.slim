@@ -30,5 +30,3 @@
               p asked #{time_ago_in_words(question.created_at)} ago #{link_to question.user.full_name, question.user}
 
       = paginate @questions
-
-= subscribe_to "/questions"

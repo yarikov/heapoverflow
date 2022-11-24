@@ -15,6 +15,3 @@
           - if can?(:create, Answer)
             h4 Your Answer
             == render 'answers/form', answer: @answer
-
-= subscribe_to "/questions/#{@question.id}/answers"
-= subscribe_to "/questions/#{@question.id}/comments"

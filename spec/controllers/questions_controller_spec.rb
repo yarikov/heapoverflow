@@ -71,7 +71,7 @@ RSpec.describe QuestionsController, type: :controller do
         expect(response).to redirect_to question_path(assigns(:question))
       end
 
-      it_behaves_like 'Publishable'
+      it_behaves_like 'Broadcastable'
     end
 
     context 'with invalid attributes' do

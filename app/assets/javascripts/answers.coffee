@@ -2,11 +2,12 @@ ready = ->
   questionId = $('.question').data('question_id')
   userId = $('.question').data('user_id')
 
-  PrivatePub.subscribe "/questions/#{questionId}/answers", (data, channel) ->
-    answer = $.parseJSON(data['answer'])
-    vote_count = $.parseJSON(data['vote_count'])
-    return if userId == answer.user_id
-    $('.answers').append(JST['templates/answer'](answer: answer, vote_count: vote_count))
+  App.cable.subscriptions.create { channel: 'AnswersChannel', question_id: questionId },
+    received: (data) ->
+      answer = $.parseJSON(data['answer'])
+      vote_count = $.parseJSON(data['vote_count'])
+      return if userId == answer.user_id
+      $('.answers').append(JST['templates/answer'](answer: answer, vote_count: vote_count))
 
 voteAnswer = (e, data, status, xhr) ->
   answer = $.parseJSON(xhr.responseText)
