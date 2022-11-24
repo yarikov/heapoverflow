@@ -1,14 +1,12 @@
-require_relative '../sphinx_helper'
+require_relative '../feature_helper'
 
-feature 'Search', '
-' do
+feature 'Search' do
   given!(:user)     { create(:user) }
   given!(:question) { create(:question, body: 'question body', user: user) }
   given!(:answer)   { create(:answer, body: 'answer body', question: question, user: user) }
   given!(:comment)  { create(:comment, body: 'comment body', commentable: question, user: user) }
 
   before do
-    index
     visit search_path
   end
 

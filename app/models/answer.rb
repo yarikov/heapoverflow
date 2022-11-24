@@ -1,6 +1,8 @@
 class Answer < ApplicationRecord
   include HasVotes
 
+  searchkick searchable: %i[body]
+
   belongs_to :question
   belongs_to :user
 

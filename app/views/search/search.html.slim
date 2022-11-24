@@ -7,29 +7,28 @@
           .col-xs-9
             = search_field_tag :query, params[:query], placeholder: 'Search...', class: 'form-control'
           .col-xs-2
-            = select_tag :resource, options_for_select(Search::RESOURCES, params[:resource]), prompt: 'Anything', class: 'form-control'
+            = select_tag :resource, options_for_select(Searcher::MODELS, params[:resource]), prompt: 'Anything', class: 'form-control'
           .col-xs-1
             = submit_tag 'Search', class: 'btn btn-primary'
       .row
         .col-xs-12
           .result
-            - if @resources
-              - @resources.each do |resource|
-                - if resource.is_a?(Question)
-                  .question-summary
-                    .summary
-                      = link_to resource.title, resource
-                    .search-body
-                      = resource.body
-                - elsif resource.is_a?(Answer)
-                  .question-summary
-                    .summary
-                      = link_to resource.question.title, resource.question
-                    .search-body
-                      = resource.body
-                - elsif resource.is_a?(Comment)
-                  p = resource.body
-                - elsif resource.is_a?(User)
-                  p = link_to resource.full_name, resource
+            - @resources.each do |resource|
+              - if resource.is_a?(Question)
+                .question-summary
+                  .summary
+                    = link_to resource.title, resource
+                  .search-body
+                    = resource.body
+              - elsif resource.is_a?(Answer)
+                .question-summary
+                  .summary
+                    = link_to resource.question.title, resource.question
+                  .search-body
+                    = resource.body
+              - elsif resource.is_a?(Comment)
+                p = resource.body
+              - elsif resource.is_a?(User)
+                p = link_to resource.full_name, resource
 
-              = paginate @resources
+            = paginate @resources if @resources.any?

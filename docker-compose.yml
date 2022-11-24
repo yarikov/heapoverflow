@@ -3,14 +3,16 @@ version: '3.9'
 services:
   web:
     build: .
-    image: heapoverflow:2.0.0
+    image: heapoverflow:2.0.1
+    stdin_open: true
+    tty: true
     ports:
       - '3000:3000'
     environment:
       DATABASE_URL: postgres://postgres:some-long-secure-password@postgres:5432
       FAYE_PUBLIC_URL: http://localhost:9292/faye
       REDIS_URL: redis://redis:6379
-      SPHINX_HOST: '0.0.0.0'
+      ELASTICSEARCH_URL: http://elasticsearch:9200
     volumes:
       - .:/usr/src/app
       - bundle:/usr/local/bundle
@@ -19,25 +21,30 @@ services:
     depends_on:
       - postgres
       - redis
-    command: /bin/bash -c "bundle exec rails ts:start; bundle exec rails server -b 0.0.0.0"
+      - elasticsearch
+    command: bundle exec rails server -b 0.0.0.0
 
   sidekiq:
     build: .
-    image: heapoverflow:2.0.0
+    image: heapoverflow:2.0.1
+    stdin_open: true
+    tty: true
     environment:
       DATABASE_URL: postgres://postgres:some-long-secure-password@postgres:5432
       REDIS_URL: redis://redis:6379
+      ELASTICSEARCH_URL: http://elasticsearch:9200
     volumes:
       - .:/usr/src/app
       - bundle:/usr/local/bundle
     depends_on:
       - postgres
       - redis
+      - elasticsearch
     command: bundle exec sidekiq
 
   private_pub:
     build: .
-    image: heapoverflow:2.0.0
+    image: heapoverflow:2.0.1
     ports:
       - '9292:9292'
     volumes:
@@ -56,6 +63,14 @@ services:
     image: redis
     volumes:
       - redis:/data
+
+  elasticsearch:
+    image: elasticsearch:8.5.1
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - 9200:9200
 
   chrome:
     image: seleniarm/standalone-chromium:107.0

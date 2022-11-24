@@ -1,5 +1,8 @@
 class Question < ApplicationRecord
   include HasVotes
+
+  searchkick searchable: %i[title body]
+
   is_impressionable
   acts_as_taggable
 

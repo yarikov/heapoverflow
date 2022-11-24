@@ -37,11 +37,12 @@ gem 'sinatra', git: 'https://github.com/sinatra/sinatra', ref: '6f15fba2790ebdf4
 gem 'skim', '~> 0.11.0'
 gem 'slim-rails'
 gem 'thin'
-gem 'thinking-sphinx'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'whenever'
 gem 'mimemagic', '~> 0.3.9'
+gem 'searchkick'
+gem 'elasticsearch'
 
 group :development, :test do
   gem 'database_cleaner'

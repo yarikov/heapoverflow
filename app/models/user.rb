@@ -1,4 +1,12 @@
 class User < ActiveRecord::Base
+  searchkick searchable: %i[full_name]
+  mount_uploader :avatar, AvatarUploader
+  is_impressionable
+
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook, :twitter]
+
   has_many :authorizations, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
@@ -7,13 +15,6 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
 
   validates :full_name, presence: true
-
-  mount_uploader :avatar, AvatarUploader
-  is_impressionable
-
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :twitter]
 
   def self.find_for_oauth(auth)
     authorization = Authorization.find_by(provider: auth.provider, uid: auth.uid.to_s)
