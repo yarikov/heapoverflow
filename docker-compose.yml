@@ -3,7 +3,7 @@ version: '3.9'
 services:
   web:
     build: .
-    image: heapoverflow:2.0.1
+    image: heapoverflow:2.0.2
     stdin_open: true
     tty: true
     ports:
@@ -25,7 +25,7 @@ services:
 
   sidekiq:
     build: .
-    image: heapoverflow:2.0.1
+    image: heapoverflow:2.0.2
     stdin_open: true
     tty: true
     environment:

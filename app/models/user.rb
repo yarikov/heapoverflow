@@ -1,11 +1,15 @@
 class User < ActiveRecord::Base
   searchkick searchable: %i[full_name]
-  mount_uploader :avatar, AvatarUploader
   is_impressionable
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
+
+  has_one_attached :avatar do |attachable|
+    attachable.variant :medium, resize_to_fill: [300, 300]
+    attachable.variant :thumb, resize_to_fill: [100, 100]
+  end
 
   has_many :authorizations, dependent: :destroy
   has_many :questions, dependent: :destroy
@@ -14,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
+  validates :avatar, content_type: ['image/png', 'image/jpg', 'image/jpeg']
   validates :full_name, presence: true
 
   def self.find_for_oauth(auth)
@@ -22,7 +27,7 @@ class User < ActiveRecord::Base
     return new unless auth.info.email
     user = find_or_create_by!(email: auth.info.email) do |u|
       u.full_name = auth.info.name
-      u.remote_avatar_url = auth.info.image
+      # u.remote_avatar_url = auth.info.image
       u.password = Devise.friendly_token[0, 20]
       u.skip_confirmation! if auth.credentials
     end

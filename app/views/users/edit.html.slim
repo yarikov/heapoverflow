@@ -5,7 +5,7 @@
       .row
         .col-xs-3
           .gravatar-wrapper
-            = image_tag @user.avatar_url
+            = image_tag avatar_path(@user, :medium)
             a#change-picture href='#' Change picture
           = simple_form_for @user, remote: true, data: { type: :json }, html: { id: 'update-avatar' } do |f|
             = f.input :avatar, label: false

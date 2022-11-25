@@ -7,7 +7,7 @@ FactoryBot.define do
     confirmed_at { Time.zone.now }
 
     factory :user_with_profile do
-      avatar { File.open("#{Rails.root}/app/assets/images/avatar.png") }
+      avatar { Rack::Test::UploadedFile.new("#{Rails.root}/app/assets/images/avatar.png", 'image/png') }
       sequence(:description) { |n| "Description #{n}" }
       sequence(:location)    { |n| "Pupkino #{n}" }
       sequence(:website)     { |n| "http://vasya#{n}.com" }

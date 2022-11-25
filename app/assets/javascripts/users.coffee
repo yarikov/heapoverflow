@@ -7,6 +7,7 @@ ready = ->
 
   $('#update-avatar').on "ajax:success", (e, data, status, xhr)->
     @user = $.parseJSON(xhr.responseText).user
-    $('.gravatar-wrapper img').attr('src', @user.avatar.url)
+    $('.gravatar-wrapper img').attr('src', @user.avatar_path)
+    $('.dropdown img').attr('src', @user.avatar_path)
 
 $(document).ready(ready)

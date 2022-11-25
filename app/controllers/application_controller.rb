@@ -1,6 +1,9 @@
 require 'application_responder'
 
 class ApplicationController < ActionController::Base
+  include ActiveStorage::SetCurrent
+  serialization_scope :view_context
+
   self.responder = ApplicationResponder
   respond_to :html
 

@@ -6,7 +6,7 @@ h4 Users
         .user-info
           .user-gravatar
             = link_to user do
-              = image_tag user.avatar.small.url
+              = image_tag avatar_path(user, :thumb)
           .user-details
             = link_to user.full_name, user
             span = user.location

@@ -25,7 +25,7 @@
         .user-info
           span answered #{answer.created_at.to_fs(:my_short)}
           = link_to answer.user do
-            = image_tag answer.user.avatar.small.url
+            = image_tag avatar_path(answer.user, :thumb)
           = link_to answer.user.full_name, answer.user
 
         .clearfix

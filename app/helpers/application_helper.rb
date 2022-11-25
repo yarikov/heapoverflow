@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def avatar_path(user, variant)
+    if user.avatar.attached?
+      rails_representation_path(user.avatar.variant(variant))
+    else
+      asset_path("#{variant}_avatar.png")
+    end
+  end
+
   def bootstrap_class_for(flash_type)
     { success: 'alert-success',
       error: 'alert-danger',

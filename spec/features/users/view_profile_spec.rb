@@ -7,7 +7,7 @@ feature 'View profile' do
   scenario 'Any users can view profile' do
     visit user_path(user)
 
-    expect(page).to have_css("img[src*='#{user.avatar.url}']")
+    expect(page).to have_css("img[src*='#{avatar_path(user, :medium)}']")
     expect(page).to have_content user.full_name
     expect(page).to have_content user.description
     expect(page).to have_link user.website

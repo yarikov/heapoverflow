@@ -30,7 +30,7 @@
       .user-info
         span asked #{@question.created_at.to_fs(:my_short)}
         = link_to @question.user do
-          = image_tag @question.user.avatar.small.url
+          = image_tag avatar_path(@question.user, :thumb)
         = link_to @question.user.full_name, @question.user
       .clearfix
 

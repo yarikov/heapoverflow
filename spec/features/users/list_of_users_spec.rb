@@ -9,7 +9,7 @@ feature 'The list of users' do
     click_on 'Users'
 
     users.each do |user|
-      expect(page).to have_css("img[src*='#{user.avatar.small.url}']")
+      expect(page).to have_css("img[src*='#{avatar_path(user, :thumb)}']")
       expect(page).to have_link user.full_name
     end
   end
