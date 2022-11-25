@@ -40,6 +40,7 @@ gem 'whenever'
 gem 'mimemagic', '~> 0.3.9'
 gem 'searchkick'
 gem 'elasticsearch'
+gem 'jsbundling-rails', '~> 1.0'
 
 group :development, :test do
   gem 'database_cleaner'
