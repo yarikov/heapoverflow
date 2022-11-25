@@ -5,7 +5,7 @@ feature 'Add cooment to question' do
   given!(:question) { create(:question, user: user) }
 
   scenario 'Authenticated user add comment to question', js: true do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     click_on 'Добавить комментарий'

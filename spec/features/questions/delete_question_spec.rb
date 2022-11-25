@@ -5,7 +5,7 @@ feature 'Delete the question' do
   given(:question) { create(:question, user: user) }
 
   scenario 'User can delete own question' do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
     click_on 'delete'
 

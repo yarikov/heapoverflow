@@ -18,14 +18,14 @@ feature 'View profile' do
   end
 
   scenario 'The user sees link to edit profile' do
-    sign_in user
+    login_as user
     visit user_path(user)
 
     expect(page).to have_link 'Edit Profile'
   end
 
   scenario 'Other user does not see link to edit profile' do
-    sign_in other
+    login_as other
     visit user_path(user)
 
     within('.profile') { expect(page).to_not have_link 'Edit Profile' }

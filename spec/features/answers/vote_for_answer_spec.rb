@@ -16,7 +16,7 @@ feature 'Voting for answer' do
 
   context 'Author' do
     before do
-      sign_in(author)
+      login_as(author)
       visit question_path(question)
     end
 
@@ -39,7 +39,7 @@ feature 'Voting for answer' do
 
   context 'Authenticated user' do
     before do
-      sign_in(user)
+      login_as(user)
       visit question_path(question)
     end
 

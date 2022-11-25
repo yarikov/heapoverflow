@@ -7,7 +7,7 @@ feature 'Delete the answer' do
   given!(:answer) { create(:answer, question: question, user: author) }
 
   scenario 'Author can delete own answer', js: true do
-    sign_in(author)
+    login_as(author)
 
     visit question_path(question)
     accept_alert { within('.answers') { click_on 'delete' } }
@@ -18,7 +18,7 @@ feature 'Delete the answer' do
   end
 
   scenario "Authenticated user try to delete other user's answer" do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     within('.answers') { expect(page).to_not have_content 'delete' }

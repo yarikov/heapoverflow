@@ -6,7 +6,7 @@ feature 'Add cooment to answer' do
   given!(:answer) { create(:answer, question: question, user: user) }
 
   scenario 'Authenticated user add comment to answer', js: true do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     within '.answers' do

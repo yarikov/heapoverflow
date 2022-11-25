@@ -9,7 +9,7 @@ feature 'Сreate an answer', '
   given!(:question) { create(:question, user: user) }
 
   scenario 'Authenticated user creates an answer', js: true do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     fill_in 'answer[body]', with: 'Answer body'
@@ -22,7 +22,7 @@ feature 'Сreate an answer', '
   end
 
   scenario 'Authenticated user creates invalid answer', js: true do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     click_on 'Post Your Answer'

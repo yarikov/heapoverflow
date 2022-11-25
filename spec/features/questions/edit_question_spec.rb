@@ -11,7 +11,7 @@ feature 'Question editing', '
 
   context 'Author' do
     before do
-      sign_in(author)
+      login_as(author)
       visit question_path(question)
     end
 
@@ -37,7 +37,7 @@ feature 'Question editing', '
   end
 
   scenario "Authenticated user try to edit other user's question" do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     within('.question') { expect(page).to_not have_link 'edit' }

@@ -7,7 +7,7 @@ feature 'Edit comment' do
   given!(:comment)  { create(:comment, commentable: question, user: user) }
 
   scenario 'User can edit the comment', js: true do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     within '.comments' do
@@ -24,7 +24,7 @@ feature 'Edit comment' do
   end
 
   scenario 'Other user cannot delete the comment' do
-    sign_in(other)
+    login_as(other)
     visit question_path(question)
 
     within('.comments') { expect(page).to_not have_css '.show-edit-form' }

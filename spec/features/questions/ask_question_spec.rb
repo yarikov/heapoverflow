@@ -4,7 +4,7 @@ feature 'Ask question' do
   given(:user) { create(:user) }
 
   scenario 'when authenticated user', js: true do
-    sign_in(user)
+    login_as(user)
     visit new_question_path
 
     fill_in 'Title', with: 'Question title'

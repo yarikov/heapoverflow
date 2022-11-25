@@ -4,7 +4,7 @@ feature 'Edit profile' do
   given!(:user) { create(:user) }
 
   scenario 'The user can edit profile' do
-    sign_in user
+    login_as user
     visit edit_user_path(user)
 
     fill_in 'Full name',   with: 'Petya Ivanov'

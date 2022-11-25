@@ -12,7 +12,7 @@ feature 'The best answer', '
   given!(:best_answer) { create(:answer, question: question, user: user, best: true) }
 
   scenario 'Author of the question choose the best answer', js: true do
-    sign_in(author)
+    login_as(author)
     visit question_path(question)
 
     within ".answer-#{answer.id}" do
@@ -26,7 +26,7 @@ feature 'The best answer', '
   end
 
   scenario 'Authenticated user try to choose the best answer' do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     expect(page).to_not have_css 'a.glyphicon.glyphicon-ok'

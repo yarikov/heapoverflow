@@ -7,7 +7,7 @@ feature 'Delete the comment' do
   given!(:comment) { create(:comment, commentable: question, user: user) }
 
   scenario 'User can delete the comment', js: true do
-    sign_in(user)
+    login_as(user)
 
     visit question_path(question)
     page.execute_script('$(".delete-comment").click()')
@@ -17,7 +17,7 @@ feature 'Delete the comment' do
   end
 
   scenario 'Other user cannot delete the comment' do
-    sign_in(other)
+    login_as(other)
     visit question_path(question)
 
     expect(page).to_not have_css '.delete-comment'

@@ -13,8 +13,6 @@ DatabaseCleaner.allow_production = true
 DatabaseCleaner.allow_remote_database_url = true
 
 RSpec.configure do |config|
-  config.include FeatureMacros, type: :feature
-
   config.use_transactional_fixtures = false
 
   config.before(:suite) do

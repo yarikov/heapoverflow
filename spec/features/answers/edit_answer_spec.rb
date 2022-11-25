@@ -12,7 +12,7 @@ feature 'Answer editing', '
 
   context 'Author' do
     before do
-      sign_in(author)
+      login_as(author)
       visit question_path(question)
     end
 
@@ -35,7 +35,7 @@ feature 'Answer editing', '
   end
 
   scenario "Authenticated user try to edit other user's answer" do
-    sign_in(user)
+    login_as(user)
     visit question_path(question)
 
     within('.answers') { expect(page).to_not have_link 'edit' }
