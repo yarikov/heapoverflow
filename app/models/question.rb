@@ -9,7 +9,6 @@ class Question < ApplicationRecord
   belongs_to :user
 
   has_many :answers, dependent: :destroy
-  has_many :attachments, as: :attachable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
@@ -18,8 +17,6 @@ class Question < ApplicationRecord
   validates :body,  length: { in: 10..3000 }
 
   after_create :author_subscribe
-
-  accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
 
   scope :created_last_24_hours, -> { where(created_at: 1.day.ago..Time.zone.now) }
 

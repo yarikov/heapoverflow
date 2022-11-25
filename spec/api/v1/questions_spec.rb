@@ -45,14 +45,10 @@ describe 'Questions API' do
     let!(:old_answer)      { create(:old_answer, question: question) }
     let!(:qst_old_comment) { create(:old_comment, commentable: question) }
     let!(:ans_old_comment) { create(:old_comment, commentable: answer) }
-    let!(:qst_old_atchmnt) { create(:old_attachment, attachable: question) }
-    let!(:ans_old_atchmnt) { create(:old_attachment, attachable: answer) }
 
     let!(:answer)          { create(:answer, question: question) }
     let!(:qst_comment)     { create(:comment, commentable: question) }
     let!(:ans_comment)     { create(:comment, commentable: answer) }
-    let!(:qst_atchmnt)     { create(:attachment, attachable: question) }
-    let!(:ans_atchmnt)     { create(:attachment, attachable: answer) }
 
     it_behaves_like 'API Authenticable'
 
@@ -70,8 +66,8 @@ describe 'Questions API' do
         expect(response).to be_successful
       end
 
-      it 'returns list of questions' do
-        expect(response.body).to have_json_size(9).at_path('question')
+      it 'returns question attributes' do
+        expect(response.body).to have_json_size(8).at_path('question')
       end
 
       %w(id title body user_id created_at updated_at).each do |attr|
@@ -94,19 +90,6 @@ describe 'Questions API' do
               .to be_json_eql(qst_comment.send(attr.to_sym).to_json)
               .at_path("question/comments/1/#{attr}")
           end
-        end
-      end
-
-      context 'attachments' do
-        it 'included in question object' do
-          expect(response.body)
-            .to have_json_size(2).at_path('question/attachments')
-        end
-
-        it 'contains url' do
-          expect(response.body)
-            .to be_json_eql(qst_atchmnt.file.url.to_json)
-            .at_path('question/attachments/0/url')
         end
       end
 
@@ -136,19 +119,6 @@ describe 'Questions API' do
                 .to be_json_eql(ans_comment.send(attr.to_sym).to_json)
                 .at_path("question/answers/1/comments/1/#{attr}")
             end
-          end
-        end
-
-        context 'attachments' do
-          it 'included in answer object' do
-            expect(response.body)
-              .to have_json_size(2).at_path('question/answers/1/attachments')
-          end
-
-          it 'contains url' do
-            expect(response.body)
-              .to be_json_eql(ans_atchmnt.file.url.to_json)
-              .at_path('question/answers/1/attachments/0/url')
           end
         end
       end
