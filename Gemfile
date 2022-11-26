@@ -4,7 +4,7 @@ gem 'active_model_serializers'
 gem 'active_storage_validations'
 gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on'
 gem 'bootsnap', require: false
-gem 'bootstrap-sass', '~> 3.3.5'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'cancancan', '~> 3.4.0'
 gem 'devise'
 gem 'doorkeeper'
