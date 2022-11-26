@@ -1,51 +1,40 @@
-.question data={question_id: "#{@question.id}", user_id: "#{current_user.id if user_signed_in?}"}
+= turbo_frame_tag @question
+  .question data={question_id: "#{@question.id}", user_id: "#{current_user.id if user_signed_in?}"}
 
-  h3 = @question.title
+    h3 = @question.title
 
-  .row
-    .col-xs-1
-      .vote
-        = vote_up_link_to vote_up_question_path, @question
-        span.vote_count = @question.vote_count
-        = vote_down_link_to vote_down_question_path, @question
+    .row
+      .col-xs-1
+        = render 'votes/vote', votable: @question
+        = render 'questions/subscription', question: @question, subscription: @subscription
 
-      .subscription
-        - if can?(:destroy, @subscription)
-          = link_to '', [@question, @subscription], method: :delete, remote: true, class: 'glyphicon glyphicon-star active'
-        - else
-          = link_to '', question_subscriptions_path(@question), method: :post, remote: true, class: 'glyphicon glyphicon-star'
-        span = question.subscriptions.count
+      .col-xs-11
+        .question-body.clearfix
+          = markdown @question.body
+          .tags
+            = raw @question.tag_list.map { |tag| link_to tag, tag_path(tag), class: 'tag' }.join(' ')
 
-    .col-xs-11
-      .question-body.clearfix
-        = markdown @question.body
-        .tags
-          = raw @question.tag_list.map { |tag| link_to tag, tag_path(tag), class: 'tag' }.join(' ')
+        div data={ controller: 'form' }
+          - if can?(:update, @question)
+            .post-menu
+              = link_to 'edit', '', data: { action: 'click->form#showForm' }
+              = link_to 'delete', @question, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
 
-      - if can?(:update, @question)
-        .post-menu
-          = link_to 'edit', '', class: 'show-edit-form'
-          = link_to 'delete', @question, data: { confirm: 'Вы уверены' }, method: :delete
+          .user-info
+            span asked #{@question.created_at.to_fs(:my_short)}
+            = link_to @question.user do
+              = image_tag avatar_path(@question.user, :thumb)
+            = link_to @question.user.full_name, @question.user
+          .clearfix
 
-      .user-info
-        span asked #{@question.created_at.to_fs(:my_short)}
-        = link_to @question.user do
-          = image_tag avatar_path(@question.user, :thumb)
-        = link_to @question.user.full_name, @question.user
-      .clearfix
+          == render 'form' if can?(:update, @question)
 
-      == render 'form' if can?(:update, @question)
+        .comments
+          = turbo_frame_tag "#{dom_id(@question)}_comments"
+            == render @question.comments
 
-      .comments
-        == render @question.comments
-
-      .new-comment
-        - if can?(:create, Comment)
-          = link_to 'add a comment', '', class: 'new-comment-link'
-
-          = form_for [@question, Comment.new], remote: true do |f|
-            .form-group
-              = f.text_area :body, class: 'form-control'
-            .buttons
-              = f.submit 'Add', class: 'btn btn-primary'
-              = link_to 'Close', '', class: 'btn btn-default close-form'
+        .new-comment
+          - if can?(:create, Comment)
+            div data={ controller: 'form' }
+              = link_to 'add a comment', '', class: 'new-comment-link', data: { action: 'click->form#showForm' }
+              = render 'comments/new', commentable: @question, comment: Comment.new

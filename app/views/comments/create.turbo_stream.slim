@@ -1,0 +1,4 @@
+= turbo_stream.append "#{dom_id(@commentable)}_comments"
+  = render 'comments/comment', comment: @comment
+= turbo_stream.replace "#{dom_id(@commentable)}_new_comment"
+  = render 'comments/new', commentable: @commentable, comment: Comment.new

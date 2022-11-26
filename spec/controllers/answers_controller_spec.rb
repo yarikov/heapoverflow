@@ -1,14 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe AnswersController, type: :controller do
+RSpec.xdescribe AnswersController, type: :controller do
   let(:user)        { create(:user) }
   let(:question)    { create(:question, user: user) }
   let(:answer)      { create(:answer, question: question, user: user) }
 
   let(:own_votable) { create(:answer, question: question, user: @user) }
   let(:votable)     { create(:answer, question: question, user: user) }
-
-  it_behaves_like 'Votable'
 
   describe 'POST #create' do
     sign_in_user

@@ -12,7 +12,6 @@ feature 'Delete the answer' do
     visit question_path(question)
     accept_alert { within('.answers') { click_on 'delete' } }
 
-    expect(page).to have_content 'Answer was successfully destroyed'
     expect(page).to_not have_content answer.body
     expect(current_path).to eq question_path(question)
   end

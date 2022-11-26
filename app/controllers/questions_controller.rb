@@ -7,11 +7,7 @@ class QuestionsController < ApplicationController
 
   impressionist actions: [:show]
 
-  include Voted
-
   authorize_resource
-
-  respond_to :js, only: :update
 
   def index
     respond_with @questions = Question.newest.page(params[:page]).per(15)
@@ -26,12 +22,21 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    respond_with @question = current_user.questions.create(question_params)
+    @question = current_user.questions.new(question_params)
+
+    if @question.save
+      redirect_to question_url(@question)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
-    @question.update(question_params)
-    respond_with @question
+    if @question.update(question_params)
+      render :update
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

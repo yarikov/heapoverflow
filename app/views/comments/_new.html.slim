@@ -1,0 +1,7 @@
+= turbo_frame_tag "#{dom_id(commentable)}_new_comment"
+  = simple_form_for [commentable, comment], remote: true , data: { 'form-target': 'form' },
+                    html: { style: "display: #{comment.errors.any? ? 'block' : 'none'}" } do |f|
+    = f.input :body, label: false
+    .buttons
+      = f.submit 'Add', class: 'btn btn-primary'
+      = link_to 'Close', '', class: 'btn btn-default close-form', data: { action: 'click->form#closeForm' }

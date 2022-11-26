@@ -7,8 +7,6 @@ RSpec.describe QuestionsController, type: :controller do
   let(:own_votable) { create(:question, user: @user) }
   let(:votable)     { create(:question, user: user) }
 
-  it_behaves_like 'Votable'
-
   describe 'GET #index' do
     let(:questions) { create_list(:question, 2, user: user) }
 
@@ -90,7 +88,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  describe 'PATCH #update' do
+  xdescribe 'PATCH #update' do
     sign_in_user
 
     let(:question)       { create(:question, user: @user) }
@@ -99,8 +97,7 @@ RSpec.describe QuestionsController, type: :controller do
     before do
       patch :update, params: {
         id: question,
-        question: qst_attributes,
-        format: :js
+        question: qst_attributes
       }
     end
 

@@ -16,6 +16,7 @@ feature 'Сreate an answer', '
     click_on 'Post Your Answer'
 
     expect(current_path).to eq question_path(question)
+
     within '.answers' do
       expect(page).to have_content 'Answer body'
     end

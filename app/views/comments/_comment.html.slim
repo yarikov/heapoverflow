@@ -1,15 +1,12 @@
-.comment
-  .comment-body
-     span #{comment.body} – #{link_to comment.user.full_name, comment.user}
-     span.commented  #{comment.created_at.to_fs(:my_short)}
-  .comment-buttons
-    - if can?(:destroy, comment)
-      = link_to '', '', class: 'glyphicon glyphicon-pencil show-edit-form'
-      = link_to '', comment, method: :delete, remote: true, data: { type: :json }, class: 'glyphicon glyphicon-remove delete-comment'
+= turbo_frame_tag comment
+  .comment data={ controller: 'form' }
+    .comment-body
+       span #{comment.body} – #{link_to comment.user.full_name, comment.user}
+       span.commented  #{comment.created_at.to_fs(:my_short)}
+    .comment-buttons
+      - if can?(:destroy, comment)
+        = link_to '', '', class: 'glyphicon glyphicon-pencil show-edit-form', data: { action: 'click->form#showForm' }
+        = link_to '', comment, data: { turbo_method: :delete }, class: 'glyphicon glyphicon-remove delete-comment'
 
-  - if can?(:update, comment)
-    = simple_form_for comment, remote: true, data: { type: :json } do |f|
-      = f.input :body, label: false
-      .buttons
-        = f.submit 'Save', class: 'btn btn-primary'
-        = link_to 'Close', '', class: 'btn btn-default close-form'
+    - if can?(:update, comment)
+      = render 'comments/edit', comment: comment

@@ -1,2 +1,0 @@
-$('.subscription a').replaceWith("<%= j link_to '', [@question, @subscription], method: :delete, remote: true, class: 'glyphicon glyphicon-star active' %>");
-$('.subscription span').text("<%= @question.subscriptions.count %>")

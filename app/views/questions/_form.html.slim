@@ -1,5 +1,7 @@
-= simple_form_for @question, remote: @question.persisted? do |f|
-  = f.input :title
-  = f.input :body
-  = f.input :tag_list, label: 'Tags', input_html: { value: @question.tag_list.to_s }
-  == render 'common/buttons', resource: @question, f: f
+= turbo_frame_tag "#{dom_id(@question)}_edit"
+  = simple_form_for @question, remote: @question.persisted?, data: { 'form-target': 'form' },
+                    html: { style: "display: #{(@question.errors.any? || @question.new_record?) ? 'block' : 'none'}" } do |f|
+    = f.input :title
+    = f.input :body
+    = f.input :tag_list, label: 'Tags', input_html: { value: @question.tag_list.to_s }
+    == render 'common/buttons', resource: @question, f: f

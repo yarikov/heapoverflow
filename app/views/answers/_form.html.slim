@@ -1,3 +1,4 @@
-= simple_form_for shallow_path(@question, answer), remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
-  = f.input :body
+= simple_form_for shallow_path(@question, answer), remote: true, data: { 'form-target': 'form' },
+                  html: { style: "display: #{(answer.errors.any? || answer.new_record?) ? 'block' : 'none'}" } do |f|
+  = f.input :body, label: false
   == render 'common/buttons', resource: answer, f: f

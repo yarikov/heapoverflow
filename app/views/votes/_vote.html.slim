@@ -1,0 +1,13 @@
+= turbo_frame_tag "vote_#{dom_id(votable)}"
+  .vote
+    - if current_user&.vote_up?(votable)
+      = link_to '', send(:"#{votable.model_name.singular}_vote_path", votable), data: { turbo_method: :delete }, class: 'vote-up-on'
+    - else
+      = link_to '', send(:"up_#{votable.model_name.singular}_vote_path", votable), data: { turbo_method: :patch }, class: 'vote-up-off'
+
+    span.vote_count = votable.vote_count
+
+    - if current_user&.vote_down?(votable)
+      = link_to '', send(:"#{votable.model_name.singular}_vote_path", votable), data: { turbo_method: :delete }, class: 'vote-down-on'
+    - else
+      = link_to '', send(:"down_#{votable.model_name.singular}_vote_path", votable), data: { turbo_method: :patch }, class: 'vote-down-off'

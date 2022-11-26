@@ -13,9 +13,10 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    @user.update(user_params)
-    respond_with @user do |format|
-      format.json { render json: @user }
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

@@ -3,15 +3,12 @@ class SubscriptionsController < ApplicationController
   before_action :set_question
   authorize_resource
 
-  respond_to :js
-
   def create
-    respond_with @subscription = current_user.subscriptions.create(question: @question)
+    @subscription = current_user.subscriptions.find_or_create_by(question: @question)
   end
 
   def destroy
-    @subscription = current_user.subscriptions.find(params[:id])
-    respond_with @subscription.destroy
+    @subscription = current_user.subscriptions.destroy_by(question: @question)
   end
 
   private

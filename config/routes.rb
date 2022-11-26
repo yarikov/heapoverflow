@@ -13,23 +13,25 @@ Rails.application.routes.draw do
   root 'questions#index'
   get 'search', to: 'search#search'
 
-  concern :voted do
-    member do
-      patch :vote_up
-      patch :vote_down
+  concern :commentable do
+    resources :comments
+  end
+
+  concern :votable do
+    resource :vote, only: :destroy do
+      patch :up
+      patch :down
     end
   end
 
   resources :users, only: [:index, :show, :edit, :update]
   resources :tags,  only: [:index, :show]
 
-  resources :questions, concerns: :voted do
-    resources :comments
-    resources :subscriptions, only: [:create, :destroy]
-    resources :answers, concerns: :voted, shallow: true do
-      resources :comments
+  resources :questions, concerns: [:commentable, :votable] do
+    resources :answers, concerns: [:commentable, :votable], shallow: true do
       patch :best, on: :member
     end
+    resource :subscription, only: [:create, :destroy]
   end
 
   namespace :api do

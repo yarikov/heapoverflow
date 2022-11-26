@@ -1,0 +1,3 @@
+- @question.answers.each do |answer|
+  = turbo_stream.replace "best_answer_#{answer.id}"
+    = render 'answers/best', answer: answer

@@ -16,7 +16,7 @@ feature 'The best answer', '
     visit question_path(question)
 
     within ".answer-#{answer.id}" do
-      page.execute_script('$(".not_best").click()')
+      find('.not_best').click()
       expect(page).to have_css 'a.glyphicon.glyphicon-ok.best'
     end
 
