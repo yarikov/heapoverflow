@@ -11,10 +11,8 @@ feature 'Edit comment' do
     visit question_path(question)
 
     within '.comments' do
-      page.execute_script('$(".show-edit-form").click()')
-
+      find('.show-edit-form').click()
       fill_in 'comment[body]', with: 'edited comment'
-
       click_on 'Save'
 
       expect(page).to_not have_content comment.body

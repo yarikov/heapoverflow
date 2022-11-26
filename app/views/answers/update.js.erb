@@ -1,7 +1,0 @@
-<% if @answer.persisted? && @answer.errors.present? %>
-  $('<%= ".answer-#{@answer.id}" %> form.edit_answer').replaceWith("<%= j render 'answers/form', answer: @answer %>");
-  $('<%= ".answer-#{@answer.id}" %> form.edit_answer').show();
-<% else %>
-  $('<%= ".answer-#{@answer.id}" %>').replaceWith('<%= j render @answer %>');
-<% end %>
-$('.flash').replaceWith('<%= j render 'layouts/flash' %>');

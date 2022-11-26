@@ -245,16 +245,19 @@ a.new-comment-link:hover {
   color: #00CED1;
 }
 
-.question .user-info, .answer .user-info {
+.post-user-info {
+  font-size: 13px;
   box-sizing: border-box;
   padding: 5px 6px 9px 7px;
   width: 200px;
   color: #52575c;
-  background: #E1ECF4;
+  background: #fff;
   float: right;
 
   span {
     display: block;
+    color: #666;
+    font-size: 12px;
   }
 
   img {
@@ -264,13 +267,13 @@ a.new-comment-link:hover {
   }
 
   a {
-    font-size: 13px;
+    text-decoration: none;
     display: inline-block;
   }
-}
 
-.answer .user-info {
-  background: #fff;
+  &--author {
+    background: #E1ECF4;
+  }
 }
 
 form.edit_comment {

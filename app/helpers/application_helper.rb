@@ -36,17 +36,17 @@ module ApplicationHelper
 
   def vote_up_link_to(path, obj)
     vote_class = user_signed_in? && current_user.vote_up?(obj) ? 'vote-up-on' : 'vote-up-off'
-    link_to '', path, method: :patch, remote: true, class: "#{vote_class}"
+    link_to '', path, data: { turbo_method: :post }, class: "#{vote_class}"
   end
 
   def vote_down_link_to(path, obj)
     vote_class = user_signed_in? && current_user.vote_down?(obj) ? 'vote-down-on' : 'vote-down-off'
-    link_to '', path, method: :patch, remote: true, class: "#{vote_class}"
+    link_to '', path, data: { turbo_method: :post }, class: "#{vote_class}"
   end
 
   def best_link_to(path, obj)
     best_class = obj.best ? 'best' : 'not_best'
-    link_to '', path, method: :patch, remote: true, class: "glyphicon glyphicon-ok #{best_class}"
+    link_to '', path, data: { turbo_method: :patch }, class: "glyphicon glyphicon-ok #{best_class}"
   end
 
   def shallow_path(*args)

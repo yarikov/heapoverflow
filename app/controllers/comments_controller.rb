@@ -4,24 +4,28 @@ class CommentsController < ApplicationController
   before_action :set_commentable, only: :create
   after_action :broadcast_comment, only: :create
 
-  respond_to :js, only: :create
-  respond_to :json, only: [:update, :destroy]
-
   authorize_resource
 
   def create
-    respond_with @comment = @commentable.comments.create(comment_params.merge(user: current_user))
+    @comment = @commentable.comments.new(comment_params.merge(user: current_user))
+
+    if @comment.save
+      render :create
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
-    @comment.update(comment_params)
-    respond_with @comment do |format|
-      format.json { render json: @comment }
+    if @comment.update(comment_params)
+      render :update
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    respond_with @comment.destroy
+    @comment.destroy
   end
 
   private

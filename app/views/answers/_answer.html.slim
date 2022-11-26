@@ -1,47 +1,28 @@
 - if answer.persisted?
-  div class="answer answer-#{answer.id}"
-    .row
-      .col-xs-1
-        .vote
-          = vote_up_link_to vote_up_answer_path(answer), answer
-          span.vote_count = answer.vote_count
-          = vote_down_link_to vote_down_answer_path(answer), answer
+  = turbo_frame_tag answer do
+    div class="answer answer-#{answer.id}"
+      .row
+        .col-xs-1
+          = render 'votes/vote', votable: answer
+          = render 'answers/best', answer: answer
 
-        .best-answer
-          - if can?(:best, answer)
-            = best_link_to best_answer_path(answer), answer
-          - elsif answer.best
-            i.glyphicon.glyphicon-ok.best
+        .col-xs-11
+          .answer-body
+            = markdown answer.body
 
-      .col-xs-11
-        .answer-body
-          = markdown answer.body
+          div data={ controller: 'form' }
+            - if can?(:update, answer)
+              .post-menu
+                = link_to 'edit', '', data: { action: 'click->form#showForm' }
+                = link_to 'delete', answer, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
 
-        - if can?(:update, answer)
-          .post-menu
-            = link_to 'edit', '', class: 'show-edit-form'
-            = link_to 'delete', answer, data: { confirm: 'Вы уверены' }, method: :delete, remote: true
+            = render 'common/post_user_info', post: answer, question: answer.question
 
-        .user-info
-          span answered #{answer.created_at.to_fs(:my_short)}
-          = link_to answer.user do
-            = image_tag avatar_path(answer.user, :thumb)
-          = link_to answer.user.full_name, answer.user
+            .clearfix
 
-        .clearfix
+            - if can?(:update, answer)
+              = turbo_frame_tag "#{dom_id(answer)}_edit"
+                = render 'answers/form', answer: answer
 
-        == render 'answers/form', answer: answer if can?(:update, answer)
 
-        .comments
-          == render answer.comments
-
-        .new-comment
-          - if can?(:create, Comment)
-            = link_to 'add a comment', '', class: 'new-comment-link'
-
-            = form_for [answer, Comment.new], remote: true do |f|
-              .form-group
-                = f.text_area :body, class: 'form-control'
-              .buttons
-                = f.submit 'Add', class: 'btn btn-primary'
-                = link_to 'Close', '', class: 'btn btn-default close-form'
+          = render 'comments/list', commentable: answer

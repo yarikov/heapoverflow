@@ -1,2 +1,0 @@
-$('.subscription a').replaceWith("<%= j link_to '', question_subscriptions_path(@question), method: :post, remote: true, class: 'glyphicon glyphicon-star' %>");
-$('.subscription span').text("<%= @question.subscriptions.count %>")

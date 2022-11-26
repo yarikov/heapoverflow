@@ -1,7 +1,0 @@
-<% if @question.errors.present? %>
-  $('form.edit_question').replaceWith("<%= j render 'form', question: @question %>");
-  $('form.edit_question').show();
-<% else %>
-  $('.question').replaceWith("<%= j render @question %>");
-<% end %>
-$('.flash').replaceWith('<%= j render 'layouts/flash' %>');

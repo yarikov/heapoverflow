@@ -1,0 +1,4 @@
+= turbo_stream.append 'answers'
+  = render 'answers/answer', answer: @answer
+= turbo_stream.update 'new_answer'
+  = render 'answers/form', answer: @question.answers.new

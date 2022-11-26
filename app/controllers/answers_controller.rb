@@ -4,27 +4,33 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:create, :update, :best]
   after_action :broadcast_answer, only: :create
 
-  include Voted
-
-  respond_to :js
-
   authorize_resource
 
   def create
-    respond_with @answer = @question.answers.create(answer_params.merge(user: current_user))
+    @answer = @question.answers.new(answer_params.merge(user: current_user))
+
+    if @answer.save
+      render :create
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
-    @answer.update(answer_params)
-    respond_with @answer
+    if @answer.update(answer_params)
+      render :update
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def best
-    respond_with @answer.best!
+    @answer.best!
+    @answer.reload
   end
 
   def destroy
-    respond_with @answer.destroy
+    @answer.destroy
   end
 
   private

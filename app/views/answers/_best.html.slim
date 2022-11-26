@@ -1,0 +1,6 @@
+= turbo_frame_tag "best_answer_#{answer.id}"
+  .best-answer
+    - if can?(:best, answer)
+      = best_link_to best_answer_path(answer), answer
+    - elsif answer.best
+      i.glyphicon.glyphicon-ok.best

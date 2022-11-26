@@ -1,0 +1,6 @@
+= simple_form_for shallow_path(comment.commentable, comment), remote: true, data: { 'form-target': 'form' },
+                  html: { style: "display: #{comment.errors.any? ? 'block' : 'none'}" } do |f|
+  = f.input :body, label: false, input_html: { data: { 'form-target': 'autofocus' } }
+  .buttons
+    = f.submit "#{comment.new_record? ? 'Add' : 'Save'}", class: 'btn btn-primary'
+    = link_to 'Close', '', class: 'btn btn-default close-form', data: { action: 'click->form#closeForm' }

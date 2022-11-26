@@ -4,6 +4,9 @@ build:
 run:
 	docker compose up
 
+c:
+	docker compose run -it --rm web
+
 setup:
 	build
 	docker compose run -it --rm web bin/setup

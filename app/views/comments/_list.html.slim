@@ -1,0 +1,10 @@
+.comments
+  = turbo_frame_tag "#{dom_id(commentable)}_comments"
+    == render commentable.comments
+
+.new-comment
+  - if can?(:create, Comment)
+    div data={ controller: 'form' }
+      = link_to 'add a comment', '', class: 'new-comment-link', data: { action: 'click->form#showForm' }
+      = turbo_frame_tag "#{dom_id(commentable)}_new_comment"
+        = render 'comments/form', comment: commentable.comments.new

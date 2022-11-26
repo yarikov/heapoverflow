@@ -1,0 +1,4 @@
+= turbo_stream.append "#{dom_id(@commentable)}_comments"
+  = render 'comments/comment', comment: @comment
+= turbo_stream.update "#{dom_id(@commentable)}_new_comment"
+  = render 'comments/form', comment: @commentable.comments.new

@@ -1,0 +1,5 @@
+.post-user-info class="#{'post-user-info--author' if post.user.author_of?(question)}"
+  span #{post.is_a?(Question) ? 'asked' : 'answered'} #{post.created_at.to_fs(:my_short)}
+  = link_to post.user do
+    = image_tag avatar_path(post.user, :thumb)
+  = link_to post.user.full_name, post.user

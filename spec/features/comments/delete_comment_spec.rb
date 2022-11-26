@@ -10,7 +10,7 @@ feature 'Delete the comment' do
     login_as(user)
 
     visit question_path(question)
-    page.execute_script('$(".delete-comment").click()')
+    find(".delete-comment").click()
 
     expect(page).to_not have_content comment.body
     expect(current_path).to eq question_path(question)

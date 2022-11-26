@@ -4,7 +4,7 @@
 
 .row
   .col-lg-9
-    .answers
+    = turbo_frame_tag 'answers', class: 'answers'
       == render @question.answers
 
 .row
@@ -14,4 +14,5 @@
         .new-answer
           - if can?(:create, Answer)
             h4 Your Answer
-            == render 'answers/form', answer: @answer
+            = turbo_frame_tag 'new_answer'
+              == render 'answers/form', answer: @answer

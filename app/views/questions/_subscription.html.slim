@@ -1,0 +1,6 @@
+= turbo_frame_tag "subscription_#{dom_id(question)}", class: 'subscription'
+  - if subscription && can?(:destroy, subscription)
+    = link_to '', question_subscription_path(question), data: { turbo_method: :delete }, class: 'glyphicon glyphicon-star active unsubscribe'
+  - else
+    = link_to '', question_subscription_path(question), data: { turbo_method: :post }, class: 'glyphicon glyphicon-star subscribe'
+  span = question.subscriptions.count
