@@ -4,8 +4,11 @@ build:
 run:
 	docker compose up
 
+bash:
+	docker compose run -it --rm web bash
+
 c:
-	docker compose run -it --rm web
+	docker compose run -it --rm web bin/rails c
 
 setup:
 	build
