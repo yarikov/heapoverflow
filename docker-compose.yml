@@ -65,6 +65,10 @@ services:
       - xpack.security.enabled=false
     ports:
       - 9200:9200
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   chrome:
     image: seleniarm/standalone-chromium:107.0
