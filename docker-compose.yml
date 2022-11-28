@@ -6,6 +6,7 @@ services:
     image: heapoverflow:2.0.3
     stdin_open: true
     tty: true
+    restart: unless-stopped
     ports:
       - '3000:3000'
     environment:
@@ -28,6 +29,7 @@ services:
     image: heapoverflow:2.0.3
     stdin_open: true
     tty: true
+    restart: unless-stopped
     environment:
       DATABASE_URL: postgres://postgres:some-long-secure-password@postgres:5432
       REDIS_URL: redis://redis:6379
@@ -43,6 +45,7 @@ services:
 
   postgres:
     image: postgres:9.6
+    restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: some-long-secure-password
     volumes:
@@ -50,11 +53,13 @@ services:
 
   redis:
     image: redis
+    restart: unless-stopped
     volumes:
       - redis:/data
 
   elasticsearch:
     image: elasticsearch:8.5.1
+    restart: unless-stopped
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
@@ -63,6 +68,7 @@ services:
 
   chrome:
     image: seleniarm/standalone-chromium:107.0
+    restart: unless-stopped
     environment:
       SE_VNC_NO_PASSWORD: 1
     volumes:
