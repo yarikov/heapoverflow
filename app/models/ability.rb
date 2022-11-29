@@ -19,6 +19,7 @@ class Ability
 
   def user_abilities
     can :read, :all
+    can :tagged, [Question]
     can :create,  [Question, Answer, Comment, Subscription]
     can [:update, :destroy], [Question, Answer, Comment, Subscription], user_id: user.id
 
@@ -35,5 +36,6 @@ class Ability
 
   def guest_abilities
     can :read, :all
+    can :tagged, [Question]
   end
 end

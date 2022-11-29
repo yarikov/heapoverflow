@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index tagged show]
   before_action :set_question, only: %i[show update destroy]
   before_action :new_answer, only: :show
   before_action :set_subscription, only: %i[show update]
@@ -11,6 +11,11 @@ class QuestionsController < ApplicationController
 
   def index
     respond_with @questions = Question.newest.page(params[:page]).per(15)
+  end
+
+  def tagged
+    @questions = Question.tagged_with(params[:tag]).page(params[:page]).per(15)
+    render :index
   end
 
   def show

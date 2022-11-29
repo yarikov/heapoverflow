@@ -27,9 +27,11 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update] do
     resource :avatar, only: [:update]
   end
-  resources :tags,  only: [:index, :show]
+  resources :tags,  only: [:index]
 
   resources :questions, concerns: [:commentable, :votable] do
+    get 'tagged/:tag', action: :tagged, as: :tagged, on: :collection
+
     resources :answers, concerns: [:commentable, :votable], shallow: true do
       patch :best, on: :member
     end

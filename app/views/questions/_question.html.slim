@@ -12,7 +12,7 @@
         .question-body.clearfix
           = markdown @question.body
           .tags
-            = raw @question.tag_list.map { |tag| link_to tag, tag_path(tag), class: 'tag' }.join(' ')
+            = raw @question.tag_list.map { |tag| link_to tag, tagged_questions_path(tag), class: 'tag' }.join(' ')
 
         div data={ controller: 'form' }
           - if can?(:update, @question)

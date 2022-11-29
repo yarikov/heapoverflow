@@ -1,6 +1,6 @@
 .row
   .col-lg-12
-    h4.pull-left All Questions
+    h4.pull-left = params[:tag] ? "Questions tagged [#{params[:tag]}]" : 'All Questions'
 
 .row
   .col-lg-9
@@ -26,7 +26,7 @@
                 = link_to question.title, question
               .clearfix
               .tags
-                = raw question.tag_list.map { |tag| link_to tag, tag_path(tag), class: 'tag' }.join(' ')
+                = raw question.tag_list.map { |tag| link_to tag, tagged_questions_path(tag), class: 'tag' }.join(' ')
               p asked #{time_ago_in_words(question.created_at)} ago #{link_to question.user.full_name, question.user}
 
       = paginate @questions

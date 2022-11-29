@@ -3,7 +3,7 @@ h4 Tags
   .row
     - @tags.each_with_index do |tag, index|
       .col-xs-3
-        = link_to tag, tag_path(tag.name), class: 'tag'
+        = link_to tag, tagged_questions_path(tag.name), class: 'tag'
         span.item-multiplier-x ×
         span.item-multiplier-count
           = tag.taggings_count
