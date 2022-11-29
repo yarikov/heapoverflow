@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update] do
+    resource :avatar, only: [:update]
+  end
   resources :tags,  only: [:index, :show]
 
   resources :questions, concerns: [:commentable, :votable] do

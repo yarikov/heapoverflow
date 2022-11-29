@@ -98,38 +98,44 @@
   padding-top: 25px;
 }
 
-.gravatar-wrapper img {
-  border-radius: 4px;
-}
-
-#change-picture {
-  position: absolute;
-  font-size: 13px;
-  border-radius: 0 0 4px 4px;
-  bottom: 15px;
-  left: 15px;
-  right: 40px;
-  padding: 5px 0;
-  width: 164px;
-  text-decoration: none;
-  text-align: center;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  cursor: pointer;
-  -webkit-transition: background, 0.3s, ease;
-  -moz-transition: background, 0.3s, ease;
-  -ms-transition: background, 0.3s, ease;
-  -o-transition: background, 0.3s, ease;
-}
-
-#change-picture:hover {
-  background: rgba(0,0,0,0.8);
-}
-
 #user_description {
   height: 200px !important;
 }
 
 #user_avatar {
   display: none;
+}
+
+.avatar-uploader {
+  &__image {
+    border-radius: 4px;
+  }
+
+  &__link {
+    position: absolute;
+    font-size: 13px;
+    border-radius: 0 0 4px 4px;
+    bottom: 15px;
+    left: 15px;
+    right: 40px;
+    padding: 5px 0;
+    width: 164px;
+    text-decoration: none !important;
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    color: white !important;
+    cursor: pointer;
+    -webkit-transition: background, 0.3s, ease;
+    -moz-transition: background, 0.3s, ease;
+    -ms-transition: background, 0.3s, ease;
+    -o-transition: background, 0.3s, ease;
+
+    &:hover {
+      background: rgba(0,0,0,0.8);
+    }
+  }
+
+  &__input {
+    display: none !important;
+  }
 }

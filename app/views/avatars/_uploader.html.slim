@@ -1,0 +1,5 @@
+= turbo_frame_tag "#{dom_id(user)}_avatar-uploader", class: 'avatar-uploader', data: { controller: 'avatar-uploader' }
+  = image_tag avatar_path(user, :medium), class: 'avatar-uploader avatar-uploader__image'
+  = link_to 'Change avatar', '#', class: 'avatar-uploader avatar-uploader__link', data: { action: 'click->avatar-uploader#openFileDialog' }
+  = simple_form_for user, url: user_avatar_path(user), method: :patch, html: { data: { 'avatar-uploader-target': 'form' } } do |f|
+    = f.input :avatar, as: :file, label: false, input_html: { data: { 'avatar-uploader-target': 'file' }, class: 'avatar-uploader avatar-uploader__input' }
