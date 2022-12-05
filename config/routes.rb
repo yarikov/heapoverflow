@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show, :edit, :update] do
-    resource :avatar, only: [:update]
+    resource :avatar, only: [:update, :destroy]
   end
   resources :tags,  only: [:index]
 

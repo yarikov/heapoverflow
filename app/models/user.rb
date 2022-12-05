@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
-  validates :avatar, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+  validates :avatar, content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { less_than: 2.megabytes }
   validates :full_name, presence: true
 
   def self.find_for_oauth(auth)

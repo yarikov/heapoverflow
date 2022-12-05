@@ -3,7 +3,15 @@ class AvatarsController < ApplicationController
   skip_authorization_check
 
   def update
-    current_user.avatar.attach(params[:user][:avatar])
-    render :update
+    if current_user.avatar.attach(params[:user][:avatar])
+      render :update
+    else
+      flash.now[:error] = current_user.errors.full_messages.first
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    current_user.avatar.destroy
   end
 end
