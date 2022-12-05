@@ -3,7 +3,7 @@ version: '3.9'
 services:
   web:
     build: .
-    image: heapoverflow:2.0.3
+    image: heapoverflow:2.0.4
     stdin_open: true
     tty: true
     restart: unless-stopped
@@ -26,7 +26,7 @@ services:
 
   sidekiq:
     build: .
-    image: heapoverflow:2.0.3
+    image: heapoverflow:2.0.4
     stdin_open: true
     tty: true
     restart: unless-stopped

@@ -1,6 +1,6 @@
 FROM ruby:3.1.2
 
-RUN apt update && apt -y install libvips
+RUN apt update && apt install -y --no-install-recommends libvips42
 
 ENV NODE_VERSION 18.12.1
 
