@@ -1,13 +1,12 @@
-= turbo_frame_tag comment
-  .comment data={ controller: 'form' }
-    .comment-body
-       span #{comment.body} – #{link_to comment.user.full_name, comment.user}
-       span.commented  #{comment.created_at.to_fs(:my_short)}
-    .comment-buttons
-      - if can?(:destroy, comment)
-        = link_to '', '', class: 'glyphicon glyphicon-pencil show-edit-form', data: { action: 'click->form#showForm' }
-        = link_to '', comment, data: { turbo_method: :delete }, class: 'glyphicon glyphicon-remove delete-comment'
+= turbo_frame_tag comment, data: { controller: 'form' }, class: 'comment'
+  .comment-body
+     span #{comment.body} – #{link_to comment.user.full_name, comment.user}
+     span.commented  #{comment.created_at.to_fs(:my_short)}
+  .comment-buttons
+    - if can?(:destroy, comment)
+      = link_to '', '', class: 'glyphicon glyphicon-pencil show-edit-form', data: { action: 'click->form#showForm' }
+      = link_to '', comment, data: { turbo_method: :delete }, class: 'glyphicon glyphicon-remove delete-comment'
 
-    - if can?(:update, comment)
-      = turbo_frame_tag "#{dom_id(comment)}_edit"
-        = render 'comments/form', comment: comment
+  - if can?(:update, comment)
+    = turbo_frame_tag "#{dom_id(comment)}_edit"
+      = render 'comments/form', comment: comment

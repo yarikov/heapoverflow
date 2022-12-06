@@ -1,6 +1,5 @@
-.comments
-  = turbo_frame_tag "#{dom_id(commentable)}_comments"
-    == render commentable.comments
+= turbo_frame_tag "#{dom_id(commentable)}_comments", class: 'comments'
+  == render commentable.comments
 
 .new-comment
   - if can?(:create, Comment)
