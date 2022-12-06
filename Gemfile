@@ -39,6 +39,7 @@ gem 'stimulus-rails'
 gem 'propshaft'
 gem 'turbo-rails'
 gem 'redis', '~> 4.0'
+gem 'faker', require: false
 
 group :development, :test do
   gem 'database_cleaner'
