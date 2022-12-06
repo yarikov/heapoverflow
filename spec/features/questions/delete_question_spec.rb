@@ -8,7 +8,7 @@ feature 'Delete the question', js: true do
     login_as(user)
     visit question_path(question)
 
-    accept_confirm { click_on 'delete' }
+    accept_confirm { click_on 'Delete' }
 
     expect(page).to have_content 'Question was successfully destroyed'
     expect(current_path).to eq questions_path
@@ -17,6 +17,6 @@ feature 'Delete the question', js: true do
   scenario "User cannot delete someone else's question" do
     visit question_path(question)
 
-    expect(page).to_not have_content 'delete'
+    expect(page).to_not have_content 'Delete'
   end
 end

@@ -17,8 +17,8 @@
         div data={ controller: 'form' }
           - if can?(:update, @question)
             .post-menu
-              = link_to 'edit', '', data: { action: 'click->form#showForm' }
-              = link_to 'delete', @question, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
+              = link_to 'Edit', '', data: { action: 'click->form#showForm' }
+              = link_to 'Delete', @question, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
 
           = render 'common/post_user_info', post: @question, question: @question
 

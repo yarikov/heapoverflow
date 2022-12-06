@@ -16,12 +16,12 @@ feature 'Question editing', '
     end
 
     scenario 'sees link to Edit' do
-      within('.question') { expect(page).to have_link 'edit' }
+      within('.question') { expect(page).to have_link 'Edit' }
     end
 
     scenario 'try to edit his question', js: true do
       within '.question' do
-        click_on 'edit'
+        click_on 'Edit'
         fill_in 'Title', with: 'edited question title'
         fill_in 'Body', with: 'edited question body'
         click_on 'Save'
@@ -39,12 +39,12 @@ feature 'Question editing', '
     login_as(user)
     visit question_path(question)
 
-    within('.question') { expect(page).to_not have_link 'edit' }
+    within('.question') { expect(page).to_not have_link 'Edit' }
   end
 
   scenario 'Unauthenticated user try to edit question' do
     visit question_path(question)
 
-    within('.question') { expect(page).to_not have_link 'edit' }
+    within('.question') { expect(page).to_not have_link 'Edit' }
   end
 end

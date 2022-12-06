@@ -17,12 +17,12 @@ feature 'Answer editing', '
     end
 
     scenario 'sees link to Edit' do
-      within('.answers') { expect(page).to have_link 'edit' }
+      within('.answers') { expect(page).to have_link 'Edit' }
     end
 
     scenario 'try to edit his answer', js: true do
       within '.answers' do
-        click_on 'edit'
+        click_on 'Edit'
         fill_in 'answer[body]', with: 'edited answer'
         click_on 'Save'
 
@@ -37,12 +37,12 @@ feature 'Answer editing', '
     login_as(user)
     visit question_path(question)
 
-    within('.answers') { expect(page).to_not have_link 'edit' }
+    within('.answers') { expect(page).to_not have_link 'Edit' }
   end
 
   scenario 'Unauthenticated user try to edit answer' do
     visit question_path(question)
 
-    within('.answers') { expect(page).to_not have_link 'edit' }
+    within('.answers') { expect(page).to_not have_link 'Edit' }
   end
 end

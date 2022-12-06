@@ -10,7 +10,7 @@ feature 'Delete the answer' do
     login_as(author)
 
     visit question_path(question)
-    accept_alert { within('.answers') { click_on 'delete' } }
+    accept_alert { within('.answers') { click_on 'Delete' } }
 
     expect(page).to_not have_content answer.body
     expect(current_path).to eq question_path(question)
@@ -20,12 +20,12 @@ feature 'Delete the answer' do
     login_as(user)
     visit question_path(question)
 
-    within('.answers') { expect(page).to_not have_content 'delete' }
+    within('.answers') { expect(page).to_not have_content 'Delete' }
   end
 
   scenario 'Unauthenticated user try to delete an answer' do
     visit question_path(question)
 
-    within('.answers') { expect(page).to_not have_content 'delete' }
+    within('.answers') { expect(page).to_not have_content 'Delete' }
   end
 end
