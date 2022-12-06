@@ -1,8 +1,8 @@
 = turbo_stream.replace "avatar-uploader_#{dom_id(current_user)}"
   = render 'avatars/uploader', user: current_user.reload
 
-= turbo_stream.replace 'header'
-  = render 'layouts/header'
+= turbo_stream.replace 'header_dropdown'
+  = render 'layouts/header_dropdown'
 
 = turbo_stream.replace 'flash'
   = render 'layouts/flash'
