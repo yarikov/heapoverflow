@@ -1,8 +1,0 @@
-= turbo_frame_tag 'header_dropdown'
-  .dropdown
-    = image_tag avatar_path(current_user, :thumb), class: 'dropdown-toggle hidden-xs', data: { toggle: 'dropdown' }
-    ul.dropdown-menu
-      li = link_to 'Your profile', current_user
-      li = link_to 'Edit profile', edit_user_path(current_user)
-      li.divider role="separator"
-      li = link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }
