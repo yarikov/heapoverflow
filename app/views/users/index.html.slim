@@ -10,3 +10,7 @@ h4 Users
           .user-details
             = link_to user.full_name, user
             span = user.location
+
+.row
+  .col-lg-9
+    = paginate @users

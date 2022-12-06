@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   impressionist actions: [:show]
 
   def index
-    @users = User.all
+    @users = User.order(full_name: 'asc').page(params[:page]).per(28)
   end
 
   def show; end
