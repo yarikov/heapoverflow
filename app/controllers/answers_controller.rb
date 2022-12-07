@@ -2,7 +2,6 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: [:update, :destroy, :best]
   before_action :set_question, only: [:create, :update, :best]
-  after_action :broadcast_answer, only: :create
 
   authorize_resource
 
@@ -42,17 +41,6 @@ class AnswersController < ApplicationController
   def set_question
     @question = @answer.question if @answer
     @question ||= Question.find(params[:question_id])
-  end
-
-  def broadcast_answer
-    return unless @answer.valid?
-
-    ActionCable.server.broadcast("/questions/#{@question.id}/answers",
-      {
-        answer: @answer.to_json,
-        vote_count: @answer.vote_count.to_json
-      }
-    )
   end
 
   def answer_params
