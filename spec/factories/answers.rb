@@ -6,6 +6,12 @@ FactoryBot.define do
     factory :old_answer do
       created_at { 3.days.ago }
     end
+
+    trait :reindex do
+      after(:create) do |answer, _evaluator|
+        answer.reindex(refresh: true)
+      end
+    end
   end
 
   factory :invalid_answer, class: 'Answer' do

@@ -4,6 +4,12 @@ FactoryBot.define do
     sequence(:title) { |n| "Question title #{n}" }
     sequence(:body)  { |n| "Question body #{n}" }
     tag_list { 'question' }
+
+    trait :reindex do
+      after(:create) do |question, _evaluator|
+        question.reindex(refresh: true)
+      end
+    end
   end
 
   factory :invalid_question, class: 'Question' do

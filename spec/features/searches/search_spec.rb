@@ -1,10 +1,10 @@
 require_relative '../feature_helper'
 
-feature 'Search' do
-  given!(:user)     { create(:user) }
-  given!(:question) { create(:question, body: 'question body', user: user) }
-  given!(:answer)   { create(:answer, body: 'answer body', question: question, user: user) }
-  given!(:comment)  { create(:comment, body: 'comment body', commentable: question, user: user) }
+feature 'Search', search: true do
+  given!(:user)     { create(:user, :reindex) }
+  given!(:question) { create(:question, :reindex, body: 'question body', user: user) }
+  given!(:answer)   { create(:answer, :reindex, body: 'answer body', question: question, user: user) }
+  given!(:comment)  { create(:comment, :reindex, body: 'comment body', commentable: question, user: user) }
 
   before do
     visit search_path

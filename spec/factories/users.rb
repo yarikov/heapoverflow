@@ -14,5 +14,11 @@ FactoryBot.define do
       sequence(:twitter)     { |n| "http://twitter.com/vasya#{n}" }
       sequence(:github)      { |n| "http://github.com/vasya#{n}" }
     end
+
+    trait :reindex do
+      after(:create) do |user, _evaluator|
+        user.reindex(refresh: true)
+      end
+    end
   end
 end
