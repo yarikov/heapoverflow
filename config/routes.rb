@@ -5,8 +5,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  use_doorkeeper
-
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   devise_scope(:user) { post :twitter, to: 'omniauth_callbacks#twitter' }
 
@@ -36,16 +34,5 @@ Rails.application.routes.draw do
       patch :best, on: :member
     end
     resource :subscription, only: [:create, :destroy]
-  end
-
-  namespace :api do
-    namespace :v1 do
-      resources :profiles, only: :index do
-        get :me, on: :collection
-      end
-      resources :questions do
-        resources :answers
-      end
-    end
   end
 end

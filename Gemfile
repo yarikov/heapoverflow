@@ -6,7 +6,6 @@ gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on'
 gem 'bootsnap', require: false
 gem 'cancancan', '~> 3.4.0'
 gem 'devise'
-gem 'doorkeeper'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'image_processing', '~> 1.2'
 gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist'
