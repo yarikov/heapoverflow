@@ -16,9 +16,10 @@ class Answer < ApplicationRecord
   after_create :notify_subscribers
 
   def best!
-    best_answer = question.answers.find_by(best: true)
-    best_answer&.update(best: false)
-    update(best: true)
+    transaction do
+      question.answers.where(best: true).update(best: false)
+      update(best: true)
+    end
   end
 
   def notify_subscribers
