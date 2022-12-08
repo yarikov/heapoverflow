@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvatarsController < ApplicationController
   before_action :authenticate_user!
   skip_authorization_check

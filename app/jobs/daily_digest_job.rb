@@ -1,4 +1,6 @@
-class DailyDigestJob < ActiveJob::Base
+# frozen_string_literal: true
+
+class DailyDigestJob < ApplicationJob
   queue_as :default
 
   def perform

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Searcher
-  MODELS = %w[User Question Answer Comment]
+  MODELS = %w[User Question Answer Comment].freeze
 
   def self.call(query, class_name, **options)
-    return [] unless query.present?
+    return [] if query.blank?
 
     models = class_name.in?(MODELS) ? Array.wrap(class_name.constantize) : MODELS.map(&:constantize)
 

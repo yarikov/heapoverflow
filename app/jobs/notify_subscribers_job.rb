@@ -1,4 +1,6 @@
-class NotifySubscribersJob < ActiveJob::Base
+# frozen_string_literal: true
+
+class NotifySubscribersJob < ApplicationJob
   queue_as :default
 
   def perform(answer)

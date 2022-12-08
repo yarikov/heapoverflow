@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'application_responder'
 
 class ApplicationController < ActionController::Base
@@ -21,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  DEVISEPARAMS = [:full_name, :email, :password, :password_confirmation].freeze
+  DEVISEPARAMS = %i[full_name email password password_confirmation].freeze
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(DEVISEPARAMS) }

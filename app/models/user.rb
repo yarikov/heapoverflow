@@ -1,10 +1,12 @@
-class User < ActiveRecord::Base
+# frozen_string_literal: true
+
+class User < ApplicationRecord
   searchkick searchable: %i[full_name]
   is_impressionable
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :twitter]
+         :omniauthable, omniauth_providers: %i[facebook twitter]
 
   has_one_attached :avatar do |attachable|
     attachable.variant :medium, resize_to_fill: [300, 300]
@@ -25,6 +27,7 @@ class User < ActiveRecord::Base
     authorization = Authorization.find_by(provider: auth.provider, uid: auth.uid.to_s)
     return authorization.user if authorization
     return new unless auth.info.email
+
     user = find_or_create_by!(email: auth.info.email) do |u|
       u.full_name = auth.info.name
       # u.remote_avatar_url = auth.info.image

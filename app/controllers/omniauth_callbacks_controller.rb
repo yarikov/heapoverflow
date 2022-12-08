@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.find_for_oauth(auth)
@@ -13,7 +15,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       render 'omniauth/get_email'
     end
   end
-  alias_method :twitter, :facebook
+  alias twitter facebook
 
   private
 
@@ -23,8 +25,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       uid: session['devise.auth_uid'],
       info: { email: params[:email],
               name: session['devise.auth_name'],
-              image: session['devise.auth_image']
-      }
+              image: session['devise.auth_image'] }
     )
   end
 end

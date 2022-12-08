@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../feature_helper'
 
 feature 'Delete the comment' do
@@ -10,7 +12,7 @@ feature 'Delete the comment' do
     login_as(user)
 
     visit question_path(question)
-    find(".delete-comment").click()
+    find('.delete-comment').click
 
     expect(page).to_not have_content comment.body
     expect(current_path).to eq question_path(question)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
 
@@ -21,9 +23,9 @@ class Ability
     can :read, :all
     can :tagged, [Question]
     can :create,  [Question, Answer, Comment, Subscription]
-    can [:update, :destroy], [Question, Answer, Comment, Subscription], user_id: user.id
+    can %i[update destroy], [Question, Answer, Comment, Subscription], user_id: user.id
 
-    can [:update, :me], User, id: user.id
+    can %i[update me], User, id: user.id
 
     can [:vote_down, :vote_up], [Question, Answer] do |object|
       !user.author_of?(object)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Answer < ApplicationRecord
   include HasVotes
 
@@ -15,7 +17,7 @@ class Answer < ApplicationRecord
 
   def best!
     best_answer = question.answers.find_by(best: true)
-    best_answer.update(best: false) if best_answer
+    best_answer&.update(best: false)
     update(best: true)
   end
 

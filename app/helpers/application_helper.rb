@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def avatar_path(user, variant)
     if user.avatar.attached?
@@ -16,13 +18,14 @@ module ApplicationHelper
 
   def flash_messages(_opts = {})
     flash.each do |msg_type, message|
-      concat(content_tag(:div, message, class: "alert #{bootstrap_class_for(msg_type)} alert-dismissible", role: 'alert') do
-        concat(content_tag(:button, class: 'close', data: { dismiss: 'alert' }) do
-          concat content_tag(:span, '&times;'.html_safe, 'aria-hidden' => true)
-          concat content_tag(:span, 'Close', class: 'sr-only')
-        end)
-        concat message
-      end)
+      concat(content_tag(:div, message, class: "alert #{bootstrap_class_for(msg_type)} alert-dismissible",
+                                        role: 'alert') do
+               concat(content_tag(:button, class: 'close', data: { dismiss: 'alert' }) do
+                 concat content_tag(:span, '&times;'.html_safe, 'aria-hidden' => true)
+                 concat content_tag(:span, 'Close', class: 'sr-only')
+               end)
+               concat message
+             end)
     end
     nil
   end
@@ -36,12 +39,12 @@ module ApplicationHelper
 
   def vote_up_link_to(path, obj)
     vote_class = user_signed_in? && current_user.vote_up?(obj) ? 'vote-up-on' : 'vote-up-off'
-    link_to '', path, data: { turbo_method: :post }, class: "#{vote_class}"
+    link_to '', path, data: { turbo_method: :post }, class: vote_class.to_s
   end
 
   def vote_down_link_to(path, obj)
     vote_class = user_signed_in? && current_user.vote_down?(obj) ? 'vote-down-on' : 'vote-down-off'
-    link_to '', path, data: { turbo_method: :post }, class: "#{vote_class}"
+    link_to '', path, data: { turbo_method: :post }, class: vote_class.to_s
   end
 
   def best_link_to(path, obj)
@@ -56,7 +59,7 @@ module ApplicationHelper
   class HTMLwithPygments < Redcarpet::Render::HTML
     def block_code(code, language)
       Pygments.highlight(code, lexer: language)
-    rescue
+    rescue StandardError
       code
     end
   end

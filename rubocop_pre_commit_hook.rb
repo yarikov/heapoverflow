@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 ADDED_OR_MODIFIED = /^\s*(A|AM|M)/.freeze
 
@@ -19,9 +20,9 @@ success = system(%(
   rubocop #{changed_files}
 ))
 
-STDIN.reopen('/dev/tty')
+$stdin.reopen('/dev/tty')
 
 if success == false
   puts "Would you like to continue press 'any key' or 'n/N' to halt? "
-  exit(1) if %w(N n).include?(gets.chomp)
+  exit(1) if %w[N n].include?(gets.chomp)
 end

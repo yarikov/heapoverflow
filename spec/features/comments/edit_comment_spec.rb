@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../feature_helper'
 
 feature 'Edit comment' do
@@ -11,7 +13,7 @@ feature 'Edit comment' do
     visit question_path(question)
 
     within '.comments' do
-      find('.show-edit-form').click()
+      find('.show-edit-form').click
       fill_in 'comment[body]', with: 'edited comment'
       click_on 'Save'
 

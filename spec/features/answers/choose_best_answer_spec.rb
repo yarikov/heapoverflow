@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../feature_helper'
 
 feature 'The best answer', '
@@ -16,7 +18,7 @@ feature 'The best answer', '
     visit question_path(question)
 
     within ".answer-#{answer.id}" do
-      find('.not_best').click()
+      find('.not_best').click
       expect(page).to have_css 'a.glyphicon.glyphicon-ok.best'
     end
 

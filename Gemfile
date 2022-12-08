@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gem 'active_model_serializers'
@@ -5,40 +7,42 @@ gem 'active_storage_validations'
 gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on'
 gem 'bootsnap', require: false
 gem 'cancancan', '~> 3.4.0'
+gem 'cssbundling-rails', '~> 1.1'
 gem 'devise'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem 'elasticsearch'
+gem 'faker', require: false
 gem 'image_processing', '~> 1.2'
 gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist'
 gem 'jbuilder', '~> 2.0'
+gem 'jsbundling-rails', '~> 1.0'
 gem 'kaminari'
+gem 'mimemagic', '~> 0.3.9'
 gem 'oj'
 gem 'oj_mimic_json'
 gem 'omniauth', '~> 1.9.2'
 gem 'omniauth-facebook', '~> 5.0.0'
 gem 'omniauth-twitter'
 gem 'pg', '~> 1.1.4'
+gem 'propshaft'
 gem 'puma', '~> 5.6.5'
 gem 'pygments.rb'
 gem 'rails', '~> 7.0.4'
 gem 'redcarpet'
+gem 'redis', '~> 4.0'
 gem 'responders'
+gem 'searchkick'
 gem 'sidekiq'
 gem 'simple_form'
-gem 'sinatra', git: 'https://github.com/sinatra/sinatra', ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea', require: false
+gem 'sinatra', git: 'https://github.com/sinatra/sinatra',
+               ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea',
+               require: false
 gem 'slim-rails'
+gem 'stimulus-rails'
+gem 'turbo-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'whenever'
-gem 'mimemagic', '~> 0.3.9'
-gem 'searchkick'
-gem 'elasticsearch'
-gem 'cssbundling-rails', '~> 1.1'
-gem 'jsbundling-rails', '~> 1.0'
-gem 'stimulus-rails'
-gem 'propshaft'
-gem 'turbo-rails'
-gem 'redis', '~> 4.0'
-gem 'faker', require: false
 
 group :development, :test do
   gem 'database_cleaner'
@@ -53,17 +57,18 @@ end
 group :development do
   gem 'better_errors'
   gem 'capistrano', require: false
+  gem 'capistrano3-unicorn', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
-  gem 'capistrano3-unicorn', require: false
   gem 'guard-bundler', require: false
   gem 'guard-rails', require: false
   gem 'guard-rspec', require: false
   gem 'guard-spring', require: false
   gem 'letter_opener'
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 4.2.0'
@@ -71,10 +76,10 @@ end
 
 group :test do
   gem 'capybara-email'
-  gem 'webdrivers'
   gem 'fuubar'
   gem 'json_spec'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'webdrivers'
 end

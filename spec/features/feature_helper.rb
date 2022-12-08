@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 Capybara.register_driver :selenium_chrome_remote do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, url: 'http://chrome:4444')
 end
 
-Capybara.server_port = 31337
+Capybara.server_port = 31_337
 Capybara.server_host = '0.0.0.0'
 Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
 Capybara.javascript_driver = :selenium_chrome_remote

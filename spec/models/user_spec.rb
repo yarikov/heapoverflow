@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -51,7 +53,13 @@ RSpec.describe User, type: :model do
 
     context 'user does not exists' do
       context 'with email' do
-        let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345', info: { email: 'new@user.com', name: 'Petya Ivanov' }) }
+        let(:auth) do
+          OmniAuth::AuthHash.new(
+            provider: 'facebook',
+            uid: '12345',
+            info: { email: 'new@user.com', name: 'Petya Ivanov' }
+          )
+        end
 
         it 'creates new user' do
           expect { User.find_for_oauth(auth) }.to change(User, :count).by(1)

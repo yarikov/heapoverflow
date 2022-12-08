@@ -1,10 +1,8 @@
+# frozen_string_literal: true
+
 require_relative '../feature_helper'
 
-feature 'User sign in' '
-  In order to be able to ask question
-  As an User
-  I want to be able to sign in
-' do
+feature 'User sign in' do
   describe 'with Facebook' do
     scenario 'fail' do
       visit new_user_session_path

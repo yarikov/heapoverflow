@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index tagged show]
   before_action :set_question, only: %i[show update destroy]

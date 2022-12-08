@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, only: [:update, :destroy, :best]
-  before_action :set_question, only: [:create, :update, :best]
+  before_action :set_answer, only: %i[update destroy best]
+  before_action :set_question, only: %i[create update best]
 
   authorize_resource
 

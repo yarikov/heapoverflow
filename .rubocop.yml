@@ -1,17 +1,26 @@
+inherit_from: .rubocop_todo.yml
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - rubocop-rails
+
 AllCops:
   Exclude:
     - 'bin/*'
     - 'config/**/*'
     - 'db/**/*'
+    - 'node_modules/**/*'
     - 'spec/spec_helper.rb'
     - 'spec/rails_helper.rb'
-  DisplayCopNames: true
-
-Rails:
-  Enabled: true
 
 Metrics/LineLength:
-  Max: 99
+  Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
 
 Style/Documentation:
   Enabled: false

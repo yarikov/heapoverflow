@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     sequence(:email)     { |n| "user#{n}@test.com" }
@@ -7,7 +9,7 @@ FactoryBot.define do
     confirmed_at { Time.zone.now }
 
     factory :user_with_profile do
-      avatar { Rack::Test::UploadedFile.new("#{Rails.root}/app/assets/images/avatar.png", 'image/png') }
+      avatar { Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/avatar.png'), 'image/png') }
       sequence(:description) { |n| "Description #{n}" }
       sequence(:location)    { |n| "Pupkino #{n}" }
       sequence(:website)     { |n| "http://vasya#{n}.com" }

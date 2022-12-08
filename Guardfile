@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 scope groups: ['specs']
 
 group 'specs' do
-  guard :rspec, cmd: "bundle exec spring rspec" do
-    require "guard/rspec/dsl"
+  guard :rspec, cmd: 'bundle exec spring rspec' do
+    require 'guard/rspec/dsl'
     dsl = Guard::RSpec::Dsl.new(self)
 
     # Feel free to open issues for suggestions and improvements
@@ -18,11 +20,11 @@ group 'specs' do
     dsl.watch_spec_files_for(ruby.lib_files)
 
     # Rails files
-    rails = dsl.rails(view_extensions: %w(erb slim))
+    rails = dsl.rails(view_extensions: %w[erb slim])
     dsl.watch_spec_files_for(rails.app_files)
     dsl.watch_spec_files_for(rails.views)
 
-    watch(rails.controllers) { |m| rspec.spec.("controllers/#{m[1]}_controller") }
+    watch(rails.controllers) { |m| rspec.spec.call("controllers/#{m[1]}_controller") }
 
     # Rails config changes
     watch(rails.spec_helper)     { rspec.spec_dir }

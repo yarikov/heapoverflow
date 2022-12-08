@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_comment, only: [:update, :destroy]
+  before_action :set_comment, only: %i[update destroy]
   before_action :set_commentable, only: :create
 
   authorize_resource
@@ -35,6 +37,7 @@ class CommentsController < ApplicationController
 
   def set_commentable
     return @commentable = Question.find(params[:question_id]) if params[:question_id]
+
     @commentable = Answer.find(params[:answer_id]) if params[:answer_id]
   end
 

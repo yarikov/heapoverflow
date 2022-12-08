@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'Votable' do
   describe 'PATCH #vote_up' do
     sign_in_user
