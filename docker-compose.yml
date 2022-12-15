@@ -44,7 +44,7 @@ services:
     command: bundle exec sidekiq
 
   postgres:
-    image: postgres:9.6
+    image: postgres:15.1
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: some-long-secure-password
