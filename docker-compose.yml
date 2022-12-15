@@ -71,14 +71,14 @@ services:
           memory: 500M
 
   chrome:
-    image: seleniarm/standalone-chromium:107.0
+    image: browserless/chrome:latest
     restart: unless-stopped
-    environment:
-      SE_VNC_NO_PASSWORD: 1
-    volumes:
-      - .:/usr/src/app
     ports:
-      - '7900:7900'
+      - "4444:4444"
+    volumes:
+      - .:/app:cached
+    environment:
+      PORT: 4444
 
 volumes:
   bundle:

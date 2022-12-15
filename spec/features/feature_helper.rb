@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'capybara/cuprite'
 
-Capybara.register_driver :selenium_chrome_remote do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome, url: 'http://chrome:4444')
+Capybara.register_driver :cuprite_chrome do |app|
+  Capybara::Cuprite::Driver.new(app, url: ENV.fetch('CHROME_URL', 'http://chrome:4444'))
 end
 
 Capybara.server_port = 31_337
 Capybara.server_host = '0.0.0.0'
 Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
-Capybara.javascript_driver = :selenium_chrome_remote
+Capybara.javascript_driver = :cuprite_chrome
 
 DatabaseCleaner.allow_production = true
 DatabaseCleaner.allow_remote_database_url = true

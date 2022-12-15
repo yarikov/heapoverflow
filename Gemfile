@@ -76,10 +76,9 @@ end
 
 group :test do
   gem 'capybara-email'
+  gem 'cuprite'
   gem 'fuubar'
   gem 'json_spec'
   gem 'rails-controller-testing'
-  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'webdrivers'
 end
