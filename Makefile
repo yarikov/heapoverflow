@@ -11,6 +11,6 @@ c:
 	docker compose run -it --rm web bin/rails c
 
 setup:
-	build
+	make build
 	docker compose run -it --rm web bin/setup
-	run
+	make run
