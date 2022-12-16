@@ -12,7 +12,7 @@ feature 'Voting for answer' do
     visit question_path(question)
 
     within('.answers') do
-      expect(page).to have_selector '.vote_count', text: '0'
+      expect(page).to have_selector '.voting__count', text: '0'
     end
   end
 
@@ -24,17 +24,17 @@ feature 'Voting for answer' do
 
     scenario 'vote up for answer', js: true do
       within('.answers') do
-        find('.vote-up-off').click
-        expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_selector '.vote-up-off'
+        find('.voting__up-btn').click
+        expect(page).to have_selector '.voting__count', text: '0'
+        expect(page).to_not have_selector '.voting__up-btn--active'
       end
     end
 
     scenario 'vote down for answer', js: true do
       within('.answers') do
-        find('.vote-down-off').click
-        expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_selector '.vote-down-off'
+        find('.voting__down-btn').click
+        expect(page).to have_selector '.voting__count', text: '0'
+        expect(page).to_not have_selector '.voting__down-btn--active'
       end
     end
   end
@@ -47,25 +47,25 @@ feature 'Voting for answer' do
 
     scenario 'vote up for answer', js: true do
       within('.answers') do
-        find('.vote-up-off').click
-        expect(page).to have_selector '.vote_count', text: '1'
-        expect(page).to have_selector '.vote-up-on'
+        find('.voting__up-btn').click
+        expect(page).to have_selector '.voting__count', text: '1'
+        expect(page).to have_selector '.voting__up-btn--active'
 
-        find('.vote-up-on').click
-        expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_selector '.vote-up-off'
+        find('.voting__up-btn').click
+        expect(page).to have_selector '.voting__count', text: '0'
+        expect(page).to_not have_selector '.voting__up-btn--active'
       end
     end
 
     scenario 'vote down for answer', js: true do
       within('.answers') do
-        find('.vote-down-off').click
-        expect(page).to have_selector '.vote_count', text: '-1'
-        expect(page).to have_selector '.vote-down-on'
+        find('.voting__down-btn').click
+        expect(page).to have_selector '.voting__count', text: '-1'
+        expect(page).to have_selector '.voting__down-btn--active'
 
-        find('.vote-down-on').click
-        expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_selector '.vote-down-off'
+        find('.voting__down-btn').click
+        expect(page).to have_selector '.voting__count', text: '0'
+        expect(page).to_not have_selector '.voting__down-btn--active'
       end
     end
   end
@@ -77,17 +77,17 @@ feature 'Voting for answer' do
 
     scenario 'vote up for answer', js: true do
       within('.answers') do
-        find('.vote-up-off').click
-        expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_selector '.vote-up-off'
+        find('.voting__up-btn').click
+        expect(page).to have_selector '.voting__count', text: '0'
+        expect(page).to_not have_selector '.voting__up-btn--active'
       end
     end
 
     scenario 'vote down for answer', js: true do
       within('.answers') do
-        find('.vote-down-off').click
-        expect(page).to have_selector '.vote_count', text: '0'
-        expect(page).to have_selector '.vote-down-off'
+        find('.voting__down-btn').click
+        expect(page).to have_selector '.voting__count', text: '0'
+        expect(page).to_not have_selector '.voting__down-btn--active'
       end
     end
   end

@@ -13,7 +13,7 @@ feature 'Search', search: true do
   end
 
   scenario 'question', js: true do # DatabaseCleaner.strategy = :truncation
-    within '.search' do
+    within '.search-form' do
       fill_in 'query', with: question.body
       select 'Question', from: 'resource'
       click_on 'Search'
@@ -24,7 +24,7 @@ feature 'Search', search: true do
   end
 
   scenario 'answer', js: true do
-    within '.search' do
+    within '.search-form' do
       fill_in 'query', with: answer.body
       select 'Answer', from: 'resource'
       click_on 'Search'
@@ -34,28 +34,8 @@ feature 'Search', search: true do
     expect(page).to have_content answer.body
   end
 
-  scenario 'comment', js: true do
-    within '.search' do
-      fill_in 'query', with: comment.body
-      select 'Comment', from: 'resource'
-      click_on 'Search'
-    end
-
-    expect(page).to have_content comment.body
-  end
-
-  scenario 'user', js: true do
-    within '.search' do
-      fill_in 'query', with: user.full_name
-      select 'User', from: 'resource'
-      click_on 'Search'
-    end
-
-    expect(page).to have_content user.full_name
-  end
-
   scenario 'anything', js: true do
-    within '.search' do
+    within '.search-form' do
       fill_in 'query', with: 'body'
       select 'Anything', from: 'resource'
       click_on 'Search'
@@ -64,6 +44,5 @@ feature 'Search', search: true do
     expect(page).to have_content question.title
     expect(page).to have_content question.body
     expect(page).to have_content answer.body
-    expect(page).to have_content comment.body
   end
 end

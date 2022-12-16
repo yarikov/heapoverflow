@@ -13,7 +13,7 @@ feature 'Edit comment' do
     visit question_path(question)
 
     within '.comments' do
-      find('.show-edit-form').click
+      find('.comment__edit-btn').click
       fill_in 'comment[body]', with: 'edited comment'
       click_on 'Save'
 
@@ -27,12 +27,12 @@ feature 'Edit comment' do
     login_as(other)
     visit question_path(question)
 
-    within('.comments') { expect(page).to_not have_css '.show-edit-form' }
+    within('.comments') { expect(page).to_not have_css '.comment__edit-btn' }
   end
 
   scenario 'Guest cannot delete the comment' do
     visit question_path(question)
 
-    within('.comments') { expect(page).to_not have_css '.show-edit-form' }
+    within('.comments') { expect(page).to_not have_css '.comment__edit-btn' }
   end
 end

@@ -1,31 +1,29 @@
 = turbo_frame_tag @question
-  .question data={question_id: "#{@question.id}", user_id: "#{current_user.id if user_signed_in?}"}
+  .headline.mb-3
+    h4.headline__title = @question.title
 
-    h3 = @question.title
-
-    .row
-      .col-xs-1
-        = render 'votes/vote', votable: @question
+  .content
+    .post__wrapper.question
+      .post__btn-group.pe-3
+        = render 'votes/voting', votable: @question
         = render 'questions/subscription', question: @question, subscription: @subscription
 
-      .col-xs-11
-        .question-body.clearfix
+      .post data={ controller: 'form' }
+        .post__body
           = markdown @question.body
-          .tags
-            = raw @question.tag_list.map { |tag| link_to tag, tagged_questions_path(tag), class: 'tag' }.join(' ')
-
-        div data={ controller: 'form' }
+        .post__tags.mb-3
+          .tag-group
+            - @question.tag_list.each do |tag|
+              = link_to tag, tagged_questions_path(tag), class: 'tag-group__item'
+        .post__link-group
           - if can?(:update, @question)
-            .post-menu
-              = link_to 'Edit', '', data: { action: 'click->form#showForm' }
-              = link_to 'Delete', @question, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
-
-          = render 'common/post_user_info', post: @question, question: @question
-
-          .clearfix
-
+            = link_to 'Edit', '', data: { action: 'click->form#showForm' }, class: 'post__link-group-item me-1'
+            = link_to 'Delete', @question, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'post__link-group-item'
+        = render 'common/post_user_info', post: @question, question: @question
+        .clearfix
+        .post__edit-form
           - if can?(:update, @question)
             = turbo_frame_tag "#{dom_id(@question)}_edit"
               == render 'form'
-
-        = render 'comments/list', commentable: @question
+        .post__comments.mt-3
+          = render 'comments/list', commentable: @question

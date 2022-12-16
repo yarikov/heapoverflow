@@ -9,7 +9,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook twitter]
 
   has_one_attached :avatar do |attachable|
-    attachable.variant :medium, resize_to_fill: [300, 300]
+    attachable.variant :medium, resize_to_fill: [320, 320]
     attachable.variant :thumb, resize_to_fill: [100, 100]
   end
 

@@ -1,4 +1,4 @@
 = simple_form_for shallow_path(@question, answer), remote: true, data: { 'form-target': 'form' },
-                  html: { class: "#{'hidden' unless answer.errors.any? || answer.new_record?}" } do |f|
-  = f.input :body, label: false, input_html: { data: { 'form-target': 'autofocus' } }
+                  html: { class: "#{'d-none' unless answer.errors.any? || answer.new_record?}" } do |f|
+  = f.input :body, label: false, input_html: { data: { 'form-target': 'autofocus' }, rows: 10 }
   == render 'common/buttons', resource: answer, f: f

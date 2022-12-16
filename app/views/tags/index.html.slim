@@ -1,13 +1,14 @@
-h3 Tags
-.tags-list
-  .row
-    - @tags.each_with_index do |tag, index|
-      .col-xs-3
-        = link_to tag, tagged_questions_path(tag.name), class: 'tag'
-        span.item-multiplier-x ×
-        span.item-multiplier-count
-          = tag.taggings_count
+.headline.mb-3
+  h4.headline__title Tags
 
-.row
-  .col-lg-9
-    = paginate @tags
+.content
+  .tags.mb-3.mt-1
+    .row
+      - @tags.each_with_index do |tag, index|
+        .col-md-6.col-lg-3.mt-2
+          = link_to tag, tagged_questions_path(tag.name), class: 'tags__item'
+          span.tags__item-multiplier ×
+          span.tags__item-count
+            = tag.taggings_count
+
+  == pagy_bootstrap_nav @pagy

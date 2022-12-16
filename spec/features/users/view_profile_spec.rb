@@ -15,8 +15,8 @@ feature 'View profile' do
     expect(page).to have_link user.website
     expect(page).to have_link user.twitter
     expect(page).to have_link user.github
-    within('.questions') { expect(page).to have_content user.questions.count }
-    within('.answers')   { expect(page).to have_content user.answers.count }
+    expect(page).to have_content "#{user.questions.count} question"
+    expect(page).to have_content "#{user.answers.count} answer"
   end
 
   scenario 'The user sees link to edit profile' do

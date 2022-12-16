@@ -8,7 +8,7 @@ feature 'User sign out' do
     login_as(user)
 
     visit root_path
-    click_on 'Sign out'
+    click_on 'Sign out', match: :first
 
     expect(page).to have_content 'Signed out successfully.'
   end

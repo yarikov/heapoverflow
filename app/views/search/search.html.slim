@@ -1,34 +1,26 @@
-.search
-  .row
-    .col-lg-9
-      h3 Search
-      = form_tag search_path, method: :get do
-        .row
-          .col-xs-9
-            = search_field_tag :query, params[:query], placeholder: 'Search...', class: 'form-control'
-          .col-xs-2
-            = select_tag :resource, options_for_select(Searcher::MODELS, params[:resource]), prompt: 'Anything', class: 'form-control'
-          .col-xs-1
-            = submit_tag 'Search', class: 'btn btn-primary'
-      .row
-        .col-xs-12
-          .result
-            - @resources.each do |resource|
-              - if resource.is_a?(Question)
-                .question-summary
-                  .summary
-                    = link_to resource.title, resource
-                  .search-body
-                    = resource.body
-              - elsif resource.is_a?(Answer)
-                .question-summary
-                  .summary
-                    = link_to resource.question.title, resource.question
-                  .search-body
-                    = resource.body
-              - elsif resource.is_a?(Comment)
-                p = resource.body
-              - elsif resource.is_a?(User)
-                p = link_to resource.full_name, resource
+.headline.mb-3
+  h4.headline__title Search
 
-            = paginate @resources if @resources.any?
+.content
+  .search-form.mt-3
+    = simple_form_for '', url: search_path, method: :get do |f|
+      = f.input :query, placeholder: 'Search...', input_html: { value: params[:query] }, label: false
+      = f.input :resource, as: :select, collection: Searcher::MODELS, selected: params[:resource], include_blank: 'Anything', label: false
+      = f.submit 'Search', class: 'btn btn-primary'
+
+  .search-result.mb-3
+    - @resources.each do |resource|
+      - if resource.is_a?(Question)
+        .search-result__item.mt-3.mb-3
+          .search-result__item-title.mb-1
+            = link_to resource.title, resource
+          .search-result__item-body
+            = markdown truncate(resource.body, length: 300)
+      - elsif resource.is_a?(Answer)
+        .search-result__item.mt-3.mb-3
+          .search-result__item-title.mb-1
+            = link_to resource.question.title, resource.question
+          .search-result__item-body
+            = markdown truncate(resource.body, length: 300)
+
+  == pagy_bootstrap_nav @pagy

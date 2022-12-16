@@ -29,10 +29,13 @@ feature 'Question editing', '
         click_on 'Save'
 
         expect(page).to_not have_content question.body
-        expect(page).to have_content 'edited question title'
         expect(page).to have_content 'edited question body'
         expect(page).to_not have_selector 'text_field'
         expect(page).to_not have_selector 'textarea'
+      end
+
+      within '.headline' do
+        expect(page).to have_content 'edited question title'
       end
     end
   end

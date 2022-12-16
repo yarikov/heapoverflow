@@ -12,7 +12,7 @@ feature 'Delete the comment' do
     login_as(user)
 
     visit question_path(question)
-    find('.delete-comment').click
+    find('.comment__delete-btn').click
 
     expect(page).to_not have_content comment.body
     expect(current_path).to eq question_path(question)
@@ -22,12 +22,12 @@ feature 'Delete the comment' do
     login_as(other)
     visit question_path(question)
 
-    expect(page).to_not have_css '.delete-comment'
+    expect(page).to_not have_css '.comment__delete-btn'
   end
 
   scenario 'Guest cannot delete the comment' do
     visit question_path(question)
 
-    expect(page).to_not have_css '.delete-comment'
+    expect(page).to_not have_css '.comment__delete-btn'
   end
 end

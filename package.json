@@ -5,13 +5,14 @@
     "@hotwired/stimulus": "^3.1.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@rails/ujs": "^7.0.4",
-    "bootstrap-sass": "3.4.3",
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.2",
     "esbuild": "^0.15.15",
-    "jquery": "3.6.1",
     "sass": "^1.56.1"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
-    "build:css": "cp -r ./node_modules/bootstrap-sass/assets/fonts/bootstrap ./app/assets/builds && sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }

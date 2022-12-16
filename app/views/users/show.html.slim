@@ -1,23 +1,22 @@
 = render 'nav'
+
 .profile
   .row
-    .col-xs-4.col-md-3
-      .avatar
-        = image_tag avatar_path(@user, :medium)
-    .col-xs-8.col-md-6
-      h3 = @user.full_name
-      p = @user.description
-    .col-xs-3
-      .stat
-        .answers = @user.answers.count
-        p answers
-      .stat
-        .questions = @user.questions.count
-        p questions
-      ul
-        li = @user.location
-        li = link_to @user.website, @user.website if @user.website
-        li = link_to @user.twitter, @user.twitter if @user.twitter
-        li = link_to @user.github, @user.github if @user.github
-        li Member for #{time_ago_in_words(@user.created_at)}
-        li #{@user.impressionist_count(filter: :session_hash)} profile views
+    .col-md-3
+      .profile__avatar-wrapper
+        = image_tag avatar_path(@user, :medium), class: 'profile__avatar'
+    .col-md-6.mt-3.mt-md-0
+      .profile__info
+        h3 = @user.full_name
+        p = @user.description
+    .col-md-3
+      .profile__details
+        ul.profile__details-list
+          li.profile__details-list-item = @user.location
+          li.profile__details-list-item = link_to @user.website, @user.website if @user.website
+          li.profile__details-list-item = link_to @user.twitter, @user.twitter if @user.twitter
+          li.profile__details-list-item = link_to @user.github, @user.github if @user.github
+          li.profile__details-list-item Member for #{time_ago_in_words(@user.created_at)}
+          li.profile__details-list-item = pluralize(@user.impressionist_count(filter: :session_hash), 'profile view')
+          li.profile__details-list-item = pluralize(@user.answers.count, 'answer')
+          li.profile__details-list-item = pluralize(@user.questions.count, 'question')

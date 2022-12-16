@@ -11,11 +11,11 @@ class QuestionsController < ApplicationController
   authorize_resource
 
   def index
-    respond_with @questions = Question.newest.page(params[:page]).per(15)
+    @pagy, @questions = pagy(Question.newest)
   end
 
   def tagged
-    @questions = Question.tagged_with(params[:tag]).page(params[:page]).per(15)
+    @pagy, @questions = pagy(Question.tagged_with(params[:tag]))
     render :index
   end
 

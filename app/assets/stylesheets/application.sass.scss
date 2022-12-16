@@ -1,16 +1,10 @@
-// Entry point for your Sass build
-@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass/assets/stylesheets/bootstrap";
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
+
 @import "pygments";
 @import "custom";
 @import "users";
 @import "questions";
+@import "comments";
 @import "tags";
-@import "votes";
 @import "devise";
-
-@font-face {
-  font-family: "Glyphicons Halflings";
-  src: url("./bootstrap/glyphicons-halflings-regular.eot");
-  src: url("./bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("./bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("./bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("./bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("./bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
-}

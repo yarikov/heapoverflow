@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'capybara/cuprite'
 
 Capybara.register_driver :cuprite_chrome do |app|
-  Capybara::Cuprite::Driver.new(app, url: ENV.fetch('CHROME_URL', 'http://chrome:4444'))
+  Capybara::Cuprite::Driver.new(app, window_size: [1400, 1400], url: ENV.fetch('CHROME_URL', 'http://chrome:4444'))
 end
 
 Capybara.server_port = 31_337

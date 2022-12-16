@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   impressionist actions: [:show]
 
   def index
-    @users = User.order(full_name: 'asc').page(params[:page]).per(28)
+    @pagy, @users = pagy(User.order(full_name: 'asc'), items: 32)
   end
 
   def show; end

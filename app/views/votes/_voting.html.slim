@@ -1,0 +1,24 @@
+= turbo_frame_tag "vote_#{dom_id(votable)}", class: 'voting'
+  - if current_user&.vote_up?(votable)
+    = link_to '',
+              send(:"#{votable.model_name.singular}_vote_path", votable),
+              data: { turbo_method: :delete },
+              class: 'bi bi-arrow-up-square-fill voting__up-btn voting__up-btn--active'
+  - else
+    = link_to '',
+              send(:"up_#{votable.model_name.singular}_vote_path", votable),
+              data: { turbo_method: :patch },
+              class: 'bi bi-arrow-up-square-fill voting__up-btn'
+
+  span.voting__count = votable.vote_count
+
+  - if current_user&.vote_down?(votable)
+    = link_to '',
+              send(:"#{votable.model_name.singular}_vote_path", votable),
+              data: { turbo_method: :delete },
+              class: 'bi bi-arrow-down-square-fill voting__down-btn voting__down-btn--active'
+  - else
+    = link_to '',
+              send(:"down_#{votable.model_name.singular}_vote_path", votable),
+              data: { turbo_method: :patch },
+              class: 'bi bi-arrow-down-square-fill voting__down-btn'

@@ -1,6 +1,7 @@
-= turbo_frame_tag "best_answer_#{answer.id}"
-  .best-answer
-    - if can?(:best, answer)
-      = best_link_to best_answer_path(answer), answer
-    - elsif answer.best
-      i.glyphicon.glyphicon-ok.best
+= turbo_frame_tag "best_answer_#{answer.id}", class: 'best-answer mt-2'
+  - if can?(:best, answer)
+    = link_to '', best_answer_path(answer),
+              data: { turbo_method: :patch },
+              class: "bi bi-check-circle-fill best-answer__btn #{'best-answer__btn--active' if answer.best}"
+  - elsif answer.best?
+    i.bi.bi-check-circle-fill.best-answer__btn class="#{'best-answer__btn--active' if answer.best?}"

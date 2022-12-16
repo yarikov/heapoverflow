@@ -5,12 +5,12 @@ export default class extends Controller {
 
   showForm(event) {
     event.preventDefault()
-    this.formTarget.classList.remove('hidden')
+    this.formTarget.classList.remove('d-none')
     this.autofocusTarget.focus()
   }
 
   closeForm(event) {
     event.preventDefault()
-    this.formTarget.classList.add('hidden')
+    this.formTarget.classList.add('d-none')
   }
 }

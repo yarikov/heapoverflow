@@ -1,7 +1,7 @@
 = turbo_frame_tag "#{dom_id(@question)}_form"
   = simple_form_for @question, remote: @question.persisted?, data: { 'form-target': 'form' },
-                    html: { class: "#{'hidden' unless @question.errors.any? || @question.new_record?}" } do |f|
+                    html: { class: "#{'d-none' unless @question.errors.any? || @question.new_record?}" } do |f|
     = f.input :title, autofocus: true, input_html: { data: { 'form-target': 'autofocus' }}
-    = f.input :body
+    = f.input :body, input_html: { rows: 10 }
     = f.input :tag_list, label: 'Tags', input_html: { value: @question.tag_list.to_s }
     == render 'common/buttons', resource: @question, f: f

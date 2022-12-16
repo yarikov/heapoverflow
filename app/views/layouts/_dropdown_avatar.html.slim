@@ -1,2 +1,2 @@
-= turbo_frame_tag 'dropdown_avatar', class: 'dropdown-toggle hidden-xs', data: { toggle: 'dropdown' }
-  = image_tag avatar_path(current_user, :thumb)
+= turbo_frame_tag 'dropdown_avatar', data: { 'bs-toggle': 'dropdown' }
+  = image_tag avatar_path(current_user, :thumb), class: 'dropdown__avatar'

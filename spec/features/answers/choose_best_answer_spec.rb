@@ -18,12 +18,8 @@ feature 'The best answer', '
     visit question_path(question)
 
     within ".answer-#{answer.id}" do
-      find('.not_best').click
-      expect(page).to have_css 'a.glyphicon.glyphicon-ok.best'
-    end
-
-    within ".answer-#{best_answer.id}" do
-      expect(page).to_not have_css 'a.glyphicon.glyphicon-ok.best'
+      find('.best-answer__btn').click
+      expect(page).to have_css 'a.best-answer__btn--active'
     end
   end
 
@@ -31,20 +27,20 @@ feature 'The best answer', '
     login_as(user)
     visit question_path(question)
 
-    expect(page).to_not have_css 'a.glyphicon.glyphicon-ok'
+    expect(page).to_not have_css 'a.best-answer__btn'
 
     within(".answer-#{best_answer.id}") do
-      expect(page).to have_css 'i.glyphicon.glyphicon-ok.best'
+      expect(page).to have_css 'i.best-answer__btn'
     end
   end
 
   scenario 'Unauthenticated user try to choose the best answer' do
     visit question_path(question)
 
-    expect(page).to_not have_css 'a.glyphicon.glyphicon-ok'
+    expect(page).to_not have_css 'a.best-answer__btn'
 
     within(".answer-#{best_answer.id}") do
-      expect(page).to have_css 'i.glyphicon.glyphicon-ok.best'
+      expect(page).to have_css 'i.best-answer__btn'
     end
   end
 end

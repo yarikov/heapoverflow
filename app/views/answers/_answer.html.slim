@@ -1,28 +1,22 @@
 - if answer.persisted?
-  = turbo_frame_tag answer do
-    div class="answer answer-#{answer.id}"
-      .row
-        .col-xs-1
-          = render 'votes/vote', votable: answer
-          = render 'answers/best', answer: answer
+   = turbo_frame_tag answer do
+    .post__wrapper class="answer-#{answer.id}"
+      .post__btn-group.pe-3
+        = render 'votes/voting', votable: answer
+        = render 'answers/best', answer: answer
 
-        .col-xs-11
-          .answer-body
-            = markdown answer.body
-
-          div data={ controller: 'form' }
-            - if can?(:update, answer)
-              .post-menu
-                = link_to 'Edit', '', data: { action: 'click->form#showForm' }
-                = link_to 'Delete', answer, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
-
-            = render 'common/post_user_info', post: answer, question: answer.question
-
-            .clearfix
-
-            - if can?(:update, answer)
-              = turbo_frame_tag "#{dom_id(answer)}_edit"
-                = render 'answers/form', answer: answer
-
-
+      .post data={ controller: 'form' }
+        .post__body
+          = markdown answer.body
+        .post__link-group
+          - if can?(:update, answer)
+            = link_to 'Edit', '', data: { action: 'click->form#showForm' }, class: 'post__link-group-item me-1'
+            = link_to 'Delete', answer, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'post__link-group-item'
+        = render 'common/post_user_info', post: answer, question: answer.question
+        .clearfix
+        .post__edit-form
+          - if can?(:update, answer)
+            = turbo_frame_tag "#{dom_id(answer)}_edit"
+              = render 'answers/form', answer: answer
+        .post__comments.mt-3
           = render 'comments/list', commentable: answer

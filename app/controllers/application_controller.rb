@@ -4,6 +4,8 @@ require 'application_responder'
 
 class ApplicationController < ActionController::Base
   include ActiveStorage::SetCurrent
+  include Pagy::Backend
+
   serialization_scope :view_context
 
   self.responder = ApplicationResponder

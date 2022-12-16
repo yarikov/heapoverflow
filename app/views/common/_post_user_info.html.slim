@@ -1,5 +1,5 @@
-.post-user-info class="#{'post-user-info--author' if post.user.author_of?(question)}"
-  span #{post.is_a?(Question) ? 'asked' : 'answered'} #{post.created_at.to_fs(:my_short)}
+.post__user-info class="#{'post__user-info--author' if post.user.author_of?(question)}"
+  span.post__user-info-asked #{post.is_a?(Question) ? 'asked' : 'answered'} #{post.created_at.to_fs(:my_short)}
   = link_to post.user do
-    = image_tag avatar_path(post.user, :thumb)
-  = link_to post.user.full_name, post.user
+    = image_tag avatar_path(post.user, :thumb), class: 'post__user-info-img'
+  = link_to post.user.full_name, post.user, class: 'post__user-info-link'

@@ -10,7 +10,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @subscription = current_user.subscriptions.destroy_by(question: @question)
+    current_user.subscriptions.destroy_by(question: @question)
   end
 
   private

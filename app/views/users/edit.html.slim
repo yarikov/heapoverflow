@@ -1,16 +1,14 @@
 = render 'nav'
 .edit-profile
   .row
-    .col-lg-9
-      .row
-        .col-xs-3
-          = render 'avatars/uploader', user: @user
-        .col-xs-9
-          = simple_form_for @user do |f|
-            = f.input :full_name
-            = f.input :location
-            = f.input :description
-            = f.input :website
-            = f.input :twitter
-            = f.input :github
-            = f.button :submit, 'Save profile'
+    .col-md-3
+      = render 'avatars/uploader', user: @user
+    .col-md-9
+      = simple_form_for @user do |f|
+        = f.input :full_name
+        = f.input :location
+        = f.input :description
+        = f.input :website
+        = f.input :twitter
+        = f.input :github
+        = f.button :submit, 'Save profile', class: 'btn btn-primary'

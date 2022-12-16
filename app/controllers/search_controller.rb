@@ -5,5 +5,6 @@ class SearchController < ApplicationController
 
   def search
     @resources = Searcher.call(params[:query], params[:resource], page: params[:page], per_page: 15)
+    @pagy = Pagy.new_from_searchkick(@resources)
   end
 end

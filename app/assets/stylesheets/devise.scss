@@ -1,67 +1,21 @@
 .sign-form {
-  max-width: 360px;
-  padding: 20px;
+  max-width: 480px;
+  padding: 1.2rem;
   margin: 50px auto;
-  background: #f8f8f8;
-  border: 1px solid #e0e0e0;
+  border: 1px solid $border-color;
   border-radius: 4px;
 
-  h2 {
-    text-align: center;
-    margin: 10px 0 20px;
+  &__remember-me-checkbox {
+    margin: -5px 0 9px;
+    vertical-align: middle;
   }
 
-  .form-control {
-    position: relative;
-    font-size: 16px;
-    height: auto;
-    padding: 10px;
-  }
-
-  label {
+  &__remember-me-label {
     padding: 0 0 1px 5px;
     margin: -5px 0 10px;
     font-weight: 400;
     cursor: pointer;
     vertical-align: middle;
-  }
-
-  #user_remember_me {
-    margin: -5px 0 9px;
-    vertical-align: middle;
-  }
-
-  .btn {
-    border-radius: 4px;
-  }
-
-  .btn-facebook {
-    background: #3b5998;
-    border: 1px solid #3b5998;
-    font-size: 16px;
-    color: white;
-    width: 49%;
-  }
-
-  .btn-twitter {
-    background: #00aced;
-    border: 1px solid #00aced;
-    font-size: 16px;
-    color: white;
-    width: 49%;
-    float: right;
-    margin: 0;
-  }
-
-  .btn-facebook:hover { background: #3b4598; }
-  .btn-twitter:hover  { background: #0099ed; }
-
-  span {
-    display: block;
-    margin: 10px 0;
-  }
-
-  .sign-up {
-    margin-top: 15px;
+    color: $gray-600;
   }
 }

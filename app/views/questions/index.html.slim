@@ -1,32 +1,30 @@
-.row
-  .col-lg-12
-    h3.pull-left = params[:tag] ? "Questions tagged [#{params[:tag]}]" : 'All Questions'
+.headline.mb-3
+  h4.headline__title = params[:tag] ? "Questions tagged [#{params[:tag]}]" : 'All Questions'
+  = link_to 'Ask Question', new_question_path, class: 'btn btn-primary'
 
-.row
-  .col-lg-9
-    .content
-      - @questions.each do |question|
-        .question-summary
-          .row
-            .col-xs-3
-              .votes
-                .mini-counts
-                  = question.vote_count
-                p votes
-              .answers
-                .mini-counts
-                   = question.answers.count
-                p answers
-              .views
-                .mini-counts
-                  = question.impressionist_count(filter: :session_hash)
-                p views
-            .col-xs-9
-              .summary
-                = link_to question.title, question
-              .clearfix
-              .tags
-                = raw question.tag_list.map { |tag| link_to tag, tagged_questions_path(tag), class: 'tag' }.join(' ')
-              p asked #{time_ago_in_words(question.created_at)} ago #{link_to question.user.full_name, question.user}
+.content
+  .questions.mb-3
+    - @questions.each do |question|
+      .question-summary.pt-3.pb-3
+        .question-summary__stats
+          .question-summary__stats-item
+            span.question-summary__stats-item-count = question.vote_count
+            span.question-summary__stats-item-unit votes
+          .question-summary__stats-item
+            span.question-summary__stats-item-count = question.answers.count
+            span.question-summary__stats-item-unit answers
+          .question-summary__stats-item
+            span.question-summary__stats-item-count = question.impressionist_count(filter: :session_hash)
+            span.question-summary__stats-item-unit views
 
-      = paginate @questions
+        .question-summary__content.ps-3
+          .question-summary__content-title.mb-1
+            = link_to question.title, question, class: 'question-summary__content-title-link'
+          .question-summary__content-tags
+            .tag-group
+              - question.tag_list.each do |tag|
+                = link_to tag, tagged_questions_path(tag), class: 'tag-group__item'
+          span.question-summary__content-asked.mt-1
+            | asked #{time_ago_in_words(question.created_at)} ago #{link_to question.user.full_name, question.user, class: 'question-summary__content-asked-by-link'}
+
+  == pagy_bootstrap_nav @pagy

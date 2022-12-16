@@ -15,10 +15,10 @@ feature 'Subscribe to question' do
     scenario 'can subscribe to question', js: true do
       visit question_path(question)
 
-      find('.subscribe').click
+      find('.subscription__btn').click
 
       within '.subscription' do
-        expect(page).to have_css '.unsubscribe'
+        expect(page).to have_css '.subscription__btn--active'
         expect(page).to have_content '2'
       end
     end
@@ -26,10 +26,10 @@ feature 'Subscribe to question' do
     scenario 'can unsubscribe from question', js: true do
       visit question_path(subscribed_question)
 
-      find('.unsubscribe').click
+      find('.subscription__btn').click
 
       within '.subscription' do
-        expect(page).to have_css '.subscribe'
+        expect(page).to_not have_css '.subscription__btn--active'
         expect(page).to have_content '0'
       end
     end

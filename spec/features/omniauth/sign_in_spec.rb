@@ -2,7 +2,7 @@
 
 require_relative '../feature_helper'
 
-feature 'User sign in' do
+xfeature 'User sign in' do
   describe 'with Facebook' do
     scenario 'fail' do
       visit new_user_session_path

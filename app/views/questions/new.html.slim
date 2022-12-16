@@ -1,20 +1,7 @@
-.row
-  .col-lg-12
-    h3.pull-left Ask a public question
+.headline.mb-3
+  h4.headline__title Ask a public question
 
-.row
-  .col-lg-9
-    .content
-      .alert.alert-info.write-question-info
-        h4 Writing a good question
-        p You’re ready to ask a programming-related question and this form will help guide you through the process.
-        h5 Steps
-        ul
-          li Summarize your problem in a one-line title.
-          li Describe your problem in more detail.
-          li Describe what you tried and what you expected to happen.
-          li Add “tags” which help surface your question to members of the community.
-          li Review your question and post it to the site.
-
-      .question-form
-        == render 'form'
+.content
+  .new-question.mt-3
+    .new-question__form
+      == render 'form'
