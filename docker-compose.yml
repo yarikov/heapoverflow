@@ -1,46 +1,40 @@
 version: '3.9'
 
+x-app: &app
+  platform: linux/amd64
+  build:
+    context: .
+    args:
+      RUBY_VERSION: 3.1.2
+      NODE_VERSION: 18.12.1
+      BUNDLER_VERSION: 2.3.26
+  image: heapoverflow:2.0.5
+  stdin_open: true
+  tty: true
+  restart: unless-stopped
+  environment:
+    DATABASE_URL: postgres://postgres:some-long-secure-password@postgres:5432
+    REDIS_URL: redis://redis:6379
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+  volumes:
+    - .:/usr/src/app
+    - bundle:/usr/local/bundle
+  tmpfs:
+    - /usr/src/app/tmp/pids
+  depends_on:
+    - postgres
+    - redis
+    - elasticsearch
+
 services:
   web:
-    build: .
-    image: heapoverflow:2.0.4
-    stdin_open: true
-    tty: true
-    restart: unless-stopped
+    <<: *app
     ports:
       - '3000:3000'
-    environment:
-      DATABASE_URL: postgres://postgres:some-long-secure-password@postgres:5432
-      REDIS_URL: redis://redis:6379
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-    volumes:
-      - .:/usr/src/app
-      - bundle:/usr/local/bundle
-    tmpfs:
-      - /usr/src/app/tmp/pids
-    depends_on:
-      - postgres
-      - redis
-      - elasticsearch
     command: bin/dev
 
   sidekiq:
-    build: .
-    image: heapoverflow:2.0.4
-    stdin_open: true
-    tty: true
-    restart: unless-stopped
-    environment:
-      DATABASE_URL: postgres://postgres:some-long-secure-password@postgres:5432
-      REDIS_URL: redis://redis:6379
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-    volumes:
-      - .:/usr/src/app
-      - bundle:/usr/local/bundle
-    depends_on:
-      - postgres
-      - redis
-      - elasticsearch
+    <<: *app
     command: bundle exec sidekiq
 
   postgres:

@@ -1,5 +1,5 @@
 build:
-	docker build --platform linux/amd64 -t heapoverflow:2.0.4 .
+	docker compose build web
 
 run:
 	docker compose up
