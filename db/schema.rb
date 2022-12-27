@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_111012) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_27_124157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -153,6 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_111012) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_subscriptions_on_question_id"
+    t.index ["user_id", "question_id"], name: "index_subscriptions_on_user_id_and_question_id", unique: true
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
@@ -217,6 +218,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_111012) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "votable_id", "votable_type"], name: "index_votes_on_user_id_and_votable_id_and_votable_type", unique: true
     t.index ["user_id"], name: "index_votes_on_user_id"
     t.index ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type"
   end
