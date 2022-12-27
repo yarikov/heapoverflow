@@ -2,7 +2,6 @@
 
 source 'https://rubygems.org'
 
-gem 'active_model_serializers'
 gem 'active_storage_validations'
 gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on'
 gem 'bootsnap', require: false
@@ -14,11 +13,7 @@ gem 'elasticsearch'
 gem 'faker', require: false
 gem 'image_processing', '~> 1.2'
 gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist'
-gem 'jbuilder', '~> 2.0'
 gem 'jsbundling-rails', '~> 1.0'
-gem 'mimemagic', '~> 0.3.9'
-gem 'oj'
-gem 'oj_mimic_json'
 gem 'omniauth', '~> 1.9.2'
 gem 'omniauth-facebook', '~> 5.0.0'
 gem 'omniauth-twitter'
@@ -34,13 +29,9 @@ gem 'responders'
 gem 'searchkick'
 gem 'sidekiq'
 gem 'simple_form'
-gem 'sinatra', git: 'https://github.com/sinatra/sinatra',
-               ref: '6f15fba2790ebdf4d1215cebf425dea2ea3130ea',
-               require: false
 gem 'slim-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
-gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'whenever'
 

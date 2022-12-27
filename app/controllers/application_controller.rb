@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   include ActiveStorage::SetCurrent
   include Pagy::Backend
 
-  serialization_scope :view_context
-
   self.responder = ApplicationResponder
   respond_to :html
 
