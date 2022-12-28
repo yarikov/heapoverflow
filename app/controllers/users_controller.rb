@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   authorize_resource
   impressionist actions: [:show]
 
+  rescue_from CanCan::AccessDenied do
+    redirect_to action: :show
+  end
+
   def index
     @pagy, @users = pagy(User.order(full_name: 'asc'), items: 32)
   end

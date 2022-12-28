@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :answer do
     user
+    question
     sequence(:body) { |n| "Answer body #{n}" }
 
     factory :old_answer do

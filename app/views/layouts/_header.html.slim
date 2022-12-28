@@ -26,5 +26,5 @@ nav.navbar.navbar-expand-lg.bg-light
         - else
           li.nav-item = link_to 'Sign in', new_user_session_path, class: "nav-link #{active(sessions: ['new'])}"
           li.nav-item = link_to 'Sign up', new_user_registration_path, class: "nav-link #{active(registrations: ['new'])}"
-      = form_tag search_path, method: :get, class: 'd-flex ms-auto mb-3 mt-3 mt-lg-0 mb-lg-0 order-lg-2' do |f|
-        = search_field_tag :query, params[:query], placeholder: 'Search...', class: 'form-control me-2'
+      = form_tag search_path, method: :get, class: 'd-flex mb-3 mt-3 ms-lg-3 me-lg-3 mt-lg-0 mb-lg-0 order-lg-2 search-form' do |f|
+        = search_field_tag :query, params[:query], placeholder: 'Search...', class: 'form-control'

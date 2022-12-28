@@ -1,13 +1,7 @@
 .headline.mb-3
-  h4.headline__title Search
+  h4.headline__title Search Results
 
 .content
-  .search-form.mt-3
-    = simple_form_for '', url: search_path, method: :get do |f|
-      = f.input :query, placeholder: 'Search...', input_html: { value: params[:query] }, label: false
-      = f.input :resource, as: :select, collection: Searcher::MODELS, selected: params[:resource], include_blank: 'Anything', label: false
-      = f.submit 'Search', class: 'btn btn-primary'
-
   .search-result.mb-3
     - @resources.each do |resource|
       - if resource.is_a?(Question)
@@ -19,7 +13,7 @@
       - elsif resource.is_a?(Answer)
         .search-result__item.mt-3.mb-3
           .search-result__item-title.mb-1
-            = link_to resource.question.title, resource.question
+            = link_to resource.question.title, question_path(resource.question, anchor: resource.id)
           .search-result__item-body
             = markdown truncate(resource.body, length: 300)
 

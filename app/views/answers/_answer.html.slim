@@ -1,6 +1,6 @@
 - if answer.persisted?
    = turbo_frame_tag answer do
-    .post__wrapper class="answer-#{answer.id}"
+    .post__wrapper class="answer-#{answer.id}" id=answer.id
       .post__btn-group.pe-3
         = render 'votes/voting', votable: answer
         = render 'answers/best', answer: answer

@@ -5,9 +5,9 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-require 'capybara/email/rspec'
 require 'cancan/matchers'
 require 'sidekiq/testing'
+require 'test_prof/recipes/rspec/let_it_be'
 
 Sidekiq::Testing.fake!
 
@@ -37,8 +37,6 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
   config.include OmniauthMacros
-  config.include ApplicationHelper, type: :feature
-  config.include Warden::Test::Helpers, type: :feature
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

@@ -74,7 +74,7 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'with invalid attributes' do
       let(:request) do
-        post :create, params: { question: attributes_for(:invalid_question) }
+        post :create, params: { question: attributes_for(:question, :invalid) }
       end
 
       it 'does not save the question in the database' do

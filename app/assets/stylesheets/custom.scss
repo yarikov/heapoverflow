@@ -39,6 +39,10 @@ a {
   border-top: 1px solid $border-color;
 }
 
+.search-form {
+  flex: auto;
+}
+
 .dropdown__avatar {
   width: 38px;
   height: auto;
