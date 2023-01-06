@@ -36,9 +36,7 @@ gem 'unicorn'
 gem 'whenever'
 
 group :development, :test do
-  gem 'database_cleaner'
   gem 'factory_bot_rails', '~> 5.2.0'
-  gem 'launchy'
   gem 'pry-byebug'
   gem 'pry-highlight'
   gem 'pry-rails'
@@ -46,7 +44,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'better_errors'
   gem 'capistrano', require: false
   gem 'capistrano3-unicorn', require: false
   gem 'capistrano-bundler', require: false
