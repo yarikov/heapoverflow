@@ -27,4 +27,4 @@
           span.question-summary__content-asked.mt-1
             | asked #{time_ago_in_words(question.created_at)} ago #{link_to question.user.full_name, question.user, class: 'question-summary__content-asked-by-link'}
 
-  == pagy_bootstrap_nav @pagy
+  == pagy_bootstrap_nav @pagy if @pagy.pages > 1

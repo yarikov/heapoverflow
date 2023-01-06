@@ -11,4 +11,4 @@
           span.tags__item-count
             = tag.taggings_count
 
-  == pagy_bootstrap_nav @pagy
+  == pagy_bootstrap_nav @pagy if @pagy.pages > 1

@@ -17,4 +17,4 @@
           .search-result__item-body
             = markdown truncate(resource.body, length: 300)
 
-  == pagy_bootstrap_nav @pagy
+  == pagy_bootstrap_nav @pagy if @pagy.pages > 1
