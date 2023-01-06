@@ -69,8 +69,6 @@ group :test do
   gem 'capybara-email'
   gem 'cuprite'
   gem 'fuubar'
-  gem 'json_spec'
-  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'test-prof'
 end

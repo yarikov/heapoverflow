@@ -229,9 +229,6 @@ GEM
     jsbundling-rails (1.0.3)
       railties (>= 6.0.0)
     json (2.6.2)
-    json_spec (1.1.5)
-      multi_json (~> 1.0)
-      rspec (>= 2.0, < 4.0)
     jwt (2.5.0)
     kgio (2.11.4)
     launchy (2.5.0)
@@ -350,10 +347,6 @@ GEM
       activesupport (= 7.0.4)
       bundler (>= 1.15.0)
       railties (= 7.0.4)
-    rails-controller-testing (1.0.5)
-      actionpack (>= 5.0.1.rc1)
-      actionview (>= 5.0.1.rc1)
-      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -519,7 +512,6 @@ DEPENDENCIES
   image_processing (~> 1.2)
   impressionist!
   jsbundling-rails (~> 1.0)
-  json_spec
   launchy
   letter_opener
   omniauth (~> 1.9.2)
@@ -534,7 +526,6 @@ DEPENDENCIES
   puma (~> 5.6.5)
   pygments.rb
   rails (~> 7.0.4)
-  rails-controller-testing
   redcarpet
   redis (~> 4.0)
   responders
