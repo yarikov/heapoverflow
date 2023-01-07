@@ -1,0 +1,74 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "ddc487a50f1167c74ac46988f56930f8f30583d278ea2c840f461615c4a27a6e",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/users/show.html.slim",
+      "line": 16,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(User.find(params[:id]).website, User.find(params[:id]).website)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "UsersController",
+          "method": "show",
+          "line": 18,
+          "file": "app/controllers/users_controller.rb",
+          "rendered": {
+            "name": "users/show",
+            "file": "app/views/users/show.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "users/show"
+      },
+      "user_input": "User.find(params[:id]).website",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": "Fixed with CSP"
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "e3147dc379d5ee0700fd4b9ad3de31a859d98e9c40ffbb24d7aa9579060d7cec",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped parameter value",
+      "file": "app/views/search/search.html.slim",
+      "line": 20,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "pagy_bootstrap_nav(Pagy.new_from_searchkick(Searchkick.search(params[:query], :models => ([Question, Answer]), :page => params[:page], :per_page => 15)))",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "SearchController",
+          "method": "search",
+          "line": 9,
+          "file": "app/controllers/search_controller.rb",
+          "rendered": {
+            "name": "search/search",
+            "file": "app/views/search/search.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "search/search"
+      },
+      "user_input": "params[:query]",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2023-01-07 19:53:49 +0000",
+  "brakeman_version": "5.4.0"
+}

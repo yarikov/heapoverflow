@@ -6,6 +6,7 @@ html
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
     = csrf_meta_tags
+    = csp_meta_tag
 
   body
     == render 'layouts/header'
