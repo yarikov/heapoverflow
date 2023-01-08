@@ -55,7 +55,6 @@ group :development do
   gem 'guard-rails', require: false
   gem 'guard-rspec', require: false
   gem 'guard-spring', require: false
-  gem 'letter_opener'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'spring'

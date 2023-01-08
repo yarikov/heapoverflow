@@ -223,10 +223,6 @@ GEM
     json (2.6.2)
     jwt (2.5.0)
     kgio (2.11.4)
-    launchy (2.5.0)
-      addressable (~> 2.7)
-    letter_opener (1.8.1)
-      launchy (>= 2.2, < 3)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -509,7 +505,6 @@ DEPENDENCIES
   image_processing (~> 1.2)
   impressionist!
   jsbundling-rails (~> 1.0)
-  letter_opener
   omniauth (~> 1.9.2)
   omniauth-facebook (~> 5.0.0)
   omniauth-twitter
