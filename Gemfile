@@ -68,5 +68,6 @@ group :test do
   gem 'cuprite'
   gem 'fuubar'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
   gem 'test-prof'
 end

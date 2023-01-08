@@ -8,7 +8,9 @@ require 'rspec/rails'
 require 'cancan/matchers'
 require 'sidekiq/testing'
 require 'test_prof/recipes/rspec/let_it_be'
+require 'simplecov'
 
+SimpleCov.start('rails')
 Sidekiq::Testing.fake!
 
 # Add additional requires below this line. Rails is not loaded until this point!
