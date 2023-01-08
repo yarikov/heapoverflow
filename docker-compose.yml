@@ -37,6 +37,11 @@ services:
     <<: *app
     command: bundle exec sidekiq
 
+  mailcatcher:
+    image: sj26/mailcatcher:v0.8.2
+    ports:
+      - '1080:1080'
+
   postgres:
     image: postgres:15.1
     restart: unless-stopped
