@@ -23,6 +23,8 @@ class User < ApplicationRecord
   validates :avatar, content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { less_than: 2.megabytes }
   validates :full_name, presence: true
 
+  scope :with_attached_avatar, -> { includes(avatar_attachment: :blob) }
+
   def self.find_for_oauth(auth)
     authorization = Authorization.find_by(provider: auth.provider, uid: auth.uid.to_s)
     return authorization.user if authorization
@@ -42,11 +44,23 @@ class User < ApplicationRecord
     id == obj.user_id
   end
 
-  def vote_up?(obj)
-    votes.exists?(votable: obj, value: 1)
+  def vote_up?(obj, preloaded_votes = nil)
+    if preloaded_votes
+      preloaded_votes.any? do |vote|
+        vote.votable_id == obj.id && vote.votable_type == obj.class.to_s && vote.value == 1
+      end
+    else
+      votes.exists?(votable: obj, value: 1)
+    end
   end
 
-  def vote_down?(obj)
-    votes.exists?(votable: obj, value: -1)
+  def vote_down?(obj, preloaded_votes = nil)
+    if preloaded_votes
+      preloaded_votes.any? do |vote|
+        vote.votable_id == obj.id && vote.votable_type == obj.class.to_s && vote.value == -1
+      end
+    else
+      votes.exists?(votable: obj, value: -1)
+    end
   end
 end

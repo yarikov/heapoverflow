@@ -5,7 +5,7 @@
   .content
     .post__wrapper.question
       .post__btn-group.pe-3
-        = render 'votes/voting', votable: @question
+        = render 'votes/voting', votable: @question, votes: @votes
         = render 'questions/subscription', question: @question, subscription: @subscription
 
       .post data={ controller: 'form' }
@@ -13,8 +13,8 @@
           = markdown @question.body
         .post__tags.mb-3
           .tag-group
-            - @question.tag_list.each do |tag|
-              = link_to tag, tagged_questions_path(tag), class: 'tag-group__item'
+            - @question.tags.each do |tag|
+              = link_to tag, tagged_questions_path(tag.name), class: 'tag-group__item'
         .post__link-group
           - if can?(:update, @question)
             = link_to 'Edit', '', data: { action: 'click->form#showForm' }, class: 'post__link-group-item me-1'

@@ -5,7 +5,7 @@ class Answer < ApplicationRecord
 
   searchkick searchable: %i[body]
 
-  belongs_to :question
+  belongs_to :question, counter_cache: true
   belongs_to :user
 
   has_many :comments, as: :commentable, dependent: :destroy

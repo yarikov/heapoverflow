@@ -8,13 +8,13 @@
       .question-summary.pt-3.pb-3
         .question-summary__stats
           .question-summary__stats-item
-            span.question-summary__stats-item-count = question.vote_count
+            span.question-summary__stats-item-count = question.votes_sum
             span.question-summary__stats-item-unit votes
           .question-summary__stats-item
-            span.question-summary__stats-item-count = question.answers.count
+            span.question-summary__stats-item-count = question.answers_count
             span.question-summary__stats-item-unit answers
           .question-summary__stats-item
-            span.question-summary__stats-item-count = question.impressionist_count(filter: :session_hash)
+            span.question-summary__stats-item-count = question.impressions_count
             span.question-summary__stats-item-unit views
 
         .question-summary__content.ps-3
@@ -22,8 +22,8 @@
             = link_to question.title, question, class: 'question-summary__content-title-link'
           .question-summary__content-tags
             .tag-group
-              - question.tag_list.each do |tag|
-                = link_to tag, tagged_questions_path(tag), class: 'tag-group__item'
+              - question.tags.each do |tag|
+                = link_to tag, tagged_questions_path(tag.name), class: 'tag-group__item'
           span.question-summary__content-asked.mt-1
             | asked #{time_ago_in_words(question.created_at)} ago #{link_to question.user.full_name, question.user, class: 'question-summary__content-asked-by-link'}
 

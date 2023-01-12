@@ -3,6 +3,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index tagged show]
   before_action :set_question, only: %i[show update destroy]
+  before_action :set_votes, only: :show
   before_action :new_answer, only: :show
   before_action :set_subscription, only: %i[show update]
 
@@ -11,11 +12,11 @@ class QuestionsController < ApplicationController
   authorize_resource
 
   def index
-    @pagy, @questions = pagy(Question.newest)
+    @pagy, @questions = pagy(Question.with_votes_sum.newest.includes(:tags, :user))
   end
 
   def tagged
-    @pagy, @questions = pagy(Question.tagged_with(params[:tag]))
+    @pagy, @questions = pagy(Question.with_votes_sum.newest.includes(:tags, :user).tagged_with(params[:tag]))
     render :index
   end
 
@@ -52,7 +53,11 @@ class QuestionsController < ApplicationController
   private
 
   def set_question
-    @question = Question.find(params[:id])
+    @question = Question.with_votes_sum.includes(comments: :user).find(params[:id])
+  end
+
+  def set_votes
+    @votes = Vote.where(user: current_user, votable: [@question] + @question.answers)
   end
 
   def set_subscription

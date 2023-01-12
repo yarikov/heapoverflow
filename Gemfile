@@ -44,7 +44,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'brakeman'
+  gem 'brakeman', require: false
+  gem 'bullet'
   gem 'capistrano', require: false
   gem 'capistrano3-unicorn', require: false
   gem 'capistrano-bundler', require: false
@@ -55,6 +56,7 @@ group :development do
   gem 'guard-rails', require: false
   gem 'guard-rspec', require: false
   gem 'guard-spring', require: false
+  gem 'rack-mini-profiler'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'spring'

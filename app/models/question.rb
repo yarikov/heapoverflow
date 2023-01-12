@@ -5,7 +5,7 @@ class Question < ApplicationRecord
 
   searchkick searchable: %i[title body]
 
-  is_impressionable
+  is_impressionable counter_cache: true, unique: :session_hash
   acts_as_taggable
 
   belongs_to :user

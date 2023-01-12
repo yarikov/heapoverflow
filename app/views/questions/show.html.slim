@@ -1,6 +1,6 @@
 == render @question
 = turbo_frame_tag 'answers', class: 'answers'
-  == render @question.answers
+  == render @question.answers.with_votes_sum.includes(comments: :user, user: :avatar_attachment), votes: @votes
 
 .new-answer.mt-3
   - if can?(:create, Answer)

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @pagy, @users = pagy(User.order(full_name: 'asc'), items: 32)
+    @pagy, @users = pagy(User.with_attached_avatar.order(full_name: 'asc'), items: 32)
   end
 
   def show; end

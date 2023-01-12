@@ -1,5 +1,5 @@
 = turbo_frame_tag "vote_#{dom_id(votable)}", class: 'voting'
-  - if current_user&.vote_up?(votable)
+  - if current_user&.vote_up?(votable, votes)
     = link_to '',
               send(:"#{votable.model_name.singular}_vote_path", votable),
               data: { turbo_method: :delete },
@@ -10,9 +10,9 @@
               data: { turbo_method: :patch },
               class: 'bi bi-arrow-up-square-fill voting__up-btn'
 
-  span.voting__count = votable.vote_count
+  span.voting__count = votable.votes_sum
 
-  - if current_user&.vote_down?(votable)
+  - if current_user&.vote_down?(votable, votes)
     = link_to '',
               send(:"#{votable.model_name.singular}_vote_path", votable),
               data: { turbo_method: :delete },

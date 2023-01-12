@@ -2,7 +2,7 @@
    = turbo_frame_tag answer do
     .post__wrapper class="answer-#{answer.id}" id=answer.id
       .post__btn-group.pe-3
-        = render 'votes/voting', votable: answer
+        = render 'votes/voting', votable: answer, votes: votes
         = render 'answers/best', answer: answer
 
       .post data={ controller: 'form' }
