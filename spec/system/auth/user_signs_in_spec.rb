@@ -39,7 +39,7 @@ RSpec.describe 'Sign in', type: :system do
   end
 
   def submit_form(email, password)
-    within '.sign-form' do
+    within '.auth-form' do
       fill_in 'Email', with: email
       fill_in 'Password', with: password
       click_on 'Sign in'

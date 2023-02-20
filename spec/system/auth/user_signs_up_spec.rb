@@ -26,7 +26,7 @@ RSpec.describe 'Sign up', type: :system do
   end
 
   def submit_form(full_name, email, password)
-    within '.sign-form' do
+    within '.auth-form' do
       fill_in 'Full name', with: full_name
       fill_in 'Email', with: email
       fill_in 'Password', with: password
