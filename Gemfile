@@ -32,7 +32,6 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
-gem 'unicorn'
 gem 'whenever'
 
 group :development, :test do
@@ -46,16 +45,6 @@ end
 group :development do
   gem 'brakeman', require: false
   gem 'bullet'
-  gem 'capistrano', require: false
-  gem 'capistrano3-unicorn', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-rvm', require: false
-  gem 'capistrano-sidekiq', require: false
-  gem 'guard-bundler', require: false
-  gem 'guard-rails', require: false
-  gem 'guard-rspec', require: false
-  gem 'guard-spring', require: false
   gem 'rack-mini-profiler'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
