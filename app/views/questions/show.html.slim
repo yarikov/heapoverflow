@@ -1,3 +1,6 @@
+= content_for :head do
+  meta name='turbo-cache-control' content='no-preview'
+
 == render @question
 = turbo_frame_tag 'answers', class: 'answers'
   == render @question.answers.with_votes_sum.includes(comments: :user, user: :avatar_attachment), votes: @votes
