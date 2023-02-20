@@ -40,13 +40,12 @@ RSpec.describe 'Vote up for a question', type: :system do
   end
 
   context 'when the guest' do
-    it "doesn't change vote count" do
+    it 'redirects to the login page' do
       visit question_path(question)
 
       within '.question' do
         find('.voting__up-btn').click
-        expect(page).to have_selector '.voting__count', text: '0'
-        expect(page).to_not have_selector '.voting__up-btn--active'
+        expect(current_path).to eq new_user_session_path
       end
     end
   end
