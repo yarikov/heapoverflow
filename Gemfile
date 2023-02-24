@@ -14,7 +14,7 @@ gem 'faker', require: false
 gem 'image_processing', '~> 1.2'
 gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist'
 gem 'jsbundling-rails', '~> 1.0'
-gem 'omniauth', '~> 1.9.2'
+gem 'omniauth', '~> 2.0.0'
 gem 'omniauth-facebook', '~> 5.0.0'
 gem 'omniauth-twitter'
 gem 'pagy'
