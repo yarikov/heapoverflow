@@ -30,7 +30,7 @@ services:
   web:
     <<: *app
     ports:
-      - '3000:3000'
+      - 3000:3000
     command: bin/dev
 
   sidekiq:
@@ -40,7 +40,7 @@ services:
   mailcatcher:
     image: sj26/mailcatcher:v0.8.2
     ports:
-      - '1080:1080'
+      - 1080:1080
 
   postgres:
     image: postgres:15.1
@@ -73,7 +73,7 @@ services:
     image: browserless/chrome:latest
     restart: unless-stopped
     ports:
-      - "4444:4444"
+      - 4444:4444
     volumes:
       - .:/app:cached
     environment:
