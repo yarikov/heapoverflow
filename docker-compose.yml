@@ -5,10 +5,10 @@ x-app: &app
   build:
     context: .
     args:
-      RUBY_VERSION: 3.2.0
+      RUBY_VERSION: 3.3.0
       NODE_VERSION: 18.12.1
       BUNDLER_VERSION: 2.3.26
-  image: heapoverflow:2.0.6
+  image: heapoverflow:2.0.7
   stdin_open: true
   tty: true
   restart: unless-stopped
