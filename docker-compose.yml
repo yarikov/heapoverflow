@@ -7,8 +7,8 @@ x-app: &app
     args:
       RUBY_VERSION: 3.3.0
       NODE_VERSION: 20.10.0
-      BUNDLER_VERSION: 2.3.26
-  image: heapoverflow:2.0.8
+      BUNDLER_VERSION: 2.5.3
+  image: heapoverflow:2.0.9
   stdin_open: true
   tty: true
   restart: unless-stopped
