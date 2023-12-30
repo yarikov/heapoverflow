@@ -1,0 +1,11 @@
+@include color-mode(dark) {
+  .post__user-info--author {
+    background: #233752;
+  }
+
+  .user-info {
+    &:hover {
+      background-color: #233752;
+    }
+  }
+}
