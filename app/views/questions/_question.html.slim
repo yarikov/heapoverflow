@@ -18,7 +18,7 @@
         .post__link-group
           - if can?(:update, @question)
             = link_to 'Edit', '', data: { action: 'click->form#showForm' }, class: 'post__link-group-item me-1'
-            = link_to 'Delete', @question, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'post__link-group-item'
+            = link_to 'Delete', @question, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?', turbo_frame: '_top' }, class: 'post__link-group-item'
         = render 'common/post_user_info', post: @question, question: @question
         .clearfix
         .post__edit-form

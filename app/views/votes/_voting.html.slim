@@ -2,12 +2,12 @@
   - if current_user&.vote_up?(votable, votes)
     = link_to '',
               send(:"#{votable.model_name.singular}_vote_path", votable),
-              data: { turbo_method: :delete },
+              data: { turbo_method: :delete, turbo_frame: '_top' },
               class: 'bi bi-arrow-up-square-fill voting__up-btn voting__up-btn--active'
   - else
     = link_to '',
               send(:"up_#{votable.model_name.singular}_vote_path", votable),
-              data: { turbo_method: :patch },
+              data: { turbo_method: :patch, turbo_frame: '_top' },
               class: 'bi bi-arrow-up-square-fill voting__up-btn'
 
   span.voting__count = votable.votes_sum
@@ -15,10 +15,10 @@
   - if current_user&.vote_down?(votable, votes)
     = link_to '',
               send(:"#{votable.model_name.singular}_vote_path", votable),
-              data: { turbo_method: :delete },
+              data: { turbo_method: :delete, turbo_frame: '_top' },
               class: 'bi bi-arrow-down-square-fill voting__down-btn voting__down-btn--active'
   - else
     = link_to '',
               send(:"down_#{votable.model_name.singular}_vote_path", votable),
-              data: { turbo_method: :patch },
+              data: { turbo_method: :patch, turbo_frame: '_top' },
               class: 'bi bi-arrow-down-square-fill voting__down-btn'

@@ -1,5 +1,5 @@
 = turbo_frame_tag "#{dom_id(@question)}_form"
-  = simple_form_for @question, remote: @question.persisted?, data: { 'form-target': 'form' },
+  = simple_form_for @question, remote: @question.persisted?, data: { 'form-target': 'form', turbo_frame: '_top' },
                     html: { class: "#{'d-none' unless @question.errors.any? || @question.new_record?}" } do |f|
     = f.input :title, autofocus: true, input_html: { data: { 'form-target': 'autofocus' }}
     = f.input :body, input_html: { rows: 10 }
