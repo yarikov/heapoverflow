@@ -12,7 +12,7 @@ RSpec.describe 'Sign in', type: :system do
       submit_form(user.email, user.password)
 
       expect(page).to have_content 'Signed in successfully'
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path(root_path)
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe 'Sign in', type: :system do
       submit_form('wrong@email.test', user.password)
 
       expect(page).to have_content 'Invalid Email or password'
-      expect(current_path).to eq new_user_session_path
+      expect(page).to have_current_path(new_user_session_path)
     end
   end
 
@@ -34,7 +34,7 @@ RSpec.describe 'Sign in', type: :system do
       submit_form(user.email, 'wrong password')
 
       expect(page).to have_content 'Invalid Email or password'
-      expect(current_path).to eq new_user_session_path
+      expect(page).to have_current_path(new_user_session_path)
     end
   end
 

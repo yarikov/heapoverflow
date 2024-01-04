@@ -46,7 +46,7 @@ RSpec.describe 'Vote up for an answer', type: :system do
 
       within ".answer-#{answer.id}" do
         find('.voting__up-btn').click
-        expect(current_path).to eq new_user_session_path
+        expect(page).to have_current_path(new_user_session_path)
       end
     end
   end

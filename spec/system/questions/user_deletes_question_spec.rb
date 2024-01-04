@@ -17,7 +17,7 @@ RSpec.describe 'Delete a question', type: :system do
       end
 
       expect(page).to have_content 'Question was successfully destroyed'
-      expect(current_path).to eq questions_path
+      expect(page).to have_current_path(questions_path)
     end
   end
 

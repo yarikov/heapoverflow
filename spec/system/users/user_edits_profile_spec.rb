@@ -28,7 +28,7 @@ RSpec.describe 'User edits profile', type: :system do
       expect(page).to have_link 'http://petya.com'
       expect(page).to have_link 'http://twitter.com/petya'
       expect(page).to have_link 'http://github.com/petya'
-      expect(current_path).to eq user_path(user)
+      expect(page).to have_current_path(user_path(user))
     end
   end
 
@@ -39,7 +39,7 @@ RSpec.describe 'User edits profile', type: :system do
     end
 
     it "redirects to another user's profile page" do
-      expect(current_path).to eq user_path(another)
+      expect(page).to have_current_path(user_path(another))
     end
   end
 end
