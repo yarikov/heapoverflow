@@ -35,10 +35,8 @@ gem 'turbo-rails'
 gem 'whenever'
 
 group :development, :test do
+  gem 'debug', '~> 1.9.1'
   gem 'factory_bot_rails', '~> 6.4.3'
-  gem 'pry-byebug'
-  gem 'pry-highlight'
-  gem 'pry-rails'
   gem 'rspec-rails'
 end
 
