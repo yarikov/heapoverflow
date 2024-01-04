@@ -13,8 +13,6 @@
 /tmp
 
 config/database.yml
-config/private_pub.yml
-config/thinking_sphinx.yml
 config/storage.yml
 public/uploads/
 /storage
@@ -24,10 +22,6 @@ public/uploads/
 
 # Redis
 dump.rdb
-
-# Sphinx
-config/*.sphinx.conf
-db/sphinx
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
