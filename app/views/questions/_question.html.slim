@@ -14,7 +14,7 @@
         .post__tags.mb-3
           .tag-group
             - @question.tags.each do |tag|
-              = link_to tag, tagged_questions_path(tag.name), class: 'tag-group__item'
+              = link_to tag, tagged_questions_path(tag.name), class: 'tag-group__item', data: { turbo_frame: '_top' }
         .post__link-group
           - if can?(:update, @question)
             = link_to 'Edit', '', data: { action: 'click->form#showForm' }, class: 'post__link-group-item me-1'

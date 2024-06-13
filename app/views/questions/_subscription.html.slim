@@ -2,11 +2,11 @@
   - if subscription && can?(:destroy, subscription)
     = link_to '',
               question_subscription_path(question),
-              data: { turbo_method: :delete },
+              data: { turbo_method: :delete, turbo_frame: '_top' },
               class: 'bi bi-star-fill subscription__btn subscription__btn--active'
   - else
     = link_to '',
               question_subscription_path(question),
-              data: { turbo_method: :post },
+              data: { turbo_method: :post, turbo_frame: '_top' },
               class: 'bi bi-star-fill subscription__btn'
   span.subscription__count = question.subscriptions.count

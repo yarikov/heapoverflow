@@ -1,7 +1,7 @@
 = turbo_frame_tag comment, data: { controller: 'form' }, class: 'comment'
   .comment__row
     .comment__body
-       span.comment__text #{comment.body} – #{link_to comment.user.full_name, comment.user}
+       span.comment__text #{comment.body} – #{link_to comment.user.full_name, comment.user, data: { turbo_frame: '_top' }}
        span.comment__time  #{comment.created_at.to_fs(:my_short)}
     .comment__btn-group
       - if can?(:destroy, comment)
