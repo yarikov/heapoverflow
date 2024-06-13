@@ -1,14 +1,12 @@
-version: '3.9'
-
 x-app: &app
   platform: linux/amd64
   build:
     context: .
     args:
-      RUBY_VERSION: 3.3.0
-      NODE_VERSION: 20.10.0
-      BUNDLER_VERSION: 2.5.3
-  image: heapoverflow:2.0.9
+      RUBY_VERSION: 3.3.3
+      NODE_VERSION: 20.14.0
+      BUNDLER_VERSION: 2.5.11
+  image: heapoverflow:2.1.0
   stdin_open: true
   tty: true
   restart: unless-stopped
@@ -38,12 +36,12 @@ services:
     command: bundle exec sidekiq
 
   mailcatcher:
-    image: sj26/mailcatcher:v0.9.0
+    image: sj26/mailcatcher:v0.10.0
     ports:
       - 1080:1080
 
   postgres:
-    image: postgres:15.5
+    image: postgres:16.3
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: some-long-secure-password
@@ -51,13 +49,13 @@ services:
       - postgres:/var/lib/postgresql/data
 
   redis:
-    image: redis:7.2.3
+    image: redis:7.2.5
     restart: unless-stopped
     volumes:
       - redis:/data
 
   elasticsearch:
-    image: elasticsearch:8.11.3
+    image: elasticsearch:8.14.1
     restart: unless-stopped
     environment:
       - discovery.type=single-node
