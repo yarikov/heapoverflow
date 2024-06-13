@@ -46,8 +46,6 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'rubocop', '~> 1.59.0', require: false
   gem 'rubocop-rails', '~> 2.23.1', require: false
-  gem 'spring'
-  gem 'spring-commands-rspec'
   gem 'web-console', '~> 4.2.0'
 end
 
