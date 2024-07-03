@@ -8,10 +8,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'cancan/matchers'
-require 'sidekiq/testing'
 require 'test_prof/recipes/rspec/let_it_be'
-
-Sidekiq::Testing.fake!
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -39,7 +36,7 @@ RSpec.configure do |config|
   config.include OmniauthMacros
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = "#{Rails.root.join('spec/fixtures')}"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

@@ -1,8 +1,6 @@
-require 'sidekiq/web'
-
 Rails.application.routes.draw do
-  authenticate :user, -> (u) { u.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, ->(u) { u.admin? } do
+    mount MissionControl::Jobs::Engine, at: 'mission_control/jobs'
   end
 
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
@@ -22,17 +20,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show, :edit, :update] do
-    resource :avatar, only: [:update, :destroy]
+  resources :users, only: %i[index show edit update] do
+    resource :avatar, only: %i[update destroy]
   end
-  resources :tags,  only: [:index]
+  resources :tags, only: [:index]
 
-  resources :questions, concerns: [:commentable, :votable] do
+  resources :questions, concerns: %i[commentable votable] do
     get 'tagged/:tag', action: :tagged, as: :tagged, on: :collection
 
-    resources :answers, concerns: [:commentable, :votable], shallow: true do
+    resources :answers, concerns: %i[commentable votable], shallow: true do
       patch :best, on: :member
     end
-    resource :subscription, only: [:create, :destroy]
+    resource :subscription, only: %i[create destroy]
   end
 end

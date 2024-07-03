@@ -1,0 +1,7 @@
+dispatchers:
+  - polling_interval: 1
+    batch_size: 500
+    recurring_tasks:
+      daily_digest_job:
+        class: DailyDigestJob
+        schedule: '0 9 * * *'

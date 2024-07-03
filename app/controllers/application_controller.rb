@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     render json: { error: exception.message }, status: :unauthorized
   end
 
-  check_authorization unless: :devise_controller?
+  check_authorization unless: :skip_authorization?
 
   protected
 
@@ -28,5 +28,13 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(DEVISEPARAMS) }
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(DEVISEPARAMS) }
+  end
+
+  def skip_authorization?
+    devise_controller? || mission_control_controller?
+  end
+
+  def mission_control_controller?
+    is_a?(::MissionControl::Jobs::ApplicationController)
   end
 end

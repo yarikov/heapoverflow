@@ -21,7 +21,6 @@ x-app: &app
     - /usr/src/app/tmp/pids
   depends_on:
     - postgres
-    - redis
     - elasticsearch
 
 services:
@@ -31,9 +30,9 @@ services:
       - 3000:3000
     command: bin/dev
 
-  sidekiq:
+  solid_queue:
     <<: *app
-    command: bundle exec sidekiq
+    command: bundle exec rake solid_queue:start
 
   mailcatcher:
     image: sj26/mailcatcher:v0.10.0
@@ -47,12 +46,6 @@ services:
       POSTGRES_PASSWORD: some-long-secure-password
     volumes:
       - postgres:/var/lib/postgresql/data
-
-  redis:
-    image: redis:7.2.5
-    restart: unless-stopped
-    volumes:
-      - redis:/data
 
   elasticsearch:
     image: elasticsearch:8.14.1
@@ -80,4 +73,3 @@ services:
 volumes:
   bundle:
   postgres:
-  redis:
