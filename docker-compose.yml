@@ -3,10 +3,10 @@ x-app: &app
   build:
     context: .
     args:
-      RUBY_VERSION: 3.3.3
-      NODE_VERSION: 20.14.0
-      BUNDLER_VERSION: 2.5.11
-  image: heapoverflow:2.1.0
+      RUBY_VERSION: 3.3.6
+      NODE_VERSION: 22.11.0
+      BUNDLER_VERSION: 2.5.23
+  image: heapoverflow:2.2.0
   stdin_open: true
   tty: true
   restart: unless-stopped
@@ -40,7 +40,7 @@ services:
       - 1080:1080
 
   postgres:
-    image: postgres:16.3
+    image: postgres:17.1
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: some-long-secure-password
@@ -48,7 +48,7 @@ services:
       - postgres:/var/lib/postgresql/data
 
   elasticsearch:
-    image: elasticsearch:8.14.1
+    image: elasticsearch:8.16.0
     restart: unless-stopped
     environment:
       - discovery.type=single-node
