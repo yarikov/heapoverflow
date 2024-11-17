@@ -30,9 +30,9 @@ services:
       - 3000:3000
     command: bin/dev
 
-  solid_queue:
+  jobs:
     <<: *app
-    command: bundle exec rake solid_queue:start
+    command: bin/jobs
 
   mailcatcher:
     image: sj26/mailcatcher:v0.10.0

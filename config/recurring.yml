@@ -1,0 +1,3 @@
+daily_digest_job:
+  class: DailyDigestJob
+  schedule: '0 9 * * *'
