@@ -8,7 +8,7 @@ gem 'bootsnap', require: false
 gem 'cancancan', '~> 3.6.1'
 gem 'cssbundling-rails', '~> 1.4'
 gem 'devise', '~> 4.9.4'
-gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem 'dotenv-rails', require: 'dotenv/load'
 gem 'elasticsearch'
 gem 'faker', require: false
 gem 'image_processing', '~> 1.12.2'
