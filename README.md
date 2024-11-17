@@ -1,6 +1,6 @@
 # Heap Overflow
 
-Heap Overflow is a web application built with Rails 7, Turbo, and Stimulus that aims to be a clone of Stack Overflow.
+Heap Overflow is a web application built with Rails, Turbo, and Stimulus that aims to be a clone of Stack Overflow.
 
 ## Table of Contents
 
