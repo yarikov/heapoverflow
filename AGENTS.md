@@ -10,7 +10,7 @@ This document is written for AI coding agents. It assumes you know nothing about
 
 | Layer | Technology | Version |
 |-------|-----------|---------|
-| Language | Ruby | 3.3.6 |
+| Language | Ruby | 4.0.4 |
 | Framework | Rails | ~> 8.0.0 |
 | Frontend bundler | esbuild | ^0.24.0 |
 | CSS compiler | Sass | ^1.81.0 |

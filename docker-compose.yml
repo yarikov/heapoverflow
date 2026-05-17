@@ -3,7 +3,7 @@ x-app: &app
   build:
     context: .
     args:
-      RUBY_VERSION: 3.3.6
+      RUBY_VERSION: 4.0.4
       NODE_VERSION: 22.11.0
       BUNDLER_VERSION: 2.5.23
   image: heapoverflow:2.2.0
