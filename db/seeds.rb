@@ -5,11 +5,14 @@ def generate_paragraphs(number: rand(2..5))
 end
 
 users = 30.times.collect do
-  User.create(
+  u = User.new(
     full_name: Faker::Name.name,
     email: Faker::Internet.email,
     password: 'password'
   )
+  u.skip_confirmation!
+  u.save
+  u
 end
 
 100.times do

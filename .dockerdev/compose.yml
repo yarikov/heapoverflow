@@ -1,0 +1,109 @@
+x-app: &app
+  build:
+    context: .
+    args:
+      RUBY_VERSION: '4.0.4'
+      PG_MAJOR: '17'
+      NODE_MAJOR: '22'
+  image: heapoverflow-dev:1.0.0
+  working_dir: ${PWD}
+  environment: &env
+    NODE_ENV: ${NODE_ENV:-development}
+    RAILS_ENV: ${RAILS_ENV:-}
+  tmpfs:
+    - /tmp
+    - ${PWD}/tmp/pids
+
+x-backend: &backend
+  <<: *app
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${PWD}:/${PWD}:cached
+    - bundle:/usr/local/bundle
+    - rails_cache:/${PWD}/tmp/cache
+    - assets:/${PWD}/public/assets
+    - node_modules:/${PWD}/node_modules
+    - history:/usr/local/hist
+    - ./.psqlrc:/root/.psqlrc:ro
+    - ./.bashrc:/root/.bashrc:ro
+  environment: &backend_environment
+    <<: *env
+    DATABASE_URL: postgresql://postgres:postgres@postgres:5432
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+    MALLOC_ARENA_MAX: 2
+    WEB_CONCURRENCY: ${WEB_CONCURRENCY:-1}
+    BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
+    XDG_DATA_HOME: /${PWD}/tmp/cache
+    YARN_CACHE_FOLDER: /${PWD}/node_modules/.yarn-cache
+    HISTFILE: /usr/local/hist/.bash_history
+    PSQL_HISTFILE: /usr/local/hist/.psql_history
+    IRB_HISTFILE: /usr/local/hist/.irb_history
+    EDITOR: vi
+  depends_on:
+    postgres:
+      condition: service_healthy
+    elasticsearch:
+      condition: service_healthy
+
+services:
+  rails:
+    <<: *backend
+    command: bundle exec rails
+
+  web:
+    <<: *backend
+    command: bin/dev
+    ports:
+      - '3000:3000'
+
+  jobs:
+    <<: *backend
+    command: bin/jobs
+
+  mailcatcher:
+    image: sj26/mailcatcher:v0.10.0
+    ports:
+      - 1080:1080
+
+  postgres:
+    image: postgres:17
+    volumes:
+      - .psqlrc:/root/.psqlrc:ro
+      - postgres:/var/lib/postgresql/data
+      - history:/usr/local/hist
+    environment:
+      PSQL_HISTFILE: /usr/local/hist/.psql_history
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
+      interval: 5s
+
+  elasticsearch:
+    image: elasticsearch:8.16.0
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - 9200:9200
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9200/_cluster/health | grep -E '(green|yellow)'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  bundle:
+  node_modules:
+  history:
+  rails_cache:
+  postgres:
+  assets:
