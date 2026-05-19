@@ -22,7 +22,7 @@ RSpec.describe 'Sign in', type: :system do
 
       submit_form('wrong@email.test', user.password)
 
-      expect(page).to have_content 'Invalid Email or password'
+      expect(page).to have_content 'Invalid email or password'
       expect(page).to have_current_path(new_user_session_path)
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe 'Sign in', type: :system do
 
       submit_form(user.email, 'wrong password')
 
-      expect(page).to have_content 'Invalid Email or password'
+      expect(page).to have_content 'Invalid email or password'
       expect(page).to have_current_path(new_user_session_path)
     end
   end

@@ -20,7 +20,7 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
-  validates :avatar, content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { less_than: 2.megabytes }
+  validates :avatar, content_type: ['image/png', 'image/jpeg'], size: { less_than: 2.megabytes }
   validates :full_name, presence: true
 
   scope :with_attached_avatar, -> { includes(avatar_attachment: :blob) }

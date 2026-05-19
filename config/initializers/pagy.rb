@@ -1,2 +1,5 @@
-require 'pagy/extras/bootstrap'
-require 'pagy/extras/searchkick'
+# frozen_string_literal: true
+
+require 'pagy'
+
+Searchkick.extend(Pagy::Search)

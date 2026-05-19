@@ -4,6 +4,6 @@ class TagsController < ApplicationController
   skip_authorization_check
 
   def index
-    @pagy, @tags = pagy(ActsAsTaggableOn::Tag.order(name: 'asc'), items: 60)
+    @pagy, @tags = pagy(:offset, ActsAsTaggableOn::Tag.order(name: 'asc'), limit: 60)
   end
 end

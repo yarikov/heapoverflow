@@ -4,7 +4,7 @@ require 'application_responder'
 
 class ApplicationController < ActionController::Base
   include ActiveStorage::SetCurrent
-  include Pagy::Backend
+  include Pagy::Method
 
   self.responder = ApplicationResponder
   respond_to :html

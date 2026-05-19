@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  include Pagy::Frontend
-
   def avatar_path(user, variant)
     if user.avatar.attached?
       rails_representation_path(user.avatar.variant(variant))

@@ -12,11 +12,11 @@ class QuestionsController < ApplicationController
   authorize_resource
 
   def index
-    @pagy, @questions = pagy(Question.with_votes_sum.newest.includes(:tags, :user))
+    @pagy, @questions = pagy(:offset, Question.with_votes_sum.newest.includes(:tags, :user))
   end
 
   def tagged
-    @pagy, @questions = pagy(Question.with_votes_sum.newest.includes(:tags, :user).tagged_with(params[:tag]))
+    @pagy, @questions = pagy(:offset, Question.with_votes_sum.newest.includes(:tags, :user).tagged_with(params[:tag]))
     render :index
   end
 

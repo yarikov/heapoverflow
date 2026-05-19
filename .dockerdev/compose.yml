@@ -82,7 +82,7 @@ services:
       interval: 5s
 
   elasticsearch:
-    image: elasticsearch:8.16.0
+    image: elasticsearch:9.4.0
     restart: unless-stopped
     environment:
       - discovery.type=single-node
