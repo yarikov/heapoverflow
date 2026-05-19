@@ -7,7 +7,7 @@ Heap Overflow is a Rails 8 web application that clones Stack Overflow. Users ask
 | Layer | Technology |
 |-------|------------|
 | Runtime | Ruby 4.0.4 (see `.ruby-version`) |
-| Framework | Rails ~> 8.0.0 |
+| Framework | Rails ~> 8.1.0 |
 | Database | PostgreSQL 17 |
 | Search | Elasticsearch 8.16.0 via Searchkick |
 | Asset Pipeline | Propshaft |
