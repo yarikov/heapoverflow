@@ -4,7 +4,7 @@ x-app: &app
     args:
       RUBY_VERSION: '4.0.4'
       PG_MAJOR: '17'
-      NODE_MAJOR: '22'
+      NODE_MAJOR: '24'
   image: heapoverflow-dev:1.0.0
   working_dir: ${PWD}
   environment: &env
