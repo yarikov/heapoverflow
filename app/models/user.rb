@@ -25,21 +25,6 @@ class User < ApplicationRecord
 
   scope :with_attached_avatar, -> { includes(avatar_attachment: :blob) }
 
-  def self.find_for_oauth(auth)
-    authorization = Authorization.find_by(provider: auth.provider, uid: auth.uid.to_s)
-    return authorization.user if authorization
-    return new unless auth.info.email
-
-    user = find_or_create_by!(email: auth.info.email) do |u|
-      u.full_name = auth.info.name
-      # u.remote_avatar_url = auth.info.image
-      u.password = Devise.friendly_token[0, 20]
-      u.skip_confirmation! if auth.credentials
-    end
-    user.authorizations.create(provider: auth.provider, uid: auth.uid)
-    user
-  end
-
   def author_of?(obj)
     id == obj.user_id
   end

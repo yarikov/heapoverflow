@@ -2,7 +2,7 @@
 
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    @user = User.find_for_oauth(auth)
+    @user = Oauth::FindOrCreateUser.call(auth)
     if @user.persisted?
       provider = auth.provider.capitalize
       sign_in_and_redirect @user, event: :authentication
