@@ -49,5 +49,5 @@ end
     answer
   end
 
-  answers.sample&.best!
+  Answers::MarkBest.call(answers.sample) if answers.any?
 end

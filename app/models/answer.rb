@@ -12,11 +12,4 @@ class Answer < ApplicationRecord
 
   validates :body, :question_id, :user_id, presence: true
   validates :body, length: { in: 10..3000 }
-
-  def best!
-    transaction do
-      question.answers.where(best: true).update(best: false)
-      update(best: true)
-    end
-  end
 end

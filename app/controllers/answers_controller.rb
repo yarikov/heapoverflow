@@ -24,7 +24,7 @@ class AnswersController < ApplicationController
   end
 
   def best
-    @answer.best!
+    Answers::MarkBest.call(@answer)
     @answer.reload
   end
 
