@@ -141,11 +141,21 @@ yarn build:css
 
 ### Running Tests
 
+**Always use Dip for running specs.** This ensures the test environment has the correct dependencies (PostgreSQL, Elasticsearch) and environment variables.
+
 ```bash
-# Docker
+# Run full suite
 dip rspec
 
-# Local
+# Run a specific spec file or directory
+dip rspec spec/system/
+dip rspec spec/models/question_spec.rb
+```
+
+Only fall back to local execution if you are deliberately running outside Docker and have all services running locally:
+
+```bash
+# Local (not recommended unless services are running locally)
 bundle exec rspec
 ```
 
@@ -279,11 +289,12 @@ dip provision
 # Start server
 dip rails s
 
-# Run all tests
+# Run all tests (use dip — required for correct test environment)
 dip rspec
 
-# Run single spec
+# Run single spec or directory
 dip rspec spec/models/question_spec.rb
+dip rspec spec/system/
 
 # Lint
 bundle exec rubocop
