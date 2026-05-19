@@ -9,7 +9,6 @@ Heap Overflow is a web application built with Rails, Turbo, and Stimulus that ai
 - [Usage](#usage)
 - [Viewing Emails](#viewing-emails)
 - [Testing](#testing)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Description
@@ -18,9 +17,72 @@ Heap Overflow is a web application that allows users to ask and answer questions
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/yarikov/heapoverflow.git`
-2. Navigate to the project directory: `cd heapoverflow`
-3. To install all necessary dependencies run command (docker required): `dip provision`
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) installed and running
+- [Dip](https://github.com/bibendi/dip) installed:
+
+  ```bash
+  gem install dip
+  ```
+
+### Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yarikov/heapoverflow.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd heapoverflow
+   ```
+
+3. Provision the development environment (builds Docker image, starts PostgreSQL and Elasticsearch, installs dependencies, and sets up the database):
+
+   ```bash
+   dip provision
+   ```
+
+### Running the Application
+
+Start the full web stack (Rails server + asset watchers):
+
+```bash
+dip up
+```
+
+Then open your browser at [http://localhost:3000](http://localhost:3000).
+
+### Useful Commands
+
+```bash
+# Rails console
+dip rails c
+
+# Run database migrations
+dip rails db:migrate
+
+# PostgreSQL console
+dip psql
+
+# Run tests
+dip rspec
+
+# Run linter
+dip rubocop
+
+# Install Ruby gems
+dip bundle install
+
+# Install JS packages
+dip yarn install
+
+# Stop all containers
+dip down
+```
 
 ## Usage
 
@@ -49,14 +111,6 @@ dip rspec
 dip rspec spec/models/question_spec.rb
 dip rspec spec/system/
 ```
-
-## Contributing
-
-If you're interested in contributing to Heap Overflow, I welcome your input! Here are a few ways you can get involved:
-
-- Submit bug reports or feature requests by opening an issue on GitHub
-- Fork the repository and create a pull request to fix a bug or add a feature
-- Help improve the documentation by submitting a pull request to the README file
 
 ## License
 
