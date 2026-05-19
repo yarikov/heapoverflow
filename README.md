@@ -5,15 +5,29 @@ Heap Overflow is a web application built with Rails, Turbo, and Stimulus that ai
 ## Table of Contents
 
 - [Description](#description)
+- [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Viewing Emails](#viewing-emails)
+- [Development](#development)
+  - [Viewing Emails](#viewing-emails)
+  - [Useful Commands](#useful-commands)
 - [Testing](#testing)
 - [License](#license)
 
 ## Description
 
 Heap Overflow is a web application that allows users to ask and answer questions on various topics. The app is designed to be similar to Stack Overflow in terms of functionality and design. I created this project as a way to practice my Rails skills and to build something that I would personally find useful.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Backend | Ruby on Rails, Turbo, Stimulus |
+| Database | PostgreSQL |
+| Search | Elasticsearch |
+| CSS | Sass, Bootstrap |
+| Containerization | Docker, Dip |
+| Testing | RSpec |
 
 ## Installation
 
@@ -46,15 +60,30 @@ Heap Overflow is a web application that allows users to ask and answer questions
    dip provision
    ```
 
-### Running the Application
+## Usage
 
-Start the full web stack (Rails server + asset watchers):
+Start the application:
 
 ```bash
 dip up
 ```
 
 Then open your browser at [http://localhost:3000](http://localhost:3000).
+
+Once the app is running:
+
+1. Sign up for an account or log in if you already have one
+2. Ask or answer questions on the homepage or browse questions by tag
+
+## Development
+
+### Viewing Emails
+
+In a development environment, you can view email messages using [mailcatcher](https://github.com/sj26/mailcatcher). To do this, follow these steps:
+
+1. Open your web browser and navigate to `http://localhost:1080`
+2. Send an email from the Heap Overflow application (e.g., create a new account or reset your password)
+3. Check the [mailcatcher](https://github.com/sj26/mailcatcher) web interface to view the email message
 
 ### Useful Commands
 
@@ -83,21 +112,6 @@ dip yarn install
 # Stop all containers
 dip down
 ```
-
-## Usage
-
-1. Start the application: `dip up`
-2. Open your web browser and navigate to `http://localhost:3000`
-3. Sign up for an account or log in if you already have one
-4. Ask or answer questions on the homepage or browse questions by tag
-
-## Viewing Emails
-
-In a development environment, you can view email messages using mailcatcher. To do this, follow these steps:
-
-1. Open your web browser and navigate to `http://localhost:1080`
-2. Send an email from the Heap Overflow application (e.g., create a new account or reset your password)
-3. Check the mailcatcher web interface to view the email message
 
 ## Testing
 
