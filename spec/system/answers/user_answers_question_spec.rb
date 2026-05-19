@@ -13,7 +13,7 @@ RSpec.describe 'User answers a question', type: :system do
       visit question_path(question)
 
       fill_in 'answer[body]', with: 'New answer'
-      click_on 'Post Your Answer'
+      expect { click_on 'Post Your Answer' }.to change(question.answers, :count).by(1)
 
       within '.answers' do
         expect(page).to have_content 'New answer'

@@ -5,6 +5,10 @@ require 'system_helper'
 RSpec.describe 'Question subscription', type: :system do
   let_it_be(:question) { create(:question) }
 
+  before do
+    question.subscriptions.create(user: question.user)
+  end
+
   context 'when the user subscribes to a question' do
     let(:user) { create(:user) }
 

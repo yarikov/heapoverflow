@@ -16,12 +16,4 @@ RSpec.describe Question, type: :model do
   it { should validate_length_of(:title).is_at_least(10).is_at_most(200) }
   it { should validate_length_of(:body).is_at_least(10).is_at_most(3000) }
 
-  describe '#author_subscribe' do
-    let(:user)     { create(:user) }
-    let(:question) { create(:question, user: user) }
-
-    it 'subscribes author after create question' do
-      expect(question.subscriptions.count).to eq 1
-    end
-  end
 end

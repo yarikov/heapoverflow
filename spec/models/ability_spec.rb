@@ -36,7 +36,7 @@ RSpec.describe Ability, type: :model do
     let(:own_comment)   { create :comment, commentable: own_question, user: user }
     let(:other_comment) { create :comment, commentable: own_question, user: other }
 
-    let(:own_subscription) { own_question.subscriptions.first }
+    let(:own_subscription) { create(:subscription, user: user, question: own_question) }
     let(:other_subscription) { create :subscription }
 
     it { should_not be_able_to :manage, :all }

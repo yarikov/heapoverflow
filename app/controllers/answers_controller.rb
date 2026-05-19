@@ -9,12 +9,10 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answer_params.merge(user: current_user))
-
-    if @answer.save
-      render :create
-    else
-      render :new, status: :unprocessable_entity
-    end
+    Answers::Create.call(@answer)
+    render :create
+  rescue ActiveRecord::RecordInvalid
+    render :new, status: :unprocessable_entity
   end
 
   def update

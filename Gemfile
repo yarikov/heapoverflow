@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'active_storage_validations'
 gem 'acts-as-taggable-on', '~> 12.0.0'
+gem 'after_commit_everywhere'
 gem 'bootsnap', require: false
 gem 'cancancan', '~> 3.6.1'
 gem 'cssbundling-rails', '~> 1.4'

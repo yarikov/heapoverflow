@@ -3,8 +3,6 @@
 class Comment < ApplicationRecord
   searchkick searchable: %i[body]
 
-  default_scope { order(created_at: :asc) }
-
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 
