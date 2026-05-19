@@ -8,6 +8,7 @@ Heap Overflow is a web application built with Rails, Turbo, and Stimulus that ai
 - [Installation](#installation)
 - [Usage](#usage)
 - [Viewing Emails](#viewing-emails)
+- [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -19,11 +20,11 @@ Heap Overflow is a web application that allows users to ask and answer questions
 
 1. Clone the repository: `git clone https://github.com/yarikov/heapoverflow.git`
 2. Navigate to the project directory: `cd heapoverflow`
-3. To install all necessary dependencies run command (docker required): `make setup`
+3. To install all necessary dependencies run command (docker required): `dip provision`
 
 ## Usage
 
-1. Start the application: `make run`
+1. Start the application: `dip up`
 2. Open your web browser and navigate to `http://localhost:3000`
 3. Sign up for an account or log in if you already have one
 4. Ask or answer questions on the homepage or browse questions by tag
@@ -35,6 +36,19 @@ In a development environment, you can view email messages using mailcatcher. To 
 1. Open your web browser and navigate to `http://localhost:1080`
 2. Send an email from the Heap Overflow application (e.g., create a new account or reset your password)
 3. Check the mailcatcher web interface to view the email message
+
+## Testing
+
+The project uses RSpec for testing.
+
+```bash
+# Run full test suite
+dip rspec
+
+# Run a specific spec file or directory
+dip rspec spec/models/question_spec.rb
+dip rspec spec/system/
+```
 
 ## Contributing
 
