@@ -11,7 +11,7 @@ class Question < ApplicationRecord
   belongs_to :user
 
   has_many :answers, dependent: :destroy
-  has_many :comments, -> { order(created_at: :asc) }, as: :commentable, dependent: :destroy
+  has_many :comments, -> { order(created_at: :asc) }, as: :commentable, dependent: :destroy, inverse_of: :commentable
   has_many :subscriptions, dependent: :destroy
 
   validates :user_id, :title, :body, :tag_list, presence: true

@@ -22,5 +22,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*'
+
 Style/Documentation:
   Enabled: false

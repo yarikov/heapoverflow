@@ -8,7 +8,7 @@ class Answer < ApplicationRecord
   belongs_to :question, counter_cache: true
   belongs_to :user
 
-  has_many :comments, -> { order(created_at: :asc) }, as: :commentable, dependent: :destroy
+  has_many :comments, -> { order(created_at: :asc) }, as: :commentable, dependent: :destroy, inverse_of: :commentable
 
   validates :body, :question_id, :user_id, presence: true
   validates :body, length: { in: 10..3000 }

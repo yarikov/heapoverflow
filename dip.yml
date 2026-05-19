@@ -50,6 +50,12 @@ interaction:
     environment:
       RAILS_ENV: test
 
+  rubocop:
+    description: Run RuboCop commands
+    service: rails
+    command: bundle exec rubocop
+    compose_run_options: [ no-deps ]
+
   yarn:
     description: Run Yarn commands
     service: rails

@@ -16,7 +16,7 @@ RSpec.describe 'Ask a question', type: :system do
       fill_in 'Tags', with: 'ruby-on-rails'
 
       expect { click_on('Post Your Question') }.to change(user.questions, :count).by(1)
-                                                              .and change(user.subscriptions, :count).by(1)
+                                               .and change(user.subscriptions, :count).by(1)
 
       expect(page).to have_content 'Question title'
       expect(page).to have_content 'Question body'
