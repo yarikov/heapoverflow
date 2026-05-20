@@ -152,6 +152,7 @@ GEM
       dotenv (= 3.2.0)
       railties (>= 6.1)
     drb (2.2.3)
+    dry-initializer (3.2.0)
     elastic-transport (8.5.1)
       faraday (< 3)
       multi_json
@@ -518,6 +519,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  dry-initializer
   elasticsearch
   factory_bot_rails
   faker

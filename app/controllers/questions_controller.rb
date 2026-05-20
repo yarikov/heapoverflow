@@ -29,10 +29,10 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = current_user.questions.new(question_params)
-    Questions::Create.call(@question, current_user)
+    @question = Questions::Create.call(question_params, current_user)
     redirect_to question_url(@question)
-  rescue ActiveRecord::RecordInvalid
+  rescue ActiveRecord::RecordInvalid => e
+    @question = e.record
     render :new, status: :unprocessable_entity
   end
 

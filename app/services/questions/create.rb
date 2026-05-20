@@ -2,17 +2,18 @@
 
 module Questions
   class Create < ApplicationService
-    def initialize(question, author)
-      @question = question
-      @author = author
-    end
+    param :params
+    param :author
 
     def call
+      question = author.questions.new(params)
+
       ActiveRecord::Base.transaction do
-        @question.save!
-        @question.subscriptions.create!(user: @author)
+        question.save!
+        question.subscriptions.create!(user: author)
       end
-      @question
+
+      question
     end
   end
 end

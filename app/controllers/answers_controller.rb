@@ -8,10 +8,10 @@ class AnswersController < ApplicationController
   authorize_resource
 
   def create
-    @answer = @question.answers.new(answer_params.merge(user: current_user))
-    Answers::Create.call(@answer)
+    @answer = Answers::Create.call(answer_params, current_user, @question)
     render :create
-  rescue ActiveRecord::RecordInvalid
+  rescue ActiveRecord::RecordInvalid => e
+    @answer = e.record
     render :new, status: :unprocessable_entity
   end
 

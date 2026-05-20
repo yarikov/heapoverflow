@@ -2,9 +2,7 @@
 
 module Oauth
   class FindOrCreateUser < ApplicationService
-    def initialize(auth)
-      @auth = auth
-    end
+    param :auth
 
     def call
       find_user_by_authorization ||
@@ -13,8 +11,6 @@ module Oauth
     end
 
     private
-
-    attr_reader :auth
 
     def find_user_by_authorization
       Authorization.find_by(provider: auth.provider, uid: auth.uid.to_s)&.user

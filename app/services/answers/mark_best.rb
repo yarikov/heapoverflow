@@ -2,16 +2,14 @@
 
 module Answers
   class MarkBest < ApplicationService
-    def initialize(answer)
-      @answer = answer
-    end
+    param :answer
 
     def call
       ActiveRecord::Base.transaction do
-        @answer.question.answers.where(best: true).update(best: false)
-        @answer.update(best: true)
+        answer.question.answers.where(best: true).update(best: false)
+        answer.update(best: true)
       end
-      @answer
+      answer
     end
   end
 end

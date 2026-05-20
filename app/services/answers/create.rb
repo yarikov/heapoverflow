@@ -4,16 +4,19 @@ module Answers
   class Create < ApplicationService
     include AfterCommitEverywhere
 
-    def initialize(answer)
-      @answer = answer
-    end
+    param :params
+    param :author
+    param :question
 
     def call
+      answer = question.answers.new(params.merge(user: author))
+
       ActiveRecord::Base.transaction do
-        @answer.save!
-        after_commit { NotifySubscribersJob.perform_later(@answer) }
+        answer.save!
+        after_commit { NotifySubscribersJob.perform_later(answer) }
       end
-      @answer
+
+      answer
     end
   end
 end

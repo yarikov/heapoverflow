@@ -8,29 +8,29 @@ RSpec.describe Answers::Create, type: :service do
 
   describe '#call' do
     context 'when answer is valid' do
-      let(:answer) { question.answers.build(body: 'Valid answer body', user: user) }
+      let(:answer_params) { { body: 'Valid answer body' } }
 
       it 'saves the answer' do
-        expect { described_class.call(answer) }.to change(Answer, :count).by(1)
+        expect { described_class.call(answer_params, user, question) }.to change(Answer, :count).by(1)
       end
 
       it 'enqueues NotifySubscribersJob after commit' do
         allow(NotifySubscribersJob).to receive(:perform_later)
-        described_class.call(answer)
-        expect(NotifySubscribersJob).to have_received(:perform_later).with(answer)
+        described_class.call(answer_params, user, question)
+        expect(NotifySubscribersJob).to have_received(:perform_later).with(an_instance_of(Answer))
       end
     end
 
     context 'when answer is invalid' do
-      let(:answer) { question.answers.build(body: 'short', user: user) }
+      let(:answer_params) { { body: 'short' } }
 
       it 'raises ActiveRecord::RecordInvalid' do
-        expect { described_class.call(answer) }.to raise_error(ActiveRecord::RecordInvalid)
+        expect { described_class.call(answer_params, user, question) }.to raise_error(ActiveRecord::RecordInvalid)
       end
 
       it 'does not enqueue NotifySubscribersJob' do
         allow(NotifySubscribersJob).to receive(:perform_later)
-        expect { described_class.call(answer) }.to raise_error(ActiveRecord::RecordInvalid)
+        expect { described_class.call(answer_params, user, question) }.to raise_error(ActiveRecord::RecordInvalid)
         expect(NotifySubscribersJob).not_to have_received(:perform_later)
       end
     end

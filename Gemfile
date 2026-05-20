@@ -10,6 +10,7 @@ gem 'cancancan'
 gem 'cssbundling-rails'
 gem 'devise'
 gem 'dotenv-rails', require: 'dotenv/load'
+gem 'dry-initializer'
 gem 'elasticsearch'
 gem 'faker', require: false
 gem 'image_processing'
