@@ -9,12 +9,12 @@
           .search-result__item-title.mb-1
             = link_to resource.title, resource
           .search-result__item-body
-            = markdown truncate(resource.body, length: 300)
+            = MarkdownPresenter.render(truncate(resource.body, length: 300))
       - elsif resource.is_a?(Answer)
         .search-result__item.mt-3.mb-3
           .search-result__item-title.mb-1
             = link_to resource.question.title, question_path(resource.question, anchor: resource.id)
           .search-result__item-body
-            = markdown truncate(resource.body, length: 300)
+            = MarkdownPresenter.render(truncate(resource.body, length: 300))
 
   == @pagy.series_nav(:bootstrap, classes: 'pagination') if @pagy.last > 1

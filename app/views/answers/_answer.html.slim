@@ -7,7 +7,7 @@
 
       .post data={ controller: 'form' }
         .post__body
-          = markdown answer.body
+          = MarkdownPresenter.render(answer.body)
         .post__link-group
           - if allowed_to?(:update?, answer)
             = link_to 'Edit', '', data: { action: 'click->form#showForm' }, class: 'post__link-group-item me-1'

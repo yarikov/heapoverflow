@@ -10,7 +10,7 @@
 
       .post data={ controller: 'form' }
         .post__body
-          = markdown @question.body
+          = MarkdownPresenter.render(@question.body)
         .post__tags.mb-3
           .tag-group
             - @question.tags.each do |tag|
