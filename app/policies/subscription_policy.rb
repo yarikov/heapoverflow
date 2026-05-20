@@ -2,12 +2,12 @@
 
 class SubscriptionPolicy < ApplicationPolicy
   def create?
-    user.present?
+    user?
   end
 
   alias_rule :new?, to: :create?
 
   def destroy?
-    manage? || owner?
+    manage? || author?
   end
 end

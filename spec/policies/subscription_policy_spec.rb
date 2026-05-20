@@ -22,7 +22,7 @@ RSpec.describe SubscriptionPolicy, type: :policy do
       let(:user) { create(:user, admin: true) }
     end
 
-    succeed 'for owner' do
+    succeed 'for author' do
       let(:record) { create(:subscription, user: user, question: question) }
     end
 

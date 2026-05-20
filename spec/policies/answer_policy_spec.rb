@@ -31,7 +31,7 @@ RSpec.describe AnswerPolicy, type: :policy do
       let(:user) { create(:user, admin: true) }
     end
 
-    succeed 'for owner' do
+    succeed 'for author' do
       let(:record) { create(:answer, question: question, user: user) }
     end
 
@@ -47,7 +47,7 @@ RSpec.describe AnswerPolicy, type: :policy do
       let(:user) { create(:user, admin: true) }
     end
 
-    succeed 'for owner' do
+    succeed 'for author' do
       let(:record) { create(:answer, question: question, user: user) }
     end
 

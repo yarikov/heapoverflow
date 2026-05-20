@@ -8,7 +8,7 @@ class UserPolicy < ApplicationPolicy
   alias_rule :index?, to: :show?
 
   def update?
-    manage? || owner?
+    manage? || author?
   end
 
   alias_rule :me?, to: :update?
@@ -16,7 +16,7 @@ class UserPolicy < ApplicationPolicy
 
   private
 
-  def owner?
+  def author?
     return false unless user
 
     user.id == record.id

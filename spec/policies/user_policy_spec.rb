@@ -24,7 +24,7 @@ RSpec.describe UserPolicy, type: :policy do
       let(:user) { create(:user, admin: true) }
     end
 
-    succeed 'for owner' do
+    succeed 'for author' do
       let(:record) { user }
     end
 
@@ -40,7 +40,7 @@ RSpec.describe UserPolicy, type: :policy do
       let(:user) { create(:user, admin: true) }
     end
 
-    succeed 'for owner' do
+    succeed 'for author' do
       let(:record) { user }
     end
 

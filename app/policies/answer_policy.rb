@@ -8,13 +8,13 @@ class AnswerPolicy < ApplicationPolicy
   alias_rule :index?, to: :show?
 
   def create?
-    user.present?
+    user?
   end
 
   alias_rule :new?, to: :create?
 
   def update?
-    manage? || owner?
+    manage? || author?
   end
 
   alias_rule :destroy?, to: :update?
@@ -25,7 +25,7 @@ class AnswerPolicy < ApplicationPolicy
   end
 
   def vote_up?
-    user.present? && !owner?
+    user? && !author?
   end
 
   alias_rule :vote_down?, to: :vote_up?

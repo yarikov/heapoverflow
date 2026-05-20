@@ -11,9 +11,13 @@ class ApplicationPolicy < ActionPolicy::Base
 
   private
 
-  def owner?
+  def user?
+    user.present?
+  end
+
+  def author?
     return false unless user
 
-    user.id == record.user_id
+    user.author_of?(record)
   end
 end
