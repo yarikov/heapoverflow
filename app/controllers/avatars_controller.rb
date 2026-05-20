@@ -2,6 +2,7 @@
 
 class AvatarsController < ApplicationController
   before_action :authenticate_user!
+
   def update
     if current_user.avatar.attach(params[:user][:avatar])
       render :update

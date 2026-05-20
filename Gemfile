@@ -2,11 +2,11 @@
 
 source 'https://rubygems.org'
 
+gem 'action_policy'
 gem 'active_storage_validations'
 gem 'acts-as-taggable-on'
 gem 'after_commit_everywhere'
 gem 'bootsnap', require: false
-gem 'action_policy'
 gem 'cssbundling-rails'
 gem 'devise'
 gem 'dotenv-rails', require: 'dotenv/load'

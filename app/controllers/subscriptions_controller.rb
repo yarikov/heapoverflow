@@ -3,6 +3,7 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question
+
   def create
     authorize! Subscription.new
     @subscription = current_user.subscriptions.find_or_create_by(question: @question)

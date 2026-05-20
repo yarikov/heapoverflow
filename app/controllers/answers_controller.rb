@@ -41,8 +41,11 @@ class AnswersController < ApplicationController
   end
 
   def set_question
-    @question = @answer.question if @answer
-    @question ||= Question.find(params[:question_id])
+    @question = if @answer
+                  @answer.question
+                else
+                  Question.find(params[:question_id])
+                end
   end
 
   def answer_params
