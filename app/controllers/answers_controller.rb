@@ -5,9 +5,8 @@ class AnswersController < ApplicationController
   before_action :set_answer, only: %i[update destroy best]
   before_action :set_question, only: %i[create update best]
 
-  authorize_resource
-
   def create
+    authorize! Answer.new
     @answer = Answers::Create.call(answer_params, current_user, @question)
     render :create
   rescue ActiveRecord::RecordInvalid => e
@@ -16,6 +15,7 @@ class AnswersController < ApplicationController
   end
 
   def update
+    authorize! @answer
     if @answer.update(answer_params)
       render :update
     else
@@ -24,11 +24,13 @@ class AnswersController < ApplicationController
   end
 
   def best
+    authorize! @answer
     Answers::MarkBest.call(@answer)
     @answer.reload
   end
 
   def destroy
+    authorize! @answer
     @answer.destroy
   end
 

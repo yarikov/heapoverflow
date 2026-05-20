@@ -3,22 +3,27 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update]
 
-  authorize_resource
   impressionist actions: [:show]
 
-  rescue_from CanCan::AccessDenied do
+  rescue_from ActionPolicy::Unauthorized do
     redirect_to action: :show
   end
 
   def index
+    authorize! User.new
     @pagy, @users = pagy(:offset, User.with_attached_avatar.order(full_name: 'asc'), limit: 32)
   end
 
-  def show; end
+  def show
+    authorize! @user
+  end
 
-  def edit; end
+  def edit
+    authorize! @user
+  end
 
   def update
+    authorize! @user
     if @user.update(user_params)
       redirect_to @user
     else

@@ -1,5 +1,5 @@
 = turbo_frame_tag "subscription_#{dom_id(question)}", class: 'subscription mt-2'
-  - if subscription && can?(:destroy, subscription)
+  - if subscription && allowed_to?(:destroy?, subscription)
     = link_to '',
               question_subscription_path(question),
               data: { turbo_method: :delete, turbo_frame: '_top' },

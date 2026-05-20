@@ -1,6 +1,6 @@
 .nav.nav-tabs.mt-3.mb-3
   li class='nav-item'
     = link_to 'Profile', @user, class: "nav-link #{active(users: ['show'])}"
-  - if can?(:update, @user)
+  - if allowed_to?(:update?, @user)
     li class='nav-item'
       = link_to 'Edit Profile', edit_user_path(@user), class: "nav-link #{active(users: ['edit', 'update'])}"

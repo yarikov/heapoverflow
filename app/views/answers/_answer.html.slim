@@ -9,13 +9,13 @@
         .post__body
           = markdown answer.body
         .post__link-group
-          - if can?(:update, answer)
+          - if allowed_to?(:update?, answer)
             = link_to 'Edit', '', data: { action: 'click->form#showForm' }, class: 'post__link-group-item me-1'
             = link_to 'Delete', answer, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'post__link-group-item'
         = render 'common/post_user_info', post: answer, question: answer.question
         .clearfix
         .post__edit-form
-          - if can?(:update, answer)
+          - if allowed_to?(:update?, answer)
             = turbo_frame_tag "#{dom_id(answer)}_edit"
               = render 'answers/form', answer: answer
         .post__comments.mt-3

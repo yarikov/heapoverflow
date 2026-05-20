@@ -4,7 +4,7 @@
        span.comment__text #{comment.body} – #{link_to comment.user.full_name, comment.user, data: { turbo_frame: '_top' }}
        span.comment__time  #{comment.created_at.to_fs(:my_short)}
     .comment__btn-group
-      - if can?(:destroy, comment)
+      - if allowed_to?(:destroy?, comment)
         = link_to '', '',
                   data: { action: 'click->form#showForm' },
                   class: 'bi bi-pencil comment__btn-group-item comment__edit-btn pe-1'
@@ -13,6 +13,6 @@
                   class: 'bi bi-x-circle comment__btn-group-item comment__delete-btn'
 
   .comment__edit-form
-    - if can?(:update, comment)
+    - if allowed_to?(:update?, comment)
       = turbo_frame_tag "#{dom_id(comment)}_edit"
         = render 'comments/form', comment: comment

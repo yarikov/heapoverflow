@@ -5,9 +5,8 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[update destroy]
   before_action :set_commentable, only: :create
 
-  authorize_resource
-
   def create
+    authorize! Comment.new
     @comment = @commentable.comments.new(comment_params.merge(user: current_user))
 
     if @comment.save
@@ -18,6 +17,7 @@ class CommentsController < ApplicationController
   end
 
   def update
+    authorize! @comment
     if @comment.update(comment_params)
       render :update
     else
@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    authorize! @comment
     @comment.destroy
   end
 

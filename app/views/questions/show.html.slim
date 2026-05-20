@@ -6,7 +6,7 @@
   == render @question.answers.with_votes_sum.includes(comments: :user, user: :avatar_attachment), votes: @votes
 
 .new-answer.mt-3
-  - if can?(:create, Answer)
+  - if allowed_to?(:create?, Answer)
     h4 Your Answer
     = turbo_frame_tag 'new_answer'
       == render 'answers/form', answer: @answer

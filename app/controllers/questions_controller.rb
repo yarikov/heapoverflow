@@ -9,26 +9,29 @@ class QuestionsController < ApplicationController
 
   impressionist actions: [:show]
 
-  authorize_resource
-
   def index
+    authorize! Question.new
     @pagy, @questions = pagy(:offset, Question.with_votes_sum.newest.includes(:tags, :user))
   end
 
   def tagged
+    authorize! Question.new, to: :tagged?
     @pagy, @questions = pagy(:offset, Question.with_votes_sum.newest.includes(:tags, :user).tagged_with(params[:tag]))
     render :index
   end
 
   def show
+    authorize! @question
     respond_with @question
   end
 
   def new
+    authorize! Question.new
     respond_with @question = Question.new
   end
 
   def create
+    authorize! Question.new
     @question = Questions::Create.call(question_params, current_user)
     redirect_to question_url(@question)
   rescue ActiveRecord::RecordInvalid => e
@@ -37,6 +40,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    authorize! @question
     if @question.update(question_params)
       render :update
     else
@@ -45,6 +49,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    authorize! @question
     respond_with @question.destroy
   end
 

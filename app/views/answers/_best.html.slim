@@ -1,5 +1,5 @@
 = turbo_frame_tag "best_answer_#{answer.id}", class: 'best-answer mt-2'
-  - if can?(:best, answer)
+  - if allowed_to?(:best?, answer)
     = link_to '', best_answer_path(answer),
               data: { turbo_method: :patch },
               class: "bi bi-check-circle-fill best-answer__btn #{'best-answer__btn--active' if answer.best}"

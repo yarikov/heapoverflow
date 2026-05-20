@@ -2,7 +2,7 @@
   == render commentable.comments
 
 .new-comment.mt-3
-  - if can?(:create, Comment)
+  - if allowed_to?(:create?, Comment)
     div data={ controller: 'form' }
       = link_to 'Add a comment', '', class: 'new-comment__link', data: { action: 'click->form#showForm' }
       = turbo_frame_tag "#{dom_id(commentable)}_new_comment"

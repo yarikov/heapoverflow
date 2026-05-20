@@ -3,14 +3,15 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question
-  authorize_resource
-
   def create
+    authorize! Subscription.new
     @subscription = current_user.subscriptions.find_or_create_by(question: @question)
   end
 
   def destroy
-    current_user.subscriptions.destroy_by(question: @question)
+    subscription = current_user.subscriptions.find_by!(question: @question)
+    authorize! subscription
+    subscription.destroy
   end
 
   private
