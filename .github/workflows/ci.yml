@@ -60,6 +60,11 @@ jobs:
       - name: Install JavaScript dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Copy sample configs
+        run: |
+          cp config/database.yml.sample config/database.yml
+          cp config/storage.yml.sample config/storage.yml
+
       - name: Prepare database
         run: bin/rails db:create db:schema:load
 
