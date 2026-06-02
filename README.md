@@ -1,5 +1,7 @@
 # Heap Overflow
 
+[![CI](https://github.com/yarikov/heapoverflow/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/yarikov/heapoverflow/actions/workflows/ci.yml)
+
 Heap Overflow is a web application built with Rails, Turbo, and Stimulus that aims to be a clone of Stack Overflow.
 
 ## Table of Contents
