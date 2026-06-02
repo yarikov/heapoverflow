@@ -45,6 +45,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libvips42
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
