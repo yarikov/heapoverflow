@@ -5,7 +5,12 @@ require 'capybara/email/rspec'
 require 'capybara/cuprite'
 
 Capybara.register_driver :cuprite_chrome do |app|
-  Capybara::Cuprite::Driver.new(app, window_size: [1400, 1400], browser_options: { 'no-sandbox' => nil })
+  options = {
+    window_size: [1400, 1400],
+    browser_options: { 'no-sandbox' => nil }
+  }
+  options[:process_timeout] = 30 if ENV['CI']
+  Capybara::Cuprite::Driver.new(app, options)
 end
 
 Capybara.server_port = 31_337
