@@ -65,6 +65,11 @@ jobs:
           cp config/database.yml.sample config/database.yml
           cp config/storage.yml.sample config/storage.yml
 
+      - name: Build assets
+        run: |
+          yarn build
+          yarn build:css
+
       - name: Prepare database
         run: bin/rails db:create db:schema:load
 
