@@ -1,6 +1,9 @@
 # Heap Overflow
 
 [![CI](https://github.com/yarikov/heapoverflow/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/yarikov/heapoverflow/actions/workflows/ci.yml)
+[![Ruby](https://img.shields.io/badge/ruby-4.0.4-red?logo=ruby&logoColor=white)](https://www.ruby-lang.org/)
+[![Rails](https://img.shields.io/badge/rails-8.1.3-red?logo=ruby-on-rails&logoColor=white)](https://rubyonrails.org/)
+[![License](https://img.shields.io/github/license/yarikov/heapoverflow)](/LICENSE)
 
 Heap Overflow is a web application built with Rails, Turbo, and Stimulus that aims to be a clone of Stack Overflow.
 
