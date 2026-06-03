@@ -86,7 +86,7 @@ Once the app is running:
 
 In a development environment, you can view email messages using [mailcatcher](https://github.com/sj26/mailcatcher). To do this, follow these steps:
 
-1. Open your web browser and navigate to `http://localhost:1080`
+1. Open your web browser and navigate to http://localhost:1080
 2. Send an email from the Heap Overflow application (e.g., create a new account or reset your password)
 3. Check the [mailcatcher](https://github.com/sj26/mailcatcher) web interface to view the email message
 
