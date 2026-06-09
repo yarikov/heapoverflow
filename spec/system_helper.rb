@@ -9,7 +9,7 @@ Capybara.register_driver :cuprite_chrome do |app|
     window_size: [1400, 1400],
     browser_options: { 'no-sandbox' => nil }
   }
-  options[:process_timeout] = 30 if ENV['CI']
+  options[:process_timeout] = 60 if ENV['CI']
   Capybara::Cuprite::Driver.new(app, options)
 end
 
