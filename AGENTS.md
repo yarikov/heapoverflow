@@ -7,21 +7,22 @@ Heap Overflow is a Rails 8 web application that clones Stack Overflow. Users ask
 | Layer | Technology |
 |-------|------------|
 | Runtime | Ruby 4.0.4 (see `.ruby-version`) |
-| Framework | Rails ~> 8.1.0 |
+| Framework | Rails ~> 8.1.3 |
 | Database | PostgreSQL 17 |
-| Search | Elasticsearch 8.16.0 via Searchkick |
+| Search | Elasticsearch 9.4.0 via Searchkick |
 | Asset Pipeline | Propshaft |
 | JS Bundler | esbuild |
 | CSS Preprocessor | Sass |
 | Front-end | Bootstrap 5.3, Bootstrap Icons, Hotwire (Turbo + Stimulus) |
+| Node.js | 24 |
 | Job Queue | Solid Queue |
 | Web Server | Puma |
 | Mail (dev) | Mailcatcher |
 
 ### Notable Gems
 
-- **Auth**: `devise`, `omniauth` (Facebook, Twitter)
-- **Authorization**: `cancancan`
+- **Auth**: `devise`, `omniauth` (Facebook, Twitter via `omniauth-facebook`, `omniauth-twitter`)
+- **Authorization**: `action_policy`
 - **Search**: `searchkick` + `elasticsearch`
 - **Tagging**: `acts-as-taggable-on`
 - **Pagination**: `pagy`
@@ -32,6 +33,10 @@ Heap Overflow is a Rails 8 web application that clones Stack Overflow. Users ask
 - **View Counting**: `impressionist`
 - **Job Monitoring**: `mission_control-jobs` (mounted at `/mission_control/jobs`, admin-only)
 - **JSON Responses**: `responders`
+- **Environment**: `dotenv-rails`
+- **Service Objects**: `dry-initializer`
+- **Transactions**: `after_commit_everywhere`
+- **Testing**: `faker` (dev/test), `test-prof` (RSpec profiling, `let_it_be`)
 
 ## Project Structure
 
@@ -43,6 +48,9 @@ app/
   helpers/              # View helpers (single application_helper.rb)
   jobs/                 # Solid Queue jobs (daily digest, subscriber notifications)
   mailers/              # Action Mailer classes
+  policies/             # Action Policy authorization classes
+  presenters/           # View presenters (e.g., markdown rendering)
+  services/             # Service objects (business logic layer)
   javascript/           # Entry point + Stimulus controllers
   assets/stylesheets/   # Sass files (application.sass.scss, plus per-feature files)
   assets/builds/        # esbuild / Sass output (checked in or generated)
@@ -164,9 +172,9 @@ bundle exec rspec
 - **Framework**: RSpec Rails
 - **System tests**: Cuprite (headless Chrome) via `capybara/cuprite`
 - **Factories**: FactoryBot (definitions in `spec/factories/`)
-- **Matchers**: `shoulda-matchers`, `cancan/matchers`
+- **Matchers**: `shoulda-matchers`, `action_policy/rspec`
 - **Coverage**: SimpleCov with minimum thresholds — **92% line coverage**, **68% branch coverage**
-- **Profiler**: `test-prof` (`let_it_be` enabled)
+- **Profiler**: `test-prof` (`let_it_be` enabled; requires `require 'test_prof/recipes/rspec/let_it_be'` in `rails_helper.rb`)
 - **N+1 Detection**: Bullet (runs in development and test)
 
 ### Test Configuration Files
@@ -186,6 +194,9 @@ bundle exec rspec
 | `spec/system/` | End-to-end browser tests (user flows for questions, answers, comments, votes, auth, profiles) |
 | `spec/jobs/` | Background job tests |
 | `spec/mailers/` | Mailer tests |
+| `spec/policies/` | Action Policy authorization specs |
+| `spec/presenters/` | Presenter unit tests |
+| `spec/services/` | Service object unit tests |
 
 No controller/request specs exist in the codebase despite the generator configuration permitting controller specs.
 
@@ -239,7 +250,7 @@ bundle exec rubocop
 
 - **Brakeman** is included for static security analysis (`bundle exec brakeman`).
 - **Devise** handles authentication with confirmable and OAuth callbacks.
-- **CanCanCan** (`Ability` model) manages authorization.
+- **Action Policy** (`ApplicationPolicy` and resource policies) manages authorization.
 - **Mission Control Jobs** is mounted at `/mission_control/jobs` and restricted to admin users.
 - **Active Storage** is used for avatars; validations are enforced via `active_storage_validations`.
 - **Bullet** runs in development/test to catch N+1 queries.
@@ -262,7 +273,7 @@ The app relies on typical Rails env vars plus:
 | `rails` | Rails CLI runner | — |
 | `jobs` | Solid Queue worker (`bin/jobs`) | — |
 | `postgres` | PostgreSQL 17 | `5432` |
-| `elasticsearch` | Elasticsearch 8.16.0 | `9200` |
+| `elasticsearch` | Elasticsearch 9.4.0 | `9200` |
 | `mailcatcher` | SMTP catch + web UI | `1080` |
 
 ### Time Zone
@@ -278,7 +289,22 @@ A production `Dockerfile` exists in the project root. It:
 - Installs Bundler
 - Copies the application code into `/usr/src/app`
 
-No CI/CD configuration (e.g., GitHub Actions) is present in the repository.
+### CI/CD (GitHub Actions)
+
+`.github/workflows/ci.yml` runs on every push to `master` and on pull requests.
+
+Pipeline steps:
+1. Checkout code
+2. Install system dependencies (`libvips42`)
+3. Setup Ruby (from `.ruby-version`) and Node (24)
+4. Install Ruby and JS dependencies
+5. Copy sample configs (`database.yml.sample`, `storage.yml.sample`)
+6. Build assets (`yarn build`, `yarn build:css`)
+7. Prepare database (`db:create db:schema:load`)
+8. Reindex Elasticsearch (`searchkick:reindex:all`)
+9. Run RuboCop
+10. Run Brakeman (`-q -w2 -z`)
+11. Run RSpec
 
 ## Quick Reference
 
