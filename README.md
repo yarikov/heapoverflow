@@ -5,11 +5,14 @@
 [![Rails](https://img.shields.io/badge/rails-8.1.3-red?logo=ruby-on-rails&logoColor=white)](https://rubyonrails.org/)
 [![License](https://img.shields.io/github/license/yarikov/heapoverflow)](/LICENSE)
 
-Heap Overflow is a web application built with Rails, Turbo, and Stimulus that aims to be a clone of Stack Overflow.
+Heap Overflow is a Stack Overflow-inspired application built with Rails 8, Hotwire, PostgreSQL, and Elasticsearch.
+
+The primary goal of this project is learning and experimentation. I use it to explore new Rails releases, evaluate gems and libraries, and stay up to date with the modern Rails ecosystem.
+
+This project is not intended for commercial use or production deployment.
 
 ## Table of Contents
 
-- [Description](#description)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -19,9 +22,6 @@ Heap Overflow is a web application built with Rails, Turbo, and Stimulus that ai
 - [Testing](#testing)
 - [License](#license)
 
-## Description
-
-Heap Overflow is a web application that allows users to ask and answer questions on various topics. The app is designed to be similar to Stack Overflow in terms of functionality and design. I created this project as a way to practice my Rails skills and to build something that I would personally find useful.
 
 ## Tech Stack
 
