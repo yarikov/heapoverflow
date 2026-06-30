@@ -56,6 +56,12 @@ interaction:
     command: bundle exec rubocop
     compose_run_options: [ no-deps ]
 
+  brakeman:
+    description: Run Brakeman security scanner
+    service: rails
+    command: bundle exec brakeman
+    compose_run_options: [ no-deps ]
+
   yarn:
     description: Run Yarn commands
     service: rails
