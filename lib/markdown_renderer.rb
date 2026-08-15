@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MarkdownPresenter
+class MarkdownRenderer
   MARKDOWN_OPTIONS = {
     autolink: true,
     no_intra_emphasis: true,
@@ -15,19 +15,19 @@ class MarkdownPresenter
     def block_code(code, language)
       Pygments.highlight(code, lexer: language)
     rescue StandardError
-      code
+      "<pre><code>#{ERB::Util.html_escape(code)}</code></pre>"
     end
   end
 
-  def self.render(content)
-    new.render(content)
-  end
+  def self.call(...) = new.call(...)
 
-  def render(content)
+  def call(content)
     renderer = HTMLRenderer.new(hard_wrap: true, filter_html: true)
-    # Redcarpet filters HTML; output is safe to render
+    html = Redcarpet::Markdown.new(renderer, MARKDOWN_OPTIONS).render(content)
+
+    # Redcarpet filters source HTML, and HTMLRenderer escapes its fallback output.
     # rubocop:disable Rails/OutputSafety
-    Redcarpet::Markdown.new(renderer, MARKDOWN_OPTIONS).render(content).html_safe
+    html.html_safe
     # rubocop:enable Rails/OutputSafety
   end
 end
